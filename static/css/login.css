@@ -1,0 +1,562 @@
+/*====================================
+    Google Font
+====================================*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#06191d,#0a2f33,#0d4f45);
+    min-height:100vh;
+}
+
+/*====================================
+    Main Page
+====================================*/
+
+.login-page{
+
+    width:100%;
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:40px 20px;
+
+}
+
+/*====================================
+    Card
+====================================*/
+
+.login-card{
+
+    width:1050px;
+    max-width:100%;
+
+    display:flex;
+
+    overflow:hidden;
+
+    border-radius:20px;
+
+    background:#12373b;
+
+    box-shadow:0 20px 60px rgba(0,0,0,.45);
+
+}
+
+/*====================================
+    Left Side
+====================================*/
+
+.login-left{
+
+    width:40%;
+
+    background:linear-gradient(180deg,#0d4642,#0a272b);
+
+    padding:60px 45px;
+
+    color:#fff;
+
+}
+
+.brand-icon{
+
+    width:80px;
+    height:80px;
+
+    background:#37e18c;
+
+    border-radius:50%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:#08201d;
+
+    font-size:32px;
+
+    text-decoration:none;
+
+    margin-bottom:30px;
+
+    transition:.3s;
+
+}
+
+.brand-icon:hover{
+
+    transform:scale(1.08);
+
+    color:#08201d;
+
+}
+
+.login-left h2{
+
+    font-size:36px;
+
+    font-weight:700;
+
+    margin-bottom:15px;
+
+}
+
+.login-left p{
+
+    color:#c8d8d5;
+
+    line-height:28px;
+
+    margin-bottom:45px;
+
+}
+
+/*====================================
+    Features
+====================================*/
+
+.feature{
+
+    display:flex;
+
+    align-items:center;
+
+    margin-bottom:22px;
+
+}
+
+.feature i{
+
+    width:45px;
+    height:45px;
+
+    border-radius:50%;
+
+    background:#37e18c;
+
+    color:#08201d;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    margin-right:15px;
+
+}
+
+.feature span{
+
+    color:#fff;
+
+    font-size:16px;
+
+}
+
+/*====================================
+    Right Side
+====================================*/
+
+.login-right{
+
+    width:60%;
+
+    padding:60px 50px;
+
+    background:#113236;
+
+}
+
+.login-right h3{
+
+    color:#fff;
+
+    font-size:34px;
+
+    margin-bottom:8px;
+
+}
+
+.sub-title{
+
+    color:#b8d2cf;
+
+    margin-bottom:35px;
+
+}
+
+/*====================================
+    Input Fields
+====================================*/
+
+.input-box{
+
+    position:relative;
+
+    margin-bottom:22px;
+
+}
+
+.input-box i{
+
+    position:absolute;
+
+    left:18px;
+
+    top:18px;
+
+    color:#37e18c;
+
+}
+
+.input-box input{
+
+    width:100%;
+
+    height:56px;
+
+    background:#0d2629;
+
+    border:1px solid rgba(55,225,140,.25);
+
+    border-radius:12px;
+
+    outline:none;
+
+    color:#fff;
+
+    padding-left:52px;
+
+    padding-right:45px;
+
+    transition:.3s;
+
+}
+
+.input-box input::placeholder{
+
+    color:#9fb8b6;
+
+}
+
+.input-box input:focus{
+
+    border-color:#37e18c;
+
+    box-shadow:0 0 15px rgba(55,225,140,.20);
+
+}
+
+.eye{
+
+    position:absolute;
+
+    right:18px;
+
+    top:18px;
+
+    color:#37e18c;
+
+    cursor:pointer;
+
+}
+/*====================================
+    Remember Section
+====================================*/
+
+.remember{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:30px;
+
+    font-size:14px;
+
+}
+
+.remember div{
+
+    display:flex;
+    align-items:center;
+
+    color:#d7e7e4;
+
+}
+
+.remember input{
+
+    width:16px;
+    height:16px;
+
+    margin-right:8px;
+
+    accent-color:#37e18c;
+
+    cursor:pointer;
+
+}
+
+.remember a{
+
+    color:#37e18c;
+
+    text-decoration:none;
+
+    transition:.3s;
+
+}
+
+.remember a:hover{
+
+    text-decoration:underline;
+
+}
+
+/*====================================
+    Login Button
+====================================*/
+
+.login-btn{
+
+    width:100%;
+    height:56px;
+
+    border:none;
+    outline:none;
+
+    border-radius:12px;
+
+    background:linear-gradient(135deg,#37e18c,#1dbf73);
+
+    color:#08201d;
+
+    font-size:17px;
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+}
+
+.login-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 15px 30px rgba(55,225,140,.35);
+
+}
+
+/*====================================
+    Register Link
+====================================*/
+
+.register-link{
+
+    margin-top:25px;
+
+    text-align:center;
+
+    color:#c7d8d6;
+
+    font-size:15px;
+
+}
+
+.register-link a{
+
+    color:#37e18c;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+}
+
+.register-link a:hover{
+
+    text-decoration:underline;
+
+}
+
+/*====================================
+    Hover Effects
+====================================*/
+
+.input-box:hover input{
+
+    border-color:#37e18c;
+
+}
+
+.feature{
+
+    transition:.3s;
+
+}
+
+.feature:hover{
+
+    transform:translateX(8px);
+
+}
+
+.brand-icon{
+
+    transition:.4s;
+
+}
+
+.brand-icon:hover{
+
+    transform:rotate(8deg) scale(1.08);
+
+}
+
+/*====================================
+    Responsive
+====================================*/
+
+@media(max-width:992px){
+
+.login-card{
+
+    flex-direction:column;
+
+}
+
+.login-left{
+
+    width:100%;
+
+    text-align:center;
+
+    padding:45px 35px;
+
+}
+
+.login-right{
+
+    width:100%;
+
+    padding:45px 35px;
+
+}
+
+.feature{
+
+    justify-content:center;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.login-right{
+
+    padding:35px 25px;
+
+}
+
+.login-left h2{
+
+    font-size:30px;
+
+}
+
+.login-right h3{
+
+    font-size:28px;
+
+}
+
+.remember{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    gap:12px;
+
+}
+
+}
+
+@media(max-width:576px){
+
+.login-page{
+
+    padding:20px;
+
+}
+
+.login-card{
+
+    border-radius:15px;
+
+}
+
+.login-left{
+
+    padding:35px 20px;
+
+}
+
+.login-right{
+
+    padding:30px 20px;
+
+}
+
+.brand-icon{
+
+    width:70px;
+    height:70px;
+
+    font-size:28px;
+
+    margin:auto;
+    margin-bottom:25px;
+
+}
+
+.login-left h2{
+
+    font-size:26px;
+
+}
+
+.login-left p{
+
+    font-size:14px;
+
+    line-height:24px;
+
+}
+
+.input-box input{
+
+    height:52px;
+
+}
+
+.login-btn{
+
+    height:52px;
+
+}
+
+}

@@ -1,0 +1,267 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Manage Holidays | Smart Office</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+</head>
+
+<body>
+
+<div class="container py-5">
+
+    <!-- ================================================= -->
+    <!-- HEADER -->
+    <!-- ================================================= -->
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h2 class="fw-bold mb-1">
+                Manage Holidays
+            </h2>
+
+            <p class="text-muted mb-0">
+                Add company holidays and manage holiday dates.
+            </p>
+
+        </div>
+
+        <a
+            href="{% url 'admin_dashboard' %}"
+            class="btn btn-dark"
+        >
+            Dashboard
+        </a>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- MESSAGES -->
+    <!-- ================================================= -->
+
+    {% if messages %}
+
+        {% for message in messages %}
+
+            <div
+                class="alert alert-{{ message.tags }}"
+                role="alert"
+            >
+                {{ message }}
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+
+    <!-- ================================================= -->
+    <!-- ADD HOLIDAY -->
+    <!-- ================================================= -->
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-body p-4">
+
+            <h5 class="fw-bold mb-4">
+                Add Holiday
+            </h5>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="row g-3">
+
+                    <!-- DATE -->
+
+                    <div class="col-md-4">
+
+                        <label class="form-label fw-semibold">
+                            Holiday Date
+                        </label>
+
+                        <input
+                            type="date"
+                            name="date"
+                            class="form-control"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- NAME -->
+
+                    <div class="col-md-4">
+
+                        <label class="form-label fw-semibold">
+                            Holiday Name
+                        </label>
+
+                        <input
+                            type="text"
+                            name="name"
+                            class="form-control"
+                            placeholder="e.g. Independence Day"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- DESCRIPTION -->
+
+                    <div class="col-md-4">
+
+                        <label class="form-label fw-semibold">
+                            Description
+                        </label>
+
+                        <input
+                            type="text"
+                            name="description"
+                            class="form-control"
+                            placeholder="Optional"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="mt-4">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
+                        Add Holiday
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- HOLIDAY LIST -->
+    <!-- ================================================= -->
+
+    <div class="card shadow-sm">
+
+        <div class="card-body p-4">
+
+            <h5 class="fw-bold mb-4">
+                Company Holidays
+            </h5>
+
+            {% if holidays %}
+
+                <div class="table-responsive">
+
+                    <table class="table table-hover align-middle">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>#</th>
+
+                                <th>Date</th>
+
+                                <th>Holiday</th>
+
+                                <th>Description</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            {% for holiday in holidays %}
+
+                            <tr>
+
+                                <td>
+                                    {{ forloop.counter }}
+                                </td>
+
+                                <td>
+                                    {{ holiday.date|date:"d M Y" }}
+                                </td>
+
+                                <td>
+                                    <strong>
+                                        {{ holiday.name }}
+                                    </strong>
+                                </td>
+
+                                <td>
+
+                                    {% if holiday.description %}
+
+                                        {{ holiday.description }}
+
+                                    {% else %}
+
+                                        —
+
+                                    {% endif %}
+
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            {% else %}
+
+                <div class="text-center py-4">
+
+                    <p class="text-muted mb-0">
+                        No holidays added yet.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+{% include "chat/chat_widget.html" %}
+</body>
+
+</html>

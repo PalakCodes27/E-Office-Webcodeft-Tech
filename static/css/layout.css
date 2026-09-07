@@ -1,0 +1,28 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:#F5FFFC;
+    overflow-x:hidden;
+}
+
+.wrapper{
+    display:flex;
+    width:100%;
+    min-height:100vh;
+}
+
+.main-content{
+    flex:1;
+    margin-left:260px;
+    min-height:100vh;
+    background:#F5FFFC;
+}
+
+.page-content{
+    padding:30px;
+}

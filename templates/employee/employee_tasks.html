@@ -1,0 +1,1505 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Tasks | Smart Office</title>
+
+<!-- Bootstrap -->
+
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+>
+
+<!-- Font Awesome -->
+
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f4f7f8;
+    font-family: Arial, sans-serif;
+    color: #173f45;
+}
+
+
+/* =====================================================
+   MAIN CONTAINER
+===================================================== */
+
+.main-container {
+    width: 100%;
+    max-width: 1500px;
+    margin: auto;
+    padding: 28px 35px;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.page-header {
+    background: #ffffff;
+    border: 1px solid #e2e9eb;
+    border-radius: 15px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    box-shadow: 0 3px 12px rgba(25, 65, 70, 0.04);
+}
+
+.page-title {
+    margin: 0;
+    color: #164f57;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.page-subtitle {
+    margin: 5px 0 0;
+    color: #75879a;
+    font-size: 14px;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.header-btn {
+    height: 42px;
+    padding: 0 17px;
+    border-radius: 9px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: 0.2s ease;
+}
+
+.dashboard-btn {
+    background: #ffffff;
+    color: #087c83;
+    border: 1px solid #0b9089;
+}
+
+.dashboard-btn:hover {
+    background: #eaf8f7;
+    color: #086c72;
+}
+
+.logout-btn {
+    background: #0a5c63;
+    color: #ffffff;
+    border: 1px solid #0a5c63;
+}
+
+.logout-btn:hover {
+    background: #084b51;
+    color: #ffffff;
+}
+
+
+/* =====================================================
+   WELCOME
+===================================================== */
+
+.welcome-box {
+    background: #ffffff;
+    border: 1px solid #e2e9eb;
+    border-radius: 14px;
+    padding: 16px 20px;
+    margin-bottom: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    box-shadow: 0 3px 12px rgba(25, 65, 70, 0.03);
+}
+
+.welcome-text {
+    color: #667989;
+    font-size: 14px;
+}
+
+.welcome-text strong {
+    color: #164f57;
+}
+
+.task-summary {
+    color: #75879a;
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   ALERT
+===================================================== */
+
+.alert {
+    border-radius: 10px;
+    border: none;
+    font-size: 14px;
+    margin-bottom: 18px;
+}
+
+
+/* =====================================================
+   SECTION HEADER
+===================================================== */
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.section-title {
+    margin: 0;
+    color: #164b53;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.section-subtitle {
+    margin: 3px 0 0;
+    color: #81909d;
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   TASK LIST
+===================================================== */
+
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+
+/* =====================================================
+   TASK CARD
+===================================================== */
+
+.task-card {
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #e1e8ea;
+    border-radius: 11px;
+
+    padding: 14px 16px;
+
+    box-shadow: 0 2px 9px rgba(25, 65, 70, 0.035);
+
+    transition: 0.18s ease;
+
+    overflow: hidden;
+}
+
+.task-card:hover {
+    border-color: #c9dddd;
+    box-shadow: 0 4px 13px rgba(25, 65, 70, 0.06);
+}
+
+
+/* =====================================================
+   MAIN TASK ROW
+===================================================== */
+
+.task-main-row {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(230px, 2.2fr)
+        minmax(150px, 1.35fr)
+        minmax(105px, 0.85fr)
+        minmax(95px, 0.75fr)
+        minmax(240px, 1.8fr);
+
+    gap: 16px;
+
+    align-items: center;
+
+    width: 100%;
+}
+
+.task-main-row > div {
+    min-width: 0;
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   TASK INFO
+===================================================== */
+
+.task-title {
+    color: #234653;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.3;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.task-description {
+    color: #8a98a4;
+    font-size: 12px;
+    margin-top: 3px;
+    line-height: 1.35;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* =====================================================
+   LABEL
+===================================================== */
+
+.task-label {
+    display: block;
+    color: #9aa6af;
+    font-size: 10px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+
+    margin-bottom: 4px;
+}
+
+.task-value {
+    color: #465d6b;
+    font-size: 13px;
+    font-weight: 600;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* =====================================================
+   PROJECT
+===================================================== */
+
+.project-name {
+    display: inline-flex;
+    align-items: center;
+
+    max-width: 100%;
+
+    color: #465d6b;
+    font-size: 13px;
+    font-weight: 600;
+
+    text-decoration: none;
+    cursor: pointer;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    vertical-align: middle;
+}
+
+.project-name i {
+    flex-shrink: 0;
+}
+
+.project-name:hover {
+    color: #0a5c63;
+    text-decoration: underline;
+}
+
+.no-project {
+    color: #9aa7b2;
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   PRIORITY
+===================================================== */
+
+.priority {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 4px 9px;
+    border-radius: 15px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+.priority-high {
+    background: #fde8e8;
+    color: #c73545;
+}
+
+.priority-medium {
+    background: #fff4d9;
+    color: #a66b00;
+}
+
+.priority-low {
+    background: #e2f5ea;
+    color: #16834b;
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 4px 9px;
+    border-radius: 15px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+.status-pending {
+    background: #fff2d9;
+    color: #a66b00;
+}
+
+.status-in_progress {
+    background: #dff5f7;
+    color: #08717a;
+}
+
+.status-completed {
+    background: #ddf5e9;
+    color: #16834b;
+}
+
+
+/* =====================================================
+   STATUS UPDATE
+===================================================== */
+
+.status-form {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+}
+
+.status-form .form-select {
+    height: 34px;
+    min-width: 125px;
+    max-width: 145px;
+
+    border: 1px solid #d7e1e3;
+    border-radius: 7px;
+
+    font-size: 12px;
+    color: #465d6b;
+
+    padding: 4px 28px 4px 9px;
+
+    box-shadow: none !important;
+}
+
+.status-form .form-select:focus {
+    border-color: #0b9089;
+}
+
+.update-btn {
+    width: 34px;
+    height: 34px;
+
+    flex-shrink: 0;
+
+    border: none;
+    border-radius: 7px;
+
+    background: #0a5c63;
+    color: #ffffff;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 12px;
+}
+
+.update-btn:hover {
+    background: #084b51;
+    color: #ffffff;
+}
+
+
+/* =====================================================
+   EMPLOYEE UPDATE
+===================================================== */
+
+.employee-update-section {
+    margin-top: 11px;
+    padding-top: 11px;
+
+    border-top: 1px solid #edf1f2;
+}
+
+.employee-update-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 8px;
+}
+
+.employee-update-title {
+    color: #0a5c63;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.employee-update-title i {
+    margin-right: 5px;
+}
+
+.current-update-small {
+    color: #8b98a2;
+    font-size: 11px;
+}
+
+
+/* =====================================================
+   UPDATE FORM
+===================================================== */
+
+.update-form-row {
+    display: grid;
+
+    grid-template-columns: 1fr 170px auto;
+
+    gap: 8px;
+
+    align-items: end;
+}
+
+.update-field label {
+    display: block;
+
+    color: #687985;
+    font-size: 11px;
+    font-weight: 600;
+
+    margin-bottom: 4px;
+}
+
+.update-field textarea {
+    width: 100%;
+    height: 38px;
+
+    resize: none;
+
+    border: 1px solid #dce4e6;
+    border-radius: 7px;
+
+    padding: 8px 10px;
+
+    font-size: 12px;
+    color: #465d6b;
+
+    outline: none;
+}
+
+.update-field textarea:focus {
+    border-color: #0a5c63;
+}
+
+.update-field input {
+    width: 100%;
+    height: 38px;
+
+    border: 1px solid #dce4e6;
+    border-radius: 7px;
+
+    padding: 7px 9px;
+
+    font-size: 12px;
+    color: #465d6b;
+
+    outline: none;
+}
+
+.update-field input:focus {
+    border-color: #0a5c63;
+}
+
+.save-update-btn {
+    height: 38px;
+
+    padding: 0 14px;
+
+    border: none;
+    border-radius: 7px;
+
+    background: #0a5c63;
+    color: #ffffff;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+.save-update-btn:hover {
+    background: #084b51;
+    color: #ffffff;
+}
+
+
+/* =====================================================
+   SAVED EMPLOYEE UPDATE
+===================================================== */
+
+.saved-update {
+    display: flex;
+    gap: 8px;
+
+    margin-top: 8px;
+
+    min-width: 0;
+}
+
+.saved-comment,
+.saved-days {
+    background: #f7fafb;
+
+    border: 1px solid #e4eaec;
+    border-radius: 7px;
+
+    padding: 7px 10px;
+
+    color: #657682;
+    font-size: 11px;
+
+    min-width: 0;
+}
+
+.saved-comment {
+    flex: 1;
+    word-break: break-word;
+}
+
+.saved-days {
+    min-width: 140px;
+    white-space: nowrap;
+}
+
+.saved-comment i,
+.saved-days i {
+    color: #0a5c63;
+    margin-right: 4px;
+}
+
+
+/* =====================================================
+   ADMIN COMMENT
+===================================================== */
+
+.admin-comments-section {
+    margin-top: 8px;
+    padding-top: 7px;
+
+    border-top: 1px dashed #edf1f2;
+
+    max-width: 100%;
+}
+
+.admin-comment-heading {
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 5px;
+
+    color: #a66b00;
+    font-size: 10px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: .3px;
+}
+
+.admin-comment-heading i {
+    margin-right: 5px;
+}
+
+.admin-comment-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+
+    margin-bottom: 4px;
+}
+
+.admin-comment-item:last-child {
+    margin-bottom: 0;
+}
+
+.admin-comment-text {
+    flex: 1;
+    min-width: 0;
+
+    padding: 6px 8px;
+
+    background: #fffaf0;
+    border: 1px solid #f0dfb9;
+    border-radius: 7px;
+
+    color: #596b76;
+    font-size: 11px;
+    line-height: 1.35;
+
+    word-break: break-word;
+}
+
+.admin-comment-time {
+    flex-shrink: 0;
+
+    color: #a0a9ae;
+    font-size: 9px;
+
+    padding-top: 6px;
+}
+
+
+/* =====================================================
+   EMPTY STATE
+===================================================== */
+
+.empty-state {
+    background: #ffffff;
+
+    border: 1px solid #e2e9eb;
+    border-radius: 12px;
+
+    padding: 45px 20px;
+
+    text-align: center;
+
+    color: #7d8c98;
+}
+
+.empty-state i {
+    color: #8bb8b8;
+    margin-bottom: 12px;
+}
+
+.empty-state h5 {
+    color: #506474;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.empty-state p {
+    font-size: 13px;
+    margin: 0;
+}
+
+
+/* =====================================================
+   RESPONSIVE - 1200px
+===================================================== */
+
+@media (max-width: 1200px) {
+
+    .task-main-row {
+
+        grid-template-columns:
+            minmax(220px, 2fr)
+            minmax(140px, 1.2fr)
+            minmax(100px, 0.9fr)
+            minmax(90px, 0.8fr)
+            minmax(220px, 1.7fr);
+
+        gap: 12px;
+    }
+
+    .status-form .form-select {
+        min-width: 115px;
+    }
+
+    .update-form-row {
+        grid-template-columns: 1fr 150px auto;
+    }
+}
+
+
+/* =====================================================
+   RESPONSIVE - 1000px
+===================================================== */
+
+@media (max-width: 1000px) {
+
+    .task-main-row {
+
+        grid-template-columns:
+            2fr
+            1.3fr
+            1fr
+            1fr;
+
+        gap: 12px;
+    }
+
+    .task-status-column {
+        grid-column: span 2;
+    }
+}
+
+
+/* =====================================================
+   RESPONSIVE - 900px
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .main-container {
+        padding: 20px;
+    }
+
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .header-buttons {
+        width: 100%;
+    }
+
+    .header-btn {
+        flex: 1;
+    }
+
+    .welcome-box {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .task-main-row {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .task-status-column {
+        grid-column: span 2;
+    }
+
+    .update-form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .save-update-btn {
+        width: 100%;
+    }
+
+    .saved-update {
+        flex-direction: column;
+    }
+
+    .saved-days {
+        width: 100%;
+    }
+
+    .admin-comment-item {
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .admin-comment-time {
+        padding-top: 0;
+    }
+}
+
+
+/* =====================================================
+   RESPONSIVE - 600px
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .main-container {
+        padding: 14px;
+    }
+
+    .page-header {
+        padding: 16px;
+    }
+
+    .page-title {
+        font-size: 23px;
+    }
+
+    .task-main-row {
+        grid-template-columns: 1fr;
+    }
+
+    .task-status-column {
+        grid-column: span 1;
+    }
+
+    .task-card {
+        padding: 13px;
+    }
+
+    .status-form {
+        width: 100%;
+    }
+
+    .status-form .form-select {
+        flex: 1;
+        max-width: none;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="main-container">
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<div class="page-header">
+
+<div>
+
+    <h1 class="page-title">
+
+        <i class="fa-solid fa-list-check me-2"></i>
+
+        My Tasks
+
+    </h1>
+
+    <p class="page-subtitle">
+
+        View your assigned tasks and share progress updates.
+
+    </p>
+
+</div>
+
+
+<div class="header-buttons">
+
+    <a
+        href="{% url 'employee_dashboard' %}"
+        class="header-btn dashboard-btn"
+    >
+
+        <i class="fa-solid fa-chart-pie"></i>
+
+        Dashboard
+
+    </a>
+
+
+    <a
+        href="{% url 'logout' %}"
+        class="header-btn logout-btn"
+    >
+
+        <i class="fa-solid fa-right-from-bracket"></i>
+
+        Logout
+
+    </a>
+
+</div>
+
+</div>
+
+<!-- =====================================================
+     WELCOME
+===================================================== -->
+
+<div class="welcome-box">
+
+<div class="welcome-text">
+
+    Welcome,
+
+    <strong>
+        {{ request.user.first_name|default:request.user.username }}
+    </strong>
+
+</div>
+
+
+<div class="task-summary">
+
+    <i class="fa-solid fa-clipboard-list me-1"></i>
+
+    Assigned Tasks
+
+</div>
+
+</div>
+
+<!-- =====================================================
+     MESSAGES
+===================================================== -->
+
+{% if messages %}
+
+{% for message in messages %}
+
+    <div class="alert alert-{{ message.tags }}">
+
+        <i class="fa-solid fa-circle-info me-2"></i>
+
+        {{ message }}
+
+    </div>
+
+{% endfor %}
+
+{% endif %}
+
+<!-- =====================================================
+     SECTION HEADER
+===================================================== -->
+
+<div class="section-header">
+
+<div>
+
+    <h2 class="section-title">
+        Assigned Tasks
+    </h2>
+
+    <p class="section-subtitle">
+        Tasks currently assigned to you.
+    </p>
+
+</div>
+
+</div>
+
+<!-- =====================================================
+     TASK LIST
+===================================================== -->
+
+<div class="task-list">
+
+{% for task in all_tasks %}
+
+<div class="task-card">
+
+
+    <!-- =================================================
+         MAIN TASK INFORMATION
+    ================================================= -->
+
+    <div class="task-main-row">
+
+
+        <!-- TASK -->
+
+        <div>
+
+            <span class="task-label">
+                Task
+            </span>
+
+            <div class="task-title">
+                {{ task.title }}
+            </div>
+
+
+            {% if task.description %}
+
+                <div class="task-description">
+
+                    {{ task.description|truncatechars:90 }}
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- PROJECT -->
+
+        <div>
+
+            <span class="task-label">
+                Project
+            </span>
+
+
+            {% if task.project %}
+
+                <a
+                    href="{% url 'employee_project_details' task.project.id %}"
+                    class="project-name"
+                    title="{{ task.project }}"
+                >
+
+                    <i class="fa-solid fa-folder me-1"></i>
+
+                    {{ task.project }}
+
+                </a>
+
+            {% else %}
+
+                <span class="no-project">
+                    No Project
+                </span>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- DATE -->
+
+        <div>
+
+            <span class="task-label">
+                Date
+            </span>
+
+
+            <div class="task-value">
+
+                {% if task.task_date %}
+
+                    <i class="fa-regular fa-calendar me-1"></i>
+
+                    {{ task.task_date|date:"d M Y" }}
+
+                {% else %}
+
+                    -
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <!-- PRIORITY -->
+
+        <div>
+
+            <span class="task-label">
+                Priority
+            </span>
+
+
+            <span
+                class="priority priority-{{ task.priority }}"
+            >
+
+                {{ task.get_priority_display }}
+
+            </span>
+
+        </div>
+
+
+        <!-- STATUS -->
+
+        <div class="task-status-column">
+
+            <span class="task-label">
+                Status
+            </span>
+
+
+            <div class="status-form">
+
+
+                <span
+                    class="status-badge status-{{ task.status }}"
+                >
+
+                    {{ task.get_status_display }}
+
+                </span>
+
+
+                <form
+                    method="POST"
+                    action="{% url 'update_task_status' task.id %}"
+                    class="status-form"
+                >
+
+                    {% csrf_token %}
+
+
+                    <select
+                        name="status"
+                        class="form-select"
+                        title="Change task status"
+                    >
+
+                        <option
+                            value="pending"
+                            {% if task.status == "pending" %}
+                                selected
+                            {% endif %}
+                        >
+                            Pending
+                        </option>
+
+
+                        <option
+                            value="in_progress"
+                            {% if task.status == "in_progress" %}
+                                selected
+                            {% endif %}
+                        >
+                            In Progress
+                        </option>
+
+
+                        <option
+                            value="completed"
+                            {% if task.status == "completed" %}
+                                selected
+                            {% endif %}
+                        >
+                            Completed
+                        </option>
+
+                    </select>
+
+
+                    <button
+                        type="submit"
+                        class="update-btn"
+                        title="Update Status"
+                    >
+
+                        <i class="fa-solid fa-check"></i>
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =================================================
+         EMPLOYEE UPDATE
+    ================================================= -->
+
+    <div class="employee-update-section">
+
+
+        <div class="employee-update-header">
+
+            <div class="employee-update-title">
+
+                <i class="fa-solid fa-comment-dots"></i>
+
+                Employee Update
+
+            </div>
+
+
+            {% if task.employee_comment or task.remaining_days != None %}
+
+                <div class="current-update-small">
+
+                    Last saved update available
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- UPDATE FORM -->
+
+        <form
+            method="POST"
+            action="{% url 'employee_task_update' task.id %}"
+        >
+
+            {% csrf_token %}
+
+
+            <div class="update-form-row">
+
+
+                <!-- COMMENT -->
+
+                <div class="update-field">
+
+                    <label
+                        for="comment-{{ task.id }}"
+                    >
+
+                        Comment / Progress Update
+
+                    </label>
+
+
+                    <textarea
+                        id="comment-{{ task.id }}"
+                        name="employee_comment"
+                        placeholder="Write progress, issue, requirement or any update for admin..."
+                    >{{ task.employee_comment }}</textarea>
+
+                </div>
+
+
+                <!-- REMAINING DAYS -->
+
+                <div class="update-field">
+
+                    <label
+                        for="days-{{ task.id }}"
+                    >
+
+                        Remaining Days
+
+                    </label>
+
+
+                    <input
+                        type="number"
+                        id="days-{{ task.id }}"
+                        name="remaining_days"
+                        min="0"
+                        value="{{ task.remaining_days|default_if_none:'' }}"
+                        placeholder="e.g. 3"
+                    >
+
+                </div>
+
+
+                <!-- SAVE -->
+
+                <div>
+
+                    <button
+                        type="submit"
+                        class="save-update-btn"
+                    >
+
+                        <i class="fa-solid fa-floppy-disk me-1"></i>
+
+                        Save Update
+
+                    </button>
+
+                </div>
+
+
+            </div>
+
+        </form>
+
+
+        <!-- =================================================
+             SAVED EMPLOYEE UPDATE
+        ================================================= -->
+
+        {% if task.employee_comment or task.remaining_days != None %}
+
+            <div class="saved-update">
+
+
+                {% if task.employee_comment %}
+
+                    <div class="saved-comment">
+
+                        <i class="fa-regular fa-comment"></i>
+
+                        <strong>
+                            Your Comment:
+                        </strong>
+
+                        {{ task.employee_comment }}
+
+                    </div>
+
+                {% endif %}
+
+
+                {% if task.remaining_days != None %}
+
+                    <div class="saved-days">
+
+                        <i class="fa-regular fa-clock"></i>
+
+                        <strong>
+                            Remaining:
+                        </strong>
+
+                        {{ task.remaining_days }}
+
+                        day{{ task.remaining_days|pluralize }}
+
+                    </div>
+
+                {% endif %}
+
+
+            </div>
+
+        {% endif %}
+
+
+        <!-- =================================================
+             ADMIN COMMENTS
+        ================================================= -->
+
+        {% if task.comments.all %}
+
+            <div class="admin-comments-section">
+
+                <div class="admin-comment-heading">
+
+                    <i class="fa-solid fa-user-tie"></i>
+
+                    Admin Comment
+
+                </div>
+
+
+                {% for comment in task.comments.all %}
+
+                    {% if comment.user.role == "admin" %}
+
+                        <div class="admin-comment-item">
+
+                            <div class="admin-comment-text">
+
+                                {{ comment.comment }}
+
+                            </div>
+
+                            <div class="admin-comment-time">
+
+                                {{ comment.created_at|date:"d M Y, h:i A" }}
+
+                            </div>
+
+                        </div>
+
+                    {% endif %}
+
+                {% endfor %}
+
+            </div>
+
+        {% endif %}
+
+
+    </div>
+
+
+</div>
+
+
+{% empty %}
+
+<!-- =================================================
+     EMPTY STATE
+================================================= -->
+
+<div class="empty-state">
+
+    <i
+        class="fa-solid fa-clipboard-list fa-3x"
+    ></i>
+
+
+    <h5>
+        No Tasks Assigned
+    </h5>
+
+
+    <p>
+        You don't have any tasks assigned to you yet.
+    </p>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+<!-- Bootstrap JS -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+{% include "chat/chat_widget.html" %}
+</body>
+
+</html>

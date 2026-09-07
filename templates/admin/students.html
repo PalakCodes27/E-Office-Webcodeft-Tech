@@ -1,0 +1,2116 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Students | Admin Dashboard</title>
+
+<style>
+
+    /* =====================================================
+       RESET
+    ===================================================== */
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+
+    /* =====================================================
+       BODY
+    ===================================================== */
+
+    body {
+        font-family:
+            Inter,
+            Arial,
+            Helvetica,
+            sans-serif;
+
+        background: #f5f8f9;
+        color: #1f2937;
+
+        min-height: 100vh;
+    }
+
+
+    /* =====================================================
+       PAGE WRAPPER
+    ===================================================== */
+
+    .page-wrapper {
+        width: 100%;
+        min-height: 100vh;
+
+        padding: 28px 32px 40px;
+    }
+
+
+    /* =====================================================
+       PAGE HEADER
+    ===================================================== */
+
+    .page-header {
+        width: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 25px;
+
+        margin-bottom: 25px;
+    }
+
+
+    /* =====================================================
+       PAGE TITLE
+    ===================================================== */
+
+    .page-title h1 {
+        font-size: 30px;
+        line-height: 1.2;
+
+        font-weight: 750;
+
+        color: #123c40;
+
+        margin-bottom: 7px;
+    }
+
+    .page-title p {
+        color: #718096;
+
+        font-size: 14px;
+
+        line-height: 1.5;
+    }
+
+
+    /* =====================================================
+       PAGE ACTIONS
+    ===================================================== */
+
+    .page-actions {
+        display: flex;
+
+        align-items: center;
+
+        gap: 12px;
+
+        flex-shrink: 0;
+    }
+
+
+    /* =====================================================
+       DASHBOARD BUTTON
+    ===================================================== */
+
+    .dashboard-btn {
+        display: inline-flex;
+
+        align-items: center;
+        justify-content: center;
+
+        gap: 8px;
+
+        height: 50px;
+
+        padding: 0 20px;
+
+        border-radius: 12px;
+
+        background: #ffffff;
+
+        border: 1px solid #d9e5e6;
+
+        color: #164b50;
+
+        text-decoration: none;
+
+        font-size: 14px;
+
+        font-weight: 650;
+
+        transition: all 0.2s ease;
+    }
+
+    .dashboard-btn:hover {
+        background: #eef8f7;
+
+        border-color: #0a817d;
+
+        color: #08776d;
+
+        transform: translateY(-1px);
+
+        box-shadow:
+            0 5px 15px
+            rgba(8, 119, 109, 0.08);
+    }
+
+
+    /* =====================================================
+       ADD STUDENT BUTTON
+    ===================================================== */
+
+    .add-student-btn {
+        display: inline-flex;
+
+        align-items: center;
+        justify-content: center;
+
+        gap: 8px;
+
+        height: 50px;
+
+        padding: 0 22px;
+
+        border-radius: 12px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #087b78,
+                #0b9184
+            );
+
+        color: #ffffff;
+
+        text-decoration: none;
+
+        font-size: 14px;
+
+        font-weight: 650;
+
+        border: none;
+
+        box-shadow:
+            0 8px 20px
+            rgba(8, 123, 120, 0.18);
+
+        transition: all 0.2s ease;
+    }
+
+    .add-student-btn:hover {
+        color: #ffffff;
+
+        transform: translateY(-2px);
+
+        box-shadow:
+            0 12px 25px
+            rgba(8, 123, 120, 0.25);
+    }
+
+
+    /* =====================================================
+       SUMMARY GRID
+    ===================================================== */
+
+    .summary-grid {
+        display: grid;
+
+        grid-template-columns:
+            repeat(4, minmax(0, 1fr));
+
+        gap: 18px;
+
+        margin-bottom: 25px;
+    }
+
+
+    /* =====================================================
+       SUMMARY CARD
+    ===================================================== */
+
+    .summary-card {
+        background: #ffffff;
+
+        border: 1px solid #e6ecee;
+
+        border-radius: 15px;
+
+        padding: 20px;
+
+        min-height: 100px;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 15px;
+
+        box-shadow:
+            0 4px 18px
+            rgba(15, 23, 42, 0.045);
+
+        transition: all 0.2s ease;
+    }
+
+    .summary-card:hover {
+        transform: translateY(-2px);
+
+        box-shadow:
+            0 8px 24px
+            rgba(15, 23, 42, 0.07);
+    }
+
+
+    /* =====================================================
+       SUMMARY ICON
+    ===================================================== */
+
+    .summary-icon {
+        width: 50px;
+        height: 50px;
+
+        min-width: 50px;
+
+        border-radius: 13px;
+
+        background: #e8f6f4;
+
+        color: #08756c;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        font-size: 20px;
+
+        font-weight: 700;
+    }
+
+
+    /* =====================================================
+       SUMMARY CONTENT
+    ===================================================== */
+
+    .summary-content span {
+        display: block;
+
+        font-size: 12px;
+
+        color: #7b8794;
+
+        margin-bottom: 5px;
+    }
+
+    .summary-content strong {
+        display: block;
+
+        font-size: 23px;
+
+        color: #173f43;
+
+        font-weight: 750;
+    }
+
+
+    /* =====================================================
+       FILTER CARD
+    ===================================================== */
+
+    .filter-card {
+        background: #ffffff;
+
+        border: 1px solid #e5eaec;
+
+        border-radius: 15px;
+
+        padding: 20px;
+
+        margin-bottom: 25px;
+
+        box-shadow:
+            0 4px 18px
+            rgba(15, 23, 42, 0.04);
+    }
+
+
+    .filter-title {
+        font-size: 15px;
+
+        font-weight: 700;
+
+        color: #173f43;
+
+        margin-bottom: 15px;
+    }
+
+
+    .filter-row {
+        display: grid;
+
+        grid-template-columns:
+            2fr 1fr 1fr auto;
+
+        gap: 13px;
+
+        align-items: end;
+    }
+
+
+    /* =====================================================
+       FORM
+    ===================================================== */
+
+    .form-group label {
+        display: block;
+
+        font-size: 12px;
+
+        font-weight: 650;
+
+        color: #374151;
+
+        margin-bottom: 7px;
+    }
+
+
+    .form-control,
+    .form-select {
+        width: 100%;
+
+        height: 44px;
+
+        border: 1px solid #d8e0e3;
+
+        border-radius: 9px;
+
+        padding: 0 13px;
+
+        font-size: 13px;
+
+        outline: none;
+
+        background: #ffffff;
+
+        color: #374151;
+
+        transition: 0.2s;
+    }
+
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: #0c8b78;
+
+        box-shadow:
+            0 0 0 3px
+            rgba(12, 139, 120, 0.10);
+    }
+
+
+    /* =====================================================
+       FILTER BUTTON
+    ===================================================== */
+
+    .filter-btn {
+        height: 44px;
+
+        padding: 0 20px;
+
+        border: none;
+
+        border-radius: 9px;
+
+        background: #123f43;
+
+        color: white;
+
+        cursor: pointer;
+
+        font-weight: 600;
+
+        font-size: 13px;
+
+        transition: 0.2s;
+    }
+
+    .filter-btn:hover {
+        background: #0a5c63;
+    }
+
+
+    /* =====================================================
+       CLEAR BUTTON
+    ===================================================== */
+
+    .clear-btn {
+        height: 44px;
+
+        padding: 0 16px;
+
+        border: 1px solid #d8e0e3;
+
+        border-radius: 9px;
+
+        background: #ffffff;
+
+        color: #536166;
+
+        text-decoration: none;
+
+        display: inline-flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        font-size: 13px;
+
+        font-weight: 600;
+
+        transition: 0.2s;
+    }
+
+    .clear-btn:hover {
+        background: #f5f8f9;
+
+        color: #374151;
+    }
+
+
+    /* =====================================================
+       TABLE CARD
+    ===================================================== */
+
+    .table-card {
+        background: #ffffff;
+
+        border: 1px solid #e5eaec;
+
+        border-radius: 15px;
+
+        overflow: hidden;
+
+        box-shadow:
+            0 4px 18px
+            rgba(15, 23, 42, 0.04);
+    }
+
+
+    /* =====================================================
+       TABLE HEADER
+    ===================================================== */
+
+    .table-header {
+        padding: 20px 22px;
+
+        border-bottom: 1px solid #e7ecee;
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+    }
+
+
+    .table-header h2 {
+        font-size: 17px;
+
+        color: #173f43;
+
+        font-weight: 700;
+    }
+
+
+    .student-count {
+        font-size: 12px;
+
+        color: #7b8794;
+    }
+
+
+    /* =====================================================
+       TABLE WRAPPER
+    ===================================================== */
+
+    .table-wrapper {
+        width: 100%;
+
+        overflow-x: auto;
+    }
+
+
+    table {
+        width: 100%;
+
+        min-width: 1500px;
+
+        border-collapse: collapse;
+    }
+
+
+    thead {
+        background: #f8fafb;
+    }
+
+
+    th {
+        padding: 14px 16px;
+
+        text-align: left;
+
+        font-size: 11px;
+
+        text-transform: uppercase;
+
+        letter-spacing: 0.45px;
+
+        color: #64748b;
+
+        border-bottom: 1px solid #e5eaec;
+
+        white-space: nowrap;
+    }
+
+
+    td {
+        padding: 15px 16px;
+
+        border-bottom: 1px solid #eef2f3;
+
+        font-size: 13px;
+
+        color: #374151;
+
+        vertical-align: middle;
+    }
+
+
+    tbody tr {
+        transition: 0.15s;
+    }
+
+
+    tbody tr:hover {
+        background: #f9fcfc;
+    }
+
+
+    /* =====================================================
+       STUDENT INFO
+    ===================================================== */
+
+    .student-info {
+        display: flex;
+
+        align-items: center;
+
+        gap: 11px;
+    }
+
+
+    .student-avatar {
+        width: 39px;
+        height: 39px;
+
+        min-width: 39px;
+
+        border-radius: 50%;
+
+        background:
+            linear-gradient(
+                135deg,
+                #0a5c63,
+                #2edb87
+            );
+
+        color: white;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        font-size: 14px;
+
+        font-weight: 700;
+    }
+
+
+    .student-name {
+        font-weight: 650;
+
+        color: #1f3f42;
+
+        margin-bottom: 3px;
+    }
+
+
+    .student-email {
+        font-size: 11px;
+
+        color: #8a949b;
+    }
+
+
+    /* =====================================================
+       BADGES
+    ===================================================== */
+
+    .badge {
+        display: inline-flex;
+
+        align-items: center;
+
+        padding: 5px 10px;
+
+        border-radius: 20px;
+
+        font-size: 11px;
+
+        font-weight: 650;
+
+        white-space: nowrap;
+    }
+
+
+    .badge-active {
+        background: #e7f8ef;
+        color: #13834e;
+    }
+
+
+    .badge-inactive {
+        background: #f1f3f5;
+        color: #6b7280;
+    }
+
+
+    .badge-completed {
+        background: #e8f0ff;
+        color: #356ac3;
+    }
+
+
+    .badge-online {
+        background: #e6f7ff;
+        color: #087ea4;
+    }
+
+
+    .badge-offline {
+        background: #fff3df;
+        color: #a76a00;
+    }
+
+
+    .badge-paid {
+        background: #e7f8ef;
+        color: #13834e;
+    }
+
+
+    .badge-partial {
+        background: #fff4dc;
+        color: #a76a00;
+    }
+
+
+    .badge-pending {
+        background: #ffe9e9;
+        color: #c23838;
+    }
+
+
+    /* =====================================================
+       CERTIFICATE
+    ===================================================== */
+
+    .badge-certificate-issued {
+        background: #e7f8ef;
+        color: #13834e;
+    }
+
+
+    .badge-certificate-not-issued {
+        background: #ffe9e9;
+        color: #c23838;
+    }
+
+
+    /* =====================================================
+       FEES
+    ===================================================== */
+
+    .fee-total {
+        color: #1f3f42;
+
+        font-weight: 650;
+    }
+
+
+    .fee-paid {
+        color: #13834e;
+
+        font-weight: 650;
+    }
+
+
+    .fee-remaining {
+        color: #c23838;
+
+        font-weight: 650;
+    }
+
+
+    /* =====================================================
+       ACTIONS
+    ===================================================== */
+
+    .actions {
+        display: flex;
+
+        gap: 7px;
+
+        align-items: center;
+    }
+
+
+    .action-btn {
+        width: 34px;
+        height: 34px;
+
+        border-radius: 8px;
+
+        border: 1px solid #dce3e6;
+
+        background: white;
+
+        cursor: pointer;
+
+        text-decoration: none;
+
+        display: inline-flex;
+
+        align-items: center;
+        justify-content: center;
+
+        font-size: 14px;
+
+        transition: 0.2s;
+    }
+
+
+    .view-btn {
+        color: #0a6b72;
+    }
+
+    .view-btn:hover {
+        background: #e8f7f7;
+    }
+
+
+    .edit-btn {
+        color: #a56a00;
+    }
+
+    .edit-btn:hover {
+        background: #fff5df;
+    }
+
+
+    .delete-btn {
+        color: #c03939;
+    }
+
+    .delete-btn:hover {
+        background: #fff0f0;
+    }
+
+
+    /* =====================================================
+       EMPTY STATE
+    ===================================================== */
+
+    .empty-state {
+        text-align: center;
+
+        padding: 65px 20px;
+    }
+
+
+    .empty-icon {
+        width: 65px;
+        height: 65px;
+
+        margin: 0 auto 15px;
+
+        border-radius: 50%;
+
+        background: #eaf6f5;
+
+        color: #0a6b72;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        font-size: 25px;
+    }
+
+
+    .empty-state h3 {
+        color: #374151;
+
+        margin-bottom: 7px;
+
+        font-size: 17px;
+    }
+
+
+    .empty-state p {
+        color: #8a949b;
+
+        font-size: 13px;
+
+        margin-bottom: 20px;
+    }
+
+
+    /* =====================================================
+       DELETE MODAL
+    ===================================================== */
+
+    .modal-overlay {
+        display: none;
+
+        position: fixed;
+
+        inset: 0;
+
+        background:
+            rgba(15, 23, 42, 0.55);
+
+        z-index: 9999;
+
+        align-items: center;
+
+        justify-content: center;
+
+        padding: 20px;
+    }
+
+
+    .modal-box {
+        background: white;
+
+        width: 100%;
+
+        max-width: 420px;
+
+        border-radius: 16px;
+
+        padding: 25px;
+
+        box-shadow:
+            0 20px 50px
+            rgba(0, 0, 0, 0.20);
+    }
+
+
+    .modal-box h3 {
+        color: #173f43;
+
+        margin-bottom: 8px;
+    }
+
+
+    .modal-box p {
+        color: #6b7280;
+
+        font-size: 14px;
+
+        line-height: 1.6;
+
+        margin-bottom: 20px;
+    }
+
+
+    .modal-actions {
+        display: flex;
+
+        justify-content: flex-end;
+
+        gap: 10px;
+    }
+
+
+    .cancel-btn,
+    .confirm-delete {
+        padding: 10px 18px;
+
+        border-radius: 8px;
+
+        cursor: pointer;
+
+        font-weight: 600;
+
+        border: none;
+    }
+
+
+    .cancel-btn {
+        background: #eef1f3;
+
+        color: #374151;
+    }
+
+
+    .confirm-delete {
+        background: #c03939;
+
+        color: white;
+    }
+
+
+    /* =====================================================
+       RESPONSIVE - TABLET
+    ===================================================== */
+
+    @media (max-width: 1100px) {
+
+        .summary-grid {
+            grid-template-columns:
+                repeat(2, 1fr);
+        }
+
+
+        .filter-row {
+            grid-template-columns:
+                1fr 1fr;
+        }
+
+
+        .filter-row > div:last-child {
+            grid-column: span 2;
+        }
+
+    }
+
+
+    /* =====================================================
+       RESPONSIVE - MOBILE
+    ===================================================== */
+
+    @media (max-width: 700px) {
+
+        .page-wrapper {
+            padding: 18px 14px 30px;
+        }
+
+
+        .page-header {
+            flex-direction: column;
+
+            align-items: flex-start;
+
+            margin-bottom: 22px;
+        }
+
+
+        .page-title h1 {
+            font-size: 24px;
+        }
+
+
+        .page-title p {
+            font-size: 13px;
+        }
+
+
+        .page-actions {
+            width: 100%;
+
+            flex-direction: column;
+
+            gap: 9px;
+        }
+
+
+        .dashboard-btn,
+        .add-student-btn {
+            width: 100%;
+        }
+
+
+        .summary-grid {
+            grid-template-columns: 1fr;
+
+            gap: 12px;
+        }
+
+
+        .filter-row {
+            grid-template-columns: 1fr;
+        }
+
+
+        .filter-row > div:last-child {
+            grid-column: auto;
+
+            width: 100%;
+        }
+
+
+        .filter-row > div:last-child button,
+        .filter-row > div:last-child a {
+            flex: 1;
+        }
+
+
+        .table-header {
+            align-items: flex-start;
+
+            gap: 8px;
+
+            flex-direction: column;
+        }
+
+    }
+
+
+    /* =====================================================
+       SMALL MOBILE
+    ===================================================== */
+
+    @media (max-width: 450px) {
+
+        .summary-card {
+            padding: 16px;
+        }
+
+
+        .summary-icon {
+            width: 45px;
+            height: 45px;
+
+            min-width: 45px;
+        }
+
+
+        .summary-content strong {
+            font-size: 20px;
+        }
+
+    }
+
+</style>
+
+
+</head>
+
+<body>
+
+<div class="page-wrapper">
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<div class="page-header">
+
+
+    <!-- PAGE TITLE -->
+
+    <div class="page-title">
+
+        <h1>
+            Students
+        </h1>
+
+        <p>
+            Manage student records, courses, fees and enrollment details.
+        </p>
+
+    </div>
+
+
+    <!-- PAGE ACTIONS -->
+
+    <div class="page-actions">
+
+
+        <!-- DASHBOARD -->
+
+        <a
+            href="{% url 'admin_dashboard' %}"
+            class="dashboard-btn"
+        >
+
+            <span>▦</span>
+
+            Dashboard
+
+        </a>
+
+
+        <!-- ADD STUDENT -->
+
+        <a
+            href="{% url 'add_student' %}"
+            class="add-student-btn"
+        >
+
+            <span>+</span>
+
+            Add Student
+
+        </a>
+
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     SUMMARY CARDS
+===================================================== -->
+
+<div class="summary-grid">
+
+
+    <!-- TOTAL STUDENTS -->
+
+    <div class="summary-card">
+
+        <div class="summary-icon">
+            👨‍🎓
+        </div>
+
+        <div class="summary-content">
+
+            <span>
+                Total Students
+            </span>
+
+            <strong>
+                {{ total_students|default:"0" }}
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- ACTIVE STUDENTS -->
+
+    <div class="summary-card">
+
+        <div class="summary-icon">
+            ✓
+        </div>
+
+        <div class="summary-content">
+
+            <span>
+                Active Students
+            </span>
+
+            <strong>
+                {{ active_count|default:"0" }}
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- TOTAL FEES -->
+
+    <div class="summary-card">
+
+        <div class="summary-icon">
+            ₹
+        </div>
+
+        <div class="summary-content">
+
+            <span>
+                Total Fees
+            </span>
+
+            <strong>
+                ₹{{ total_fees|default:"0.00" }}
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- FEES COLLECTED -->
+
+    <div class="summary-card">
+
+        <div class="summary-icon">
+            %
+        </div>
+
+        <div class="summary-content">
+
+            <span>
+                Fees Collected
+            </span>
+
+            <strong>
+                ₹{{ fees_paid|default:"0.00" }}
+            </strong>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<!-- =====================================================
+     FILTER CARD
+===================================================== -->
+
+<div class="filter-card">
+
+
+    <div class="filter-title">
+        Search & Filter Students
+    </div>
+
+
+    <form method="GET">
+
+
+        <div class="filter-row">
+
+
+            <!-- SEARCH -->
+
+            <div class="form-group">
+
+                <label>
+                    Search Student
+                </label>
+
+                <input
+                    type="text"
+                    name="search"
+                    class="form-control"
+                    placeholder="Name, email, phone, course..."
+                    value="{{ search|default:'' }}"
+                >
+
+            </div>
+
+
+            <!-- STATUS -->
+
+            <div class="form-group">
+
+                <label>
+                    Status
+                </label>
+
+                <select
+                    name="status"
+                    class="form-select"
+                >
+
+                    <option value="">
+                        All Status
+                    </option>
+
+                    <option
+                        value="active"
+                        {% if selected_status == "active" %}
+                            selected
+                        {% endif %}
+                    >
+                        Active
+                    </option>
+
+                    <option
+                        value="inactive"
+                        {% if selected_status == "inactive" %}
+                            selected
+                        {% endif %}
+                    >
+                        Inactive
+                    </option>
+
+                    <option
+                        value="completed"
+                        {% if selected_status == "completed" %}
+                            selected
+                        {% endif %}
+                    >
+                        Completed
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- LEARNING MODE -->
+
+            <div class="form-group">
+
+                <label>
+                    Learning Mode
+                </label>
+
+                <select
+                    name="mode"
+                    class="form-select"
+                >
+
+                    <option value="">
+                        All Modes
+                    </option>
+
+                    <option
+                        value="online"
+                        {% if selected_mode == "online" %}
+                            selected
+                        {% endif %}
+                    >
+                        Online
+                    </option>
+
+                    <option
+                        value="offline"
+                        {% if selected_mode == "offline" %}
+                            selected
+                        {% endif %}
+                    >
+                        Offline
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- FILTER BUTTONS -->
+
+            <div
+                style="
+                    display:flex;
+                    gap:8px;
+                "
+            >
+
+                <button
+                    type="submit"
+                    class="filter-btn"
+                >
+                    Search
+                </button>
+
+
+                <a
+                    href="{% url 'students' %}"
+                    class="clear-btn"
+                >
+                    Clear
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </form>
+
+</div>
+
+
+<!-- =====================================================
+     STUDENT TABLE
+===================================================== -->
+
+<div class="table-card">
+
+
+    <!-- TABLE HEADER -->
+
+    <div class="table-header">
+
+        <h2>
+            Student List
+        </h2>
+
+        <span class="student-count">
+
+            {{ students|length }}
+            student{{ students|length|pluralize }}
+
+        </span>
+
+    </div>
+
+
+    <!-- TABLE -->
+
+    <div class="table-wrapper">
+
+
+        {% if students %}
+
+
+        <table>
+
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Student
+                    </th>
+
+                    <!-- CERTIFICATE COLUMN -->
+
+                    <th>
+                        Certificate
+                    </th>
+
+                    <th>
+                        Phone
+                    </th>
+
+                    <th>
+                        Course
+                    </th>
+
+                    <th>
+                        Course Duration
+                    </th>
+
+                    <th>
+                        Batch
+                    </th>
+
+                    <th>
+                        Assigned Employee
+                    </th>
+
+                    <th>
+                        Mode
+                    </th>
+
+                    <th>
+                        Total Fee
+                    </th>
+
+                    <th>
+                        Paid
+                    </th>
+
+                    <th>
+                        Remaining
+                    </th>
+
+                    <th>
+                        Payment
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                    <th>
+                        Actions
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+
+            {% for student in students %}
+
+
+            <tr>
+
+
+                <!-- STUDENT -->
+
+                <td>
+
+                    <div class="student-info">
+
+
+                        <div class="student-avatar">
+
+                            {{ student.first_name|first|upper }}
+
+                        </div>
+
+
+                        <div>
+
+                            <div class="student-name">
+
+                                {{ student.first_name }}
+
+                                {{ student.last_name }}
+
+                            </div>
+
+
+                            <div class="student-email">
+
+                                {{ student.email }}
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </td>
+
+
+                <!-- =================================================
+                     CERTIFICATE
+                ================================================== -->
+
+                <td>
+
+                    {% if student.certificate_status == "issued" %}
+
+                        <span class="badge badge-certificate-issued">
+                            Issued
+                        </span>
+
+                    {% else %}
+
+                        <span class="badge badge-certificate-not-issued">
+                            Not Issued
+                        </span>
+
+                    {% endif %}
+
+                </td>
+
+
+                <!-- PHONE -->
+
+                <td>
+
+                    {{ student.phone|default:"-" }}
+
+                </td>
+
+
+                <!-- COURSE -->
+
+                <td>
+
+                    {{ student.course|default:"-" }}
+
+                </td>
+
+
+                <!-- COURSE DURATION -->
+
+                <td>
+
+                    {% if student.course_duration_months %}
+
+                        {{ student.course_duration_months }}
+                        month{{ student.course_duration_months|pluralize }}
+
+                    {% endif %}
+
+
+                    {% if student.course_duration_days %}
+
+                        {% if student.course_duration_months %}
+                            +
+                        {% endif %}
+
+                        {{ student.course_duration_days }}
+                        day{{ student.course_duration_days|pluralize }}
+
+                    {% endif %}
+
+
+                    {% if not student.course_duration_months and not student.course_duration_days %}
+
+                        -
+
+                    {% endif %}
+
+                </td>
+
+
+                <!-- BATCH -->
+
+                <td>
+
+                    {{ student.batch|default:"-" }}
+
+                </td>
+
+
+                <!-- ASSIGNED EMPLOYEE -->
+
+                <td>
+
+                    {% if student.assigned_employee %}
+
+                        {{ student.assigned_employee.get_full_name|default:student.assigned_employee.username }}
+
+                    {% else %}
+
+                        <span style="color:#9ca3af;">
+                            Not Assigned
+                        </span>
+
+                    {% endif %}
+
+                </td>
+
+
+                <!-- MODE -->
+
+                <td>
+
+                    {% if student.learning_mode == "online" %}
+
+                        <span class="badge badge-online">
+                            Online
+                        </span>
+
+                    {% elif student.learning_mode == "offline" %}
+
+                        <span class="badge badge-offline">
+                            Offline
+                        </span>
+
+                    {% else %}
+
+                        -
+
+                    {% endif %}
+
+                </td>
+
+
+                <!-- TOTAL FEE -->
+
+                <td>
+
+                    <span class="fee-total">
+
+                        ₹{{ student.total_fee|default:"0.00" }}
+
+                    </span>
+
+                </td>
+
+
+                <!-- PAID -->
+
+                <td>
+
+                    <span class="fee-paid">
+
+                        ₹{{ student.fee_paid|default:"0.00" }}
+
+                    </span>
+
+                </td>
+
+
+                <!-- REMAINING -->
+
+                <td>
+
+                    <span class="fee-remaining">
+
+                        ₹{{ student.remaining_fee|default:"0.00" }}
+
+                    </span>
+
+                </td>
+
+
+                <!-- PAYMENT -->
+
+                <td>
+
+                    {% if student.payment_status == "paid" %}
+
+                        <span class="badge badge-paid">
+                            Paid
+                        </span>
+
+                    {% elif student.payment_status == "partial" %}
+
+                        <span class="badge badge-partial">
+                            Partially Paid
+                        </span>
+
+                    {% else %}
+
+                        <span class="badge badge-pending">
+                            Pending
+                        </span>
+
+                    {% endif %}
+
+                </td>
+
+
+                <!-- STATUS -->
+
+                <td>
+
+                    {% if student.status == "active" %}
+
+                        <span class="badge badge-active">
+                            Active
+                        </span>
+
+                    {% elif student.status == "inactive" %}
+
+                        <span class="badge badge-inactive">
+                            Inactive
+                        </span>
+
+                    {% elif student.status == "completed" %}
+
+                        <span class="badge badge-completed">
+                            Completed
+                        </span>
+
+                    {% else %}
+
+                        -
+
+                    {% endif %}
+
+                </td>
+
+
+                <!-- ACTIONS -->
+
+                <td>
+
+                    <div class="actions">
+
+
+                        <!-- VIEW -->
+
+                        <a
+                            href="{% url 'student_detail' student.id %}"
+                            class="action-btn view-btn"
+                            title="View Student"
+                        >
+                            👁
+                        </a>
+
+
+                        <!-- EDIT -->
+
+                        <a
+                            href="{% url 'edit_student' student.id %}"
+                            class="action-btn edit-btn"
+                            title="Edit Student"
+                        >
+                            ✎
+                        </a>
+
+
+                        <!-- DELETE -->
+
+                        <button
+                            type="button"
+                            class="action-btn delete-btn"
+                            title="Delete Student"
+
+                            onclick="openDeleteModal(
+                                '{{ student.id }}',
+                                '{{ student.first_name }} {{ student.last_name }}'
+                            )"
+                        >
+                            🗑
+                        </button>
+
+
+                    </div>
+
+                </td>
+
+
+            </tr>
+
+
+            {% endfor %}
+
+
+            </tbody>
+
+        </table>
+
+
+        {% else %}
+
+
+        <!-- EMPTY STATE -->
+
+        <div class="empty-state">
+
+
+            <div class="empty-icon">
+                👨‍🎓
+            </div>
+
+
+            <h3>
+                No Students Found
+            </h3>
+
+
+            <p>
+                No student records match your search or filter.
+            </p>
+
+
+            <a
+                href="{% url 'add_student' %}"
+                class="add-student-btn"
+            >
+                + Add Student
+            </a>
+
+
+        </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+</div>
+
+
+</div>
+
+<!-- =====================================================
+     DELETE MODAL
+===================================================== -->
+
+<div
+    class="modal-overlay"
+    id="deleteModal"
+>
+
+<div class="modal-box">
+
+
+    <h3>
+        Delete Student
+    </h3>
+
+
+    <p>
+
+        Are you sure you want to delete
+
+        <strong id="studentDeleteName">
+            this student
+        </strong>?
+
+        This action cannot be undone.
+
+    </p>
+
+
+    <div class="modal-actions">
+
+
+        <button
+            type="button"
+            class="cancel-btn"
+            onclick="closeDeleteModal()"
+        >
+            Cancel
+        </button>
+
+
+        <form
+            method="POST"
+            id="deleteStudentForm"
+        >
+
+            {% csrf_token %}
+
+            <button
+                type="submit"
+                class="confirm-delete"
+            >
+                Delete
+            </button>
+
+        </form>
+
+
+    </div>
+
+
+</div>
+
+
+</div>
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+    /* =====================================================
+       OPEN DELETE MODAL
+    ===================================================== */
+
+    function openDeleteModal(
+        studentId,
+        studentName
+    ) {
+
+
+        const modal =
+            document.getElementById(
+                "deleteModal"
+            );
+
+
+        const nameElement =
+            document.getElementById(
+                "studentDeleteName"
+            );
+
+
+        const form =
+            document.getElementById(
+                "deleteStudentForm"
+            );
+
+
+        nameElement.textContent =
+            studentName;
+
+
+        form.action =
+            "/students/delete/" +
+            studentId +
+            "/";
+
+
+        modal.style.display =
+            "flex";
+
+    }
+
+
+
+    /* =====================================================
+       CLOSE DELETE MODAL
+    ===================================================== */
+
+    function closeDeleteModal() {
+
+
+        document.getElementById(
+            "deleteModal"
+        ).style.display =
+            "none";
+
+    }
+
+
+
+    /* =====================================================
+       CLOSE WHEN CLICKING OUTSIDE
+    ===================================================== */
+
+    window.addEventListener(
+        "click",
+        function(event) {
+
+
+            const modal =
+                document.getElementById(
+                    "deleteModal"
+                );
+
+
+            if (
+                event.target === modal
+            ) {
+
+                closeDeleteModal();
+
+            }
+
+        }
+    );
+
+
+
+    /* =====================================================
+       ESC KEY CLOSE
+    ===================================================== */
+
+    window.addEventListener(
+        "keydown",
+        function(event) {
+
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                closeDeleteModal();
+
+            }
+
+        }
+    );
+
+
+</script>
+{% include "chat/chat_widget.html" %}
+</body>
+
+</html>

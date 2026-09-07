@@ -1,0 +1,2491 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
+>
+
+<title>Admin Dashboard | Smart Office</title>
+
+<!-- =====================================================
+     BOOTSTRAP
+====================================================== -->
+
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+>
+
+<!-- =====================================================
+     FONT AWESOME
+====================================================== -->
+
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+>
+
+<!-- =====================================================
+     CHART JS
+====================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+
+    body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #f4f8f8;
+        color: #1f2937;
+    }
+
+
+    /* =================================================
+       SIDEBAR
+    ================================================== */
+
+    .sidebar {
+
+        position: fixed;
+
+        left: 0;
+        top: 0;
+
+        width: 250px;
+        height: 100vh;
+
+        background:
+            linear-gradient(
+                180deg,
+                #0d9488,
+                #087f75,
+                #066d66
+            );
+
+        padding: 22px 15px;
+
+        z-index: 1000;
+
+        overflow-y: auto;
+    }
+
+
+    .logo-box {
+
+        text-align: center;
+
+        margin-bottom: 25px;
+
+        padding-bottom: 18px;
+
+        border-bottom:
+            1px solid
+            rgba(255,255,255,0.18);
+    }
+
+
+    .logo-box img {
+
+        max-width: 175px;
+        max-height: 65px;
+
+        object-fit: contain;
+    }
+
+
+    .menu-title {
+
+        color:
+            rgba(255,255,255,0.65);
+
+        font-size: 11px;
+
+        text-transform: uppercase;
+
+        letter-spacing: 1px;
+
+        margin:
+            20px 12px 8px;
+    }
+
+
+    .sidebar a {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 12px;
+
+        text-decoration: none;
+
+        color: #ffffff;
+
+        padding:
+            12px 14px;
+
+        margin-bottom: 5px;
+
+        border-radius: 10px;
+
+        font-size: 14px;
+
+        transition: 0.25s;
+    }
+
+
+    .sidebar a i {
+
+        width: 20px;
+
+        text-align: center;
+    }
+
+
+    .sidebar a:hover,
+    .sidebar a.active {
+
+        background:
+            rgba(255,255,255,0.15);
+
+        transform:
+            translateX(3px);
+    }
+
+
+    /* =================================================
+       MAIN
+    ================================================== */
+
+    .main-content {
+
+        margin-left: 250px;
+
+        padding: 27px;
+    }
+
+
+    /* =================================================
+       TOPBAR
+    ================================================== */
+
+    .topbar {
+
+        background: #ffffff;
+
+        border-radius: 15px;
+
+        padding:
+            18px 22px;
+
+        margin-bottom: 25px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        box-shadow:
+            0 4px 18px
+            rgba(0,0,0,0.05);
+    }
+
+
+    .topbar h2 {
+
+        font-size: 22px;
+
+        font-weight: 700;
+
+        margin: 0;
+
+        color: #174b47;
+    }
+
+
+    .welcome {
+
+        font-size: 13px;
+
+        color: #6b7280;
+
+        text-align: right;
+    }
+
+
+    .welcome strong {
+
+        color: #174b47;
+
+        font-weight: 700;
+    }
+
+
+    /* =================================================
+       SECTION TITLE
+    ================================================== */
+
+    .section-title {
+
+        font-size: 18px;
+
+        font-weight: 700;
+
+        color: #174b47;
+
+        margin:
+            28px 0 15px;
+    }
+
+
+    /* =================================================
+       STAT CARDS
+    ================================================== */
+
+    .dashboard-card {
+
+        background: #ffffff;
+
+        border-radius: 15px;
+
+        padding: 20px;
+
+        height: 100%;
+
+        box-shadow:
+            0 4px 18px
+            rgba(0,0,0,0.05);
+
+        border:
+            1px solid
+            #edf2f2;
+
+        transition: 0.25s;
+    }
+
+
+    .dashboard-card:hover {
+
+        transform:
+            translateY(-3px);
+
+        box-shadow:
+            0 8px 25px
+            rgba(0,0,0,0.08);
+    }
+
+
+    .card-box {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 15px;
+    }
+
+
+    .card-icon {
+
+        width: 52px;
+        height: 52px;
+
+        min-width: 52px;
+
+        border-radius: 13px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        background:
+            #e7f7f5;
+
+        color: #0d9488;
+
+        font-size: 21px;
+    }
+
+
+    .number {
+
+        font-size: 25px;
+
+        font-weight: 750;
+
+        color: #173f3b;
+
+        line-height: 1.2;
+    }
+
+
+    .card-box p {
+
+        margin: 5px 0 0;
+
+        color: #6b7280;
+
+        font-size: 13px;
+    }
+
+
+    /* =================================================
+       FINANCIAL CARDS
+    ================================================== */
+
+    .financial-card {
+
+        min-height: 110px;
+    }
+
+
+    .financial-card .card-icon {
+
+        background:
+            #eef8f6;
+    }
+
+
+    /* =================================================
+       CHART CARD
+    ================================================== */
+
+    .chart-card {
+
+        background: #ffffff;
+
+        border-radius: 16px;
+
+        padding: 22px;
+
+        height: 100%;
+
+        box-shadow:
+            0 4px 18px
+            rgba(0,0,0,0.05);
+
+        border:
+            1px solid
+            #edf2f2;
+    }
+
+
+    .chart-header {
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        margin-bottom: 15px;
+    }
+
+
+    .chart-header h5 {
+
+        margin: 0;
+
+        font-size: 16px;
+
+        font-weight: 700;
+
+        color: #174b47;
+    }
+
+
+    .chart-header span {
+
+        font-size: 12px;
+
+        color: #9ca3af;
+    }
+
+
+    .chart-wrapper {
+
+        position: relative;
+
+        height: 300px;
+    }
+
+
+    /* =================================================
+       TODAY TASK SUMMARY
+    ================================================== */
+
+    .task-summary {
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 18px;
+
+        padding:
+            10px 5px 5px;
+    }
+
+
+    .task-item {
+
+        width: 100%;
+    }
+
+
+    .task-item-header {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        margin-bottom: 8px;
+    }
+
+
+    .task-label {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 9px;
+
+        font-size: 13px;
+
+        font-weight: 600;
+
+        color: #374151;
+    }
+
+
+    .task-dot {
+
+        width: 10px;
+        height: 10px;
+
+        border-radius: 50%;
+
+        flex-shrink: 0;
+    }
+
+
+    .task-dot.pending {
+        background: #f59e0b;
+    }
+
+
+    .task-dot.progress {
+        background: #0d9488;
+    }
+
+
+    .task-dot.completed {
+        background: #10b981;
+    }
+
+
+    .task-count {
+
+        font-size: 13px;
+
+        font-weight: 700;
+
+        color: #174b47;
+    }
+
+
+    .task-progress-track {
+
+        width: 100%;
+
+        height: 11px;
+
+        background: #edf2f2;
+
+        border-radius: 20px;
+
+        overflow: hidden;
+    }
+
+
+    .task-progress-fill {
+
+        height: 100%;
+
+        border-radius: 20px;
+
+        transition:
+            width 0.6s ease;
+    }
+
+
+    .task-progress-fill.pending {
+
+        background:
+            linear-gradient(
+                90deg,
+                #f59e0b,
+                #fbbf24
+            );
+    }
+
+
+    .task-progress-fill.progress {
+
+        background:
+            linear-gradient(
+                90deg,
+                #0d9488,
+                #14b8a6
+            );
+    }
+
+
+    .task-progress-fill.completed {
+
+        background:
+            linear-gradient(
+                90deg,
+                #10b981,
+                #34d399
+            );
+    }
+
+
+    .task-total-box {
+
+        margin-top: 22px;
+
+        padding-top: 18px;
+
+        border-top:
+            1px solid
+            #edf2f2;
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+    }
+
+
+    .task-total-label {
+
+        font-size: 12px;
+
+        color: #6b7280;
+    }
+
+
+    .task-total-value {
+
+        font-size: 18px;
+
+        font-weight: 750;
+
+        color: #174b47;
+    }
+
+
+    /* =================================================
+       PROJECT PROGRESS
+    ================================================== */
+
+    .progress-card {
+
+        background: #ffffff;
+
+        border-radius: 16px;
+
+        padding: 22px;
+
+        box-shadow:
+            0 4px 18px
+            rgba(0,0,0,0.05);
+
+        border:
+            1px solid
+            #edf2f2;
+    }
+
+
+    .project-progress-row {
+
+        margin-bottom: 20px;
+    }
+
+
+    .project-progress-row:last-child {
+
+        margin-bottom: 0;
+    }
+
+
+    .project-name {
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        margin-bottom: 8px;
+
+        font-size: 13px;
+
+        font-weight: 600;
+
+        color: #374151;
+    }
+
+
+    .project-percent {
+
+        color: #0d9488;
+
+        font-weight: 700;
+    }
+
+
+    .progress {
+
+        height: 9px;
+
+        background: #e8eeee;
+
+        border-radius: 20px;
+
+        overflow: hidden;
+    }
+
+
+    .progress-bar {
+
+        background:
+            linear-gradient(
+                90deg,
+                #0d9488,
+                #14b8a6
+            );
+
+        border-radius: 20px;
+
+        transition:
+            width 0.5s ease;
+    }
+
+
+    .no-data {
+
+        text-align: center;
+
+        padding: 40px 15px;
+
+        color: #9ca3af;
+
+        font-size: 14px;
+    }
+
+
+    /* =================================================
+       TODAY AT A GLANCE
+    ================================================== */
+
+    .daily-summary-card {
+
+        background: #ffffff;
+
+        border-radius: 16px;
+
+        padding: 22px;
+
+        margin-top: 25px;
+
+        box-shadow:
+            0 4px 18px
+            rgba(0,0,0,0.05);
+
+        border:
+            1px solid
+            #edf2f2;
+    }
+
+
+    .daily-summary-header {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        margin-bottom: 18px;
+    }
+
+
+    .daily-summary-header h4 {
+
+        margin: 0;
+
+        font-size: 17px;
+
+        font-weight: 700;
+
+        color: #174b47;
+    }
+
+
+    .daily-summary-header i {
+
+        color: #0d9488;
+    }
+
+
+    .daily-summary-header span {
+
+        font-size: 12px;
+
+        color: #9ca3af;
+    }
+
+
+    .daily-summary-grid {
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(6, 1fr);
+
+        gap: 12px;
+    }
+
+
+    .daily-summary-item {
+
+        background: #f7fbfb;
+
+        border:
+            1px solid
+            #edf2f2;
+
+        border-radius: 12px;
+
+        padding: 15px;
+
+        text-align: center;
+
+        transition: 0.25s;
+    }
+
+
+    .daily-summary-item:hover {
+
+        transform:
+            translateY(-2px);
+
+        box-shadow:
+            0 5px 15px
+            rgba(0,0,0,0.05);
+    }
+
+
+    .daily-summary-icon {
+
+        width: 38px;
+        height: 38px;
+
+        margin: 0 auto 9px;
+
+        border-radius: 10px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        background: #e7f7f5;
+
+        color: #0d9488;
+
+        font-size: 16px;
+    }
+
+
+    .daily-summary-value {
+
+        font-size: 21px;
+
+        font-weight: 750;
+
+        color: #173f3b;
+
+        line-height: 1.2;
+    }
+
+
+    .daily-summary-label {
+
+        margin-top: 5px;
+
+        font-size: 11px;
+
+        color: #6b7280;
+    }
+
+
+    /* =================================================
+       MOBILE
+    ================================================== */
+
+    @media (max-width: 1200px) {
+
+        .daily-summary-grid {
+
+            grid-template-columns:
+                repeat(3, 1fr);
+        }
+    }
+
+
+    @media (max-width: 991px) {
+
+        .sidebar {
+
+            width: 220px;
+        }
+
+        .main-content {
+
+            margin-left: 220px;
+
+            padding: 20px;
+        }
+
+    }
+
+
+    @media (max-width: 768px) {
+
+        .sidebar {
+
+            position: relative;
+
+            width: 100%;
+
+            height: auto;
+        }
+
+        .main-content {
+
+            margin-left: 0;
+
+            padding: 15px;
+        }
+
+        .topbar {
+
+            flex-direction: column;
+
+            align-items: flex-start;
+
+            gap: 10px;
+        }
+
+        .welcome {
+
+            text-align: left;
+        }
+
+        .chart-wrapper {
+
+            height: 270px;
+        }
+
+        .daily-summary-grid {
+
+            grid-template-columns:
+                repeat(2, 1fr);
+        }
+
+    }
+
+
+    @media (max-width: 480px) {
+
+        .daily-summary-grid {
+
+            grid-template-columns:
+                1fr;
+        }
+
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<!-- =====================================================
+     SIDEBAR
+====================================================== -->
+
+<div class="sidebar">
+
+
+<!-- LOGO -->
+
+<div class="logo-box">
+
+    <img
+        src="{% static 'images/webcodeft-new-logo.webp' %}"
+        alt="Webcodeft"
+    >
+
+</div>
+
+
+<!-- MAIN MENU -->
+
+<div class="menu-title">
+    Main Menu
+</div>
+
+
+<!-- DASHBOARD -->
+
+<a
+    href="{% url 'admin_dashboard' %}"
+    class="active"
+>
+
+    <i class="fa-solid fa-gauge-high"></i>
+
+    <span>
+        Dashboard
+    </span>
+
+</a>
+
+
+<!-- EMPLOYEES -->
+
+<a href="{% url 'employees' %}">
+
+    <i class="fa-solid fa-users"></i>
+
+    <span>
+        Employees
+    </span>
+
+</a>
+
+
+<!-- STUDENTS -->
+
+<a href="{% url 'students' %}">
+
+    <i class="fa-solid fa-user-graduate"></i>
+
+    <span>
+        Students
+    </span>
+
+</a>
+
+
+<!-- CLIENTS -->
+
+<a href="{% url 'clients' %}">
+
+    <i class="fa-solid fa-user-tie"></i>
+
+    <span>
+        Clients
+    </span>
+
+</a>
+
+
+<!-- PROJECTS -->
+
+<a href="{% url 'projects' %}">
+
+    <i class="fa-solid fa-diagram-project"></i>
+
+    <span>
+        Projects
+    </span>
+
+</a>
+
+
+<!-- TASKS -->
+
+<a href="{% url 'tasks' %}">
+
+    <i class="fa-solid fa-list-check"></i>
+
+    <span>
+        Tasks
+    </span>
+
+</a>
+
+
+<!-- MY TO-DO -->
+
+<a href="{% url 'todo_list' %}">
+
+    <i class="fa-solid fa-square-check"></i>
+
+    <span>
+        My To-Do
+    </span>
+
+</a>
+
+
+<!-- =================================================
+     CREATE INVOICE
+================================================== -->
+
+<a href="{% url 'create_invoice' %}">
+
+    <i class="fa-solid fa-file-invoice-dollar"></i>
+
+    <span>
+        Create Invoice
+    </span>
+
+</a>
+
+
+<!-- HOLIDAYS -->
+
+<a href="{% url 'manage_holidays' %}">
+
+    <i class="fa-solid fa-calendar-days"></i>
+
+    <span>
+        Holidays
+    </span>
+
+</a>
+
+
+<!-- ATTENDANCE -->
+
+<a href="{% url 'attendance_reports' %}">
+
+    <i class="fa-solid fa-calendar-check"></i>
+
+    <span>
+        Attendance Reports
+    </span>
+
+</a>
+
+
+<!-- ACCOUNT -->
+
+<div class="menu-title">
+    Account
+</div>
+
+
+<!-- LOGOUT -->
+
+<a href="{% url 'logout' %}">
+
+    <i class="fa-solid fa-right-from-bracket"></i>
+
+    <span>
+        Logout
+    </span>
+
+</a>
+
+
+</div>
+
+<!-- =====================================================
+     MAIN CONTENT
+====================================================== -->
+
+<div class="main-content">
+
+
+<!-- =================================================
+     TOPBAR
+================================================== -->
+
+<div class="topbar">
+
+    <div>
+
+        <h2>
+            Admin Dashboard
+        </h2>
+
+    </div>
+
+
+    <div class="welcome">
+
+        Welcome,
+
+        <strong>
+            {{ request.user.get_full_name|default:request.user.username }}
+        </strong>
+
+    </div>
+
+</div>
+
+
+
+<!-- =================================================
+     QUICK STATISTICS
+================================================== -->
+
+<div class="section-title">
+    Quick Overview
+</div>
+
+
+<div class="row g-4">
+
+
+    <!-- EMPLOYEES -->
+
+    <div class="col-xl-4 col-md-6">
+
+        <div class="dashboard-card">
+
+            <div class="card-box">
+
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-users"></i>
+
+                </div>
+
+
+                <div>
+
+                    <div class="number">
+                        {{ employee_count }}
+                    </div>
+
+                    <p>
+                        Employees
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- STUDENTS -->
+
+    <div class="col-xl-4 col-md-6">
+
+        <div class="dashboard-card">
+
+            <div class="card-box">
+
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-user-graduate"></i>
+
+                </div>
+
+
+                <div>
+
+                    <div class="number">
+                        {{ student_count }}
+                    </div>
+
+                    <p>
+                        Students
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- CLIENTS -->
+
+    <div class="col-xl-4 col-md-6">
+
+        <div class="dashboard-card">
+
+            <div class="card-box">
+
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-user-tie"></i>
+
+                </div>
+
+
+                <div>
+
+                    <div class="number">
+                        {{ total_clients }}
+                    </div>
+
+                    <p>
+                        Total Clients
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- PROJECTS -->
+
+    <div class="col-xl-4 col-md-6">
+
+        <div class="dashboard-card">
+
+            <div class="card-box">
+
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-diagram-project"></i>
+
+                </div>
+
+
+                <div>
+
+                    <div class="number">
+                        {{ total_projects }}
+                    </div>
+
+                    <p>
+                        Total Projects
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ACTIVE PROJECTS -->
+
+    <div class="col-xl-4 col-md-6">
+
+        <div class="dashboard-card">
+
+            <div class="card-box">
+
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-spinner"></i>
+
+                </div>
+
+
+                <div>
+
+                    <div class="number">
+                        {{ active_projects }}
+                    </div>
+
+                    <p>
+                        Active Projects
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- COMPLETED PROJECTS -->
+
+    <div class="col-xl-4 col-md-6">
+
+        <div class="dashboard-card">
+
+            <div class="card-box">
+
+                <div class="card-icon">
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                </div>
+
+
+                <div>
+
+                    <div class="number">
+                        {{ completed_projects }}
+                    </div>
+
+                    <p>
+                        Completed Projects
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =================================================
+     PROJECT & TASK ANALYTICS
+================================================== -->
+
+<div class="section-title">
+    Project & Task Analytics
+</div>
+
+
+<div class="row g-4">
+
+
+    <!-- PROJECT STATUS -->
+
+    <div class="col-lg-6">
+
+        <div class="chart-card">
+
+
+            <div class="chart-header">
+
+                <h5>
+
+                    <i
+                        class="fa-solid fa-chart-pie me-2"
+                    ></i>
+
+                    Project Status
+
+                </h5>
+
+
+                <span>
+                    {{ total_projects }} Total Projects
+                </span>
+
+            </div>
+
+
+            <div class="chart-wrapper">
+
+                <canvas
+                    id="projectStatusChart"
+                ></canvas>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- TODAY TASK STATUS -->
+
+    <div class="col-lg-6">
+
+        <div class="chart-card">
+
+
+            <div class="chart-header">
+
+                <h5>
+
+                    <i
+                        class="fa-solid fa-list-check me-2"
+                    ></i>
+
+                    Today's Task Status
+
+                </h5>
+
+
+                <span>
+                    {{ total_task_count }} Total Tasks
+                </span>
+
+            </div>
+
+
+
+            <div class="task-summary">
+
+
+                <!-- PENDING -->
+
+                <div class="task-item">
+
+                    <div class="task-item-header">
+
+                        <div class="task-label">
+
+                            <span
+                                class="task-dot pending"
+                            ></span>
+
+                            Pending
+
+                        </div>
+
+
+                        <div class="task-count">
+
+                            {{ pending_task_count }}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="task-progress-track">
+
+                        {% if total_task_count > 0 %}
+
+                            <div
+                                class="task-progress-fill pending"
+                                style="width: {% widthratio pending_task_count total_task_count 100 %}%;"
+                            ></div>
+
+                        {% else %}
+
+                            <div
+                                class="task-progress-fill pending"
+                                style="width: 0%;"
+                            ></div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- IN PROGRESS -->
+
+                <div class="task-item">
+
+                    <div class="task-item-header">
+
+                        <div class="task-label">
+
+                            <span
+                                class="task-dot progress"
+                            ></span>
+
+                            In Progress
+
+                        </div>
+
+
+                        <div class="task-count">
+
+                            {{ in_progress_task_count }}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="task-progress-track">
+
+                        {% if total_task_count > 0 %}
+
+                            <div
+                                class="task-progress-fill progress"
+                                style="width: {% widthratio in_progress_task_count total_task_count 100 %}%;"
+                            ></div>
+
+                        {% else %}
+
+                            <div
+                                class="task-progress-fill progress"
+                                style="width: 0%;"
+                            ></div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- COMPLETED -->
+
+                <div class="task-item">
+
+                    <div class="task-item-header">
+
+                        <div class="task-label">
+
+                            <span
+                                class="task-dot completed"
+                            ></span>
+
+                            Completed
+
+                        </div>
+
+
+                        <div class="task-count">
+
+                            {{ completed_task_count }}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="task-progress-track">
+
+                        {% if total_task_count > 0 %}
+
+                            <div
+                                class="task-progress-fill completed"
+                                style="width: {% widthratio completed_task_count total_task_count 100 %}%;"
+                            ></div>
+
+                        {% else %}
+
+                            <div
+                                class="task-progress-fill completed"
+                                style="width: 0%;"
+                            ></div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- TOTAL -->
+
+            <div class="task-total-box">
+
+                <span class="task-total-label">
+
+                    Total Tasks Today
+
+                </span>
+
+
+                <span class="task-total-value">
+
+                    {{ total_task_count }}
+
+                </span>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =================================================
+     FINANCIAL OVERVIEW
+================================================== -->
+
+<div class="section-title">
+    Financial Overview
+</div>
+
+
+<div class="row g-4">
+
+
+    <!-- TOTAL PROJECT COST -->
+
+    <div class="col-lg-4 col-md-6">
+
+        <div class="dashboard-card financial-card">
+
+            <div class="card-box">
+
+                <div class="card-icon">
+
+                    <i
+                        class="fa-solid fa-indian-rupee-sign"
+                    ></i>
+
+                </div>
+
+
+                <div>
+
+                    <div class="number">
+
+                        ₹{{ total_project_cost|default:"0.00"|floatformat:2 }}
+
+                    </div>
+
+                    <p>
+                        Total Project Cost
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- DEVELOPMENT COST -->
+
+    <div class="col-lg-4 col-md-6">
+
+        <div class="dashboard-card financial-card">
+
+            <div class="card-box">
+
+                <div class="card-icon">
+
+                    <i
+                        class="fa-solid fa-code"
+                    ></i>
+
+                </div>
+
+
+                <div>
+
+                    <div class="number">
+
+                        ₹{{ total_development_cost|default:"0.00"|floatformat:2 }}
+
+                    </div>
+
+                    <p>
+                        Development Cost
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- PAID DEVELOPMENT -->
+
+    <div class="col-lg-4 col-md-6">
+
+        <div class="dashboard-card financial-card">
+
+            <div class="card-box">
+
+                <div class="card-icon">
+
+                    <i
+                        class="fa-solid fa-money-bill-transfer"
+                    ></i>
+
+                </div>
+
+
+                <div>
+
+                    <div class="number">
+
+                        ₹{{ total_paid_development_cost|default:"0.00"|floatformat:2 }}
+
+                    </div>
+
+                    <p>
+                        Paid Development Cost
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- PENDING DEVELOPMENT -->
+
+    <div class="col-lg-4 col-md-6">
+
+        <div class="dashboard-card financial-card">
+
+            <div class="card-box">
+
+                <div class="card-icon">
+
+                    <i
+                        class="fa-solid fa-clock"
+                    ></i>
+
+                </div>
+
+
+                <div>
+
+                    <div class="number">
+
+                        ₹{{ pending_development_cost|default:"0.00"|floatformat:2 }}
+
+                    </div>
+
+                    <p>
+                        Pending Development Cost
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- TOTAL STUDENT FEES -->
+
+    <div class="col-lg-4 col-md-6">
+
+        <div class="dashboard-card financial-card">
+
+            <div class="card-box">
+
+                <div class="card-icon">
+
+                    <i
+                        class="fa-solid fa-file-invoice-dollar"
+                    ></i>
+
+                </div>
+
+
+                <div>
+
+                    <div class="number">
+
+                        ₹{{ total_fee|default:"0.00"|floatformat:2 }}
+
+                    </div>
+
+                    <p>
+                        Total Student Fees
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- FEE COLLECTION -->
+
+    <div class="col-lg-4 col-md-6">
+
+        <div class="dashboard-card financial-card">
+
+            <div class="card-box">
+
+                <div class="card-icon">
+
+                    <i
+                        class="fa-solid fa-money-bill-wave"
+                    ></i>
+
+                </div>
+
+
+                <div>
+
+                    <div class="number">
+
+                        ₹{{ fee_collected|default:"0.00"|floatformat:2 }}
+
+                    </div>
+
+                    <p>
+                        Fee Collection
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- PENDING STUDENT FEES -->
+
+    <div class="col-lg-6 col-md-6">
+
+        <div class="dashboard-card financial-card">
+
+            <div class="card-box">
+
+                <div class="card-icon">
+
+                    <i
+                        class="fa-solid fa-wallet"
+                    ></i>
+
+                </div>
+
+
+                <div>
+
+                    <div class="number">
+
+                        ₹{{ fee_remaining|default:"0.00"|floatformat:2 }}
+
+                    </div>
+
+                    <p>
+                        Pending Student Fees
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- PAID STUDENTS -->
+
+    <div class="col-lg-6 col-md-6">
+
+        <div class="dashboard-card financial-card">
+
+            <div class="card-box">
+
+                <div class="card-icon">
+
+                    <i
+                        class="fa-solid fa-user-check"
+                    ></i>
+
+                </div>
+
+
+                <div>
+
+                    <div class="number">
+
+                        {{ paid_fee_students }}
+
+                    </div>
+
+                    <p>
+                        Students With Paid Fees
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =================================================
+     PROJECT PROGRESS
+================================================== -->
+
+<div class="section-title">
+    Project Progress
+</div>
+
+
+<div class="progress-card">
+
+
+    {% if project_progress %}
+
+
+        {% for project in project_progress %}
+
+
+            <div class="project-progress-row">
+
+
+                <div class="project-name">
+
+
+                    <span>
+                        {{ project.project_name }}
+                    </span>
+
+
+                    <span class="project-percent">
+                        {{ project.progress }}%
+                    </span>
+
+
+                </div>
+
+
+
+                <div class="progress">
+
+
+                    <div
+                        class="progress-bar"
+                        role="progressbar"
+                        style="width: {{ project.progress }}%;"
+                        aria-valuenow="{{ project.progress }}"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                    ></div>
+
+
+                </div>
+
+
+            </div>
+
+
+        {% endfor %}
+
+
+    {% else %}
+
+
+        <div class="no-data">
+
+
+            <i
+                class="fa-solid fa-diagram-project mb-2"
+                style="font-size: 28px;"
+            ></i>
+
+
+            <div>
+                No project progress data available.
+            </div>
+
+
+        </div>
+
+
+    {% endif %}
+
+
+</div>
+
+
+
+<!-- =================================================
+     TODAY AT A GLANCE
+================================================== -->
+
+<div class="daily-summary-card">
+
+
+    <div class="daily-summary-header">
+
+
+        <h4>
+
+            <i
+                class="fa-solid fa-calendar-day me-2"
+            ></i>
+
+            Today at a Glance
+
+        </h4>
+
+
+        <span>
+            Daily Summary
+        </span>
+
+
+    </div>
+
+
+
+    <div class="daily-summary-grid">
+
+
+        <!-- TODAY'S TASKS -->
+
+        <div class="daily-summary-item">
+
+
+            <div class="daily-summary-icon">
+
+                <i class="fa-solid fa-list-check"></i>
+
+            </div>
+
+
+            <div class="daily-summary-value">
+
+                {{ total_task_count }}
+
+            </div>
+
+
+            <div class="daily-summary-label">
+
+                Today's Tasks
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- PENDING TASKS -->
+
+        <div class="daily-summary-item">
+
+
+            <div class="daily-summary-icon">
+
+                <i class="fa-solid fa-clock"></i>
+
+            </div>
+
+
+            <div class="daily-summary-value">
+
+                {{ pending_task_count }}
+
+            </div>
+
+
+            <div class="daily-summary-label">
+
+                Pending Tasks
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- IN PROGRESS -->
+
+        <div class="daily-summary-item">
+
+
+            <div class="daily-summary-icon">
+
+                <i class="fa-solid fa-spinner"></i>
+
+            </div>
+
+
+            <div class="daily-summary-value">
+
+                {{ in_progress_task_count }}
+
+            </div>
+
+
+            <div class="daily-summary-label">
+
+                In Progress
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- COMPLETED -->
+
+        <div class="daily-summary-item">
+
+
+            <div class="daily-summary-icon">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+            </div>
+
+
+            <div class="daily-summary-value">
+
+                {{ completed_task_count }}
+
+            </div>
+
+
+            <div class="daily-summary-label">
+
+                Completed Tasks
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ACTIVE PROJECTS -->
+
+        <div class="daily-summary-item">
+
+
+            <div class="daily-summary-icon">
+
+                <i class="fa-solid fa-diagram-project"></i>
+
+            </div>
+
+
+            <div class="daily-summary-value">
+
+                {{ active_projects }}
+
+            </div>
+
+
+            <div class="daily-summary-label">
+
+                Active Projects
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- EMPLOYEES -->
+
+        <div class="daily-summary-item">
+
+
+            <div class="daily-summary-icon">
+
+                <i class="fa-solid fa-users"></i>
+
+            </div>
+
+
+            <div class="daily-summary-value">
+
+                {{ employee_count }}
+
+            </div>
+
+
+            <div class="daily-summary-label">
+
+                Employees
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+</div>
+
+<!-- =====================================================
+     CHARTS
+====================================================== -->
+
+<script>
+
+
+    /* =====================================================
+       PROJECT STATUS CHART
+    ====================================================== */
+
+    const projectStatusCanvas =
+        document.getElementById(
+            "projectStatusChart"
+        );
+
+
+    if (projectStatusCanvas) {
+
+        new Chart(
+            projectStatusCanvas,
+            {
+
+                type: "doughnut",
+
+
+                data: {
+
+                    labels: [
+
+                        "Planning",
+
+                        "In Progress",
+
+                        "Testing",
+
+                        "Completed",
+
+                        "On Hold",
+
+                        "Cancelled"
+
+                    ],
+
+
+                    datasets: [
+
+                        {
+
+                            data: [
+
+                                {{ planning_projects|default:0 }},
+
+                                {{ in_progress_projects|default:0 }},
+
+                                {{ testing_projects|default:0 }},
+
+                                {{ completed_projects|default:0 }},
+
+                                {{ on_hold_projects|default:0 }},
+
+                                {{ cancelled_projects|default:0 }}
+
+                            ],
+
+
+                            backgroundColor: [
+
+                                "#3b82f6",
+
+                                "#f59e0b",
+
+                                "#8b5cf6",
+
+                                "#10b981",
+
+                                "#64748b",
+
+                                "#ef4444"
+
+                            ],
+
+
+                            borderColor: "#ffffff",
+
+                            borderWidth: 3,
+
+                            hoverOffset: 8
+
+                        }
+
+                    ]
+
+                },
+
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+                    cutout: "62%",
+
+
+                    plugins: {
+
+                        legend: {
+
+                            position: "bottom",
+
+                            labels: {
+
+                                padding: 16,
+
+                                usePointStyle: true,
+
+                                pointStyle: "circle",
+
+                                font: {
+
+                                    size: 12
+
+                                }
+
+                            }
+
+                        },
+
+
+                        tooltip: {
+
+                            callbacks: {
+
+                                label: function(context) {
+
+                                    const value =
+                                        context.raw || 0;
+
+                                    const dataset =
+                                        context.dataset.data;
+
+                                    const total =
+                                        dataset.reduce(
+                                            (sum, item) =>
+                                                sum + item,
+                                            0
+                                        );
+
+                                    const percentage =
+                                        total > 0
+                                            ? (
+                                                value /
+                                                total *
+                                                100
+                                            ).toFixed(1)
+                                            : 0;
+
+                                    return (
+                                        " " +
+                                        context.label +
+                                        ": " +
+                                        value +
+                                        " (" +
+                                        percentage +
+                                        "%)"
+                                    );
+
+                                }
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+        );
+
+    }
+
+</script>
+
+<!-- =====================================================
+     CHAT WIDGET
+====================================================== -->
+
+{% include "chat/chat_widget.html" %}
+
+</body>
+
+</html>

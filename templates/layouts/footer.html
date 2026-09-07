@@ -1,0 +1,962 @@
+<!-- =============================================================
+     PROFESSIONAL FOOTER
+============================================================= -->
+{% load static %}
+<footer class="wc-footer">
+
+
+<div class="container">
+
+    <!-- =====================================================
+         FOOTER MAIN
+    ====================================================== -->
+
+    <div class="wc-footer-main">
+
+
+        <!-- =================================================
+             BRAND
+        ================================================== -->
+
+        <div class="wc-footer-brand">
+
+            <a href="/" class="wc-footer-logo">
+
+                <div class="wc-footer-logo-icon">
+
+                    <img
+                        src="{% static 'images/webcodeft-new-logo.webp' %}"
+                        alt="Webcodeft Technologies"
+                    >
+
+                </div>
+
+            </a>
+
+
+            <p>
+                Smart Office Management System designed to simplify
+                everyday business operations and bring people,
+                projects, clients and workflows together.
+            </p>
+
+
+            <div class="wc-footer-tag">
+
+                <i class="bi bi-stars"></i>
+
+                <span>
+                    Technology for smarter business
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             QUICK LINKS
+        ================================================== -->
+
+        <div class="wc-footer-column">
+
+            <h5>
+                Quick Links
+            </h5>
+
+            <div class="wc-footer-line"></div>
+
+            <ul>
+
+                <li>
+                    <a href="/">
+                        <i class="bi bi-chevron-right"></i>
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/#about">
+                        <i class="bi bi-chevron-right"></i>
+                        About
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/#features">
+                        <i class="bi bi-chevron-right"></i>
+                        Features
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/#contact">
+                        <i class="bi bi-chevron-right"></i>
+                        Contact
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+
+        <!-- =================================================
+             COMPANY
+        ================================================== -->
+
+        <div class="wc-footer-column">
+
+            <h5>
+                Our Approach
+            </h5>
+
+            <div class="wc-footer-line"></div>
+
+            <ul>
+
+                <li>
+                    <span>
+                        <i class="bi bi-check2"></i>
+                        Client-Centric Approach
+                    </span>
+                </li>
+
+                <li>
+                    <span>
+                        <i class="bi bi-check2"></i>
+                        Quality & Reliability
+                    </span>
+                </li>
+
+                <li>
+                    <span>
+                        <i class="bi bi-check2"></i>
+                        On-Time Delivery
+                    </span>
+                </li>
+
+                <li>
+                    <span>
+                        <i class="bi bi-check2"></i>
+                        Long-Term Partnership
+                    </span>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+
+        <!-- =================================================
+             ACCOUNT / CONTACT
+        ================================================== -->
+
+        <div class="wc-footer-column">
+
+            <h5>
+                Get Started
+            </h5>
+
+            <div class="wc-footer-line"></div>
+
+            <p class="wc-footer-small-text">
+                Access your office management dashboard
+                and manage your workspace efficiently.
+            </p>
+
+
+            <a
+                href="{% url 'login' %}"
+                class="wc-footer-login"
+            >
+
+                <span>
+                    Login to Dashboard
+                </span>
+
+                <i class="bi bi-arrow-up-right"></i>
+
+            </a>
+
+
+            <div class="wc-footer-contact">
+
+                <i class="bi bi-envelope"></i>
+
+                <a href="mailto:info@webcodeft.com">
+                    info@webcodeft.com
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         FOOTER BOTTOM
+    ====================================================== -->
+
+    <div class="wc-footer-bottom">
+
+        <div>
+
+            <span>
+                © 2026 Webcodeft Technologies
+            </span>
+
+            <span class="wc-footer-dot">
+                •
+            </span>
+
+            <span>
+                All Rights Reserved
+            </span>
+
+        </div>
+
+
+        <div class="wc-footer-bottom-right">
+
+            <span>
+                Smart Office Management System
+            </span>
+
+            <i class="bi bi-shield-check"></i>
+
+        </div>
+
+    </div>
+
+</div>
+
+</footer>
+
+<!-- =============================================================
+     FOOTER CSS
+============================================================= -->
+
+<style>
+
+/* =============================================================
+   FOOTER
+============================================================= */
+
+.wc-footer {
+
+    position: relative;
+
+    width: 100%;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            #103f3b 0%,
+            #0b5049 55%,
+            #0d5f57 100%
+        );
+
+    color: #ffffff;
+
+}
+
+
+/* Decorative glow */
+
+.wc-footer::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 420px;
+
+    height: 420px;
+
+    right: -180px;
+
+    top: -220px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(
+        255,
+        255,
+        255,
+        .07
+    );
+
+    pointer-events: none;
+
+}
+
+
+.wc-footer::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 300px;
+
+    height: 300px;
+
+    left: -180px;
+
+    bottom: -180px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(
+        255,
+        255,
+        255,
+        .06
+    );
+
+    pointer-events: none;
+
+}
+
+
+/* =============================================================
+   MAIN FOOTER
+============================================================= */
+
+.wc-footer-main {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: grid;
+
+    grid-template-columns:
+        1.6fr
+        1fr
+        1.25fr
+        1.2fr;
+
+    gap: 45px;
+
+    padding: 65px 0 50px;
+
+}
+
+
+/* =============================================================
+   BRAND
+============================================================= */
+
+.wc-footer-brand {
+
+    max-width: 350px;
+
+}
+
+
+.wc-footer-logo {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    text-decoration: none;
+
+    margin-bottom: 18px;
+
+}
+
+
+.wc-footer-logo-icon {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    width: 185px;
+
+    height: 55px;
+
+    overflow: hidden;
+
+}
+
+
+.wc-footer-logo-icon img {
+
+    width: 180px;
+
+    max-width: 100%;
+
+    height: auto;
+
+    display: block;
+
+    object-fit: contain;
+
+}
+
+
+/* Description */
+
+.wc-footer-brand > p {
+
+    margin: 0;
+
+    color: rgba(
+        255,
+        255,
+        255,
+        .68
+    );
+
+    font-size: 11px;
+
+    line-height: 1.8;
+
+}
+
+
+/* =============================================================
+   FOOTER TAG
+============================================================= */
+
+.wc-footer-tag {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-top: 19px;
+
+    padding: 7px 11px;
+
+    border: 1px solid rgba(
+        255,
+        255,
+        255,
+        .12
+    );
+
+    border-radius: 30px;
+
+    background: rgba(
+        255,
+        255,
+        255,
+        .05
+    );
+
+}
+
+
+.wc-footer-tag i {
+
+    color: #5eead4;
+
+    font-size: 11px;
+
+}
+
+
+.wc-footer-tag span {
+
+    color: rgba(
+        255,
+        255,
+        255,
+        .72
+    );
+
+    font-size: 8px;
+
+    font-weight: 600;
+
+}
+
+
+/* =============================================================
+   FOOTER COLUMNS
+============================================================= */
+
+.wc-footer-column h5 {
+
+    margin: 5px 0 9px;
+
+    color: #ffffff;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+}
+
+
+.wc-footer-line {
+
+    width: 28px;
+
+    height: 2px;
+
+    margin-bottom: 17px;
+
+    border-radius: 10px;
+
+    background: #2dd4bf;
+
+}
+
+
+/* =============================================================
+   LINKS
+============================================================= */
+
+.wc-footer-column ul {
+
+    padding: 0;
+
+    margin: 0;
+
+    list-style: none;
+
+}
+
+
+.wc-footer-column li {
+
+    margin-bottom: 11px;
+
+}
+
+
+.wc-footer-column li a,
+.wc-footer-column li span {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    color: rgba(
+        255,
+        255,
+        255,
+        .64
+    );
+
+    text-decoration: none;
+
+    font-size: 9px;
+
+    line-height: 1.5;
+
+    transition:
+        color .2s ease,
+        transform .2s ease;
+
+}
+
+
+.wc-footer-column li a:hover {
+
+    color: #ffffff;
+
+    transform:
+        translateX(3px);
+
+}
+
+
+.wc-footer-column li a i {
+
+    color: #5eead4;
+
+    font-size: 7px;
+
+}
+
+
+.wc-footer-column li span i {
+
+    color: #5eead4;
+
+    font-size: 10px;
+
+}
+
+
+/* =============================================================
+   GET STARTED
+============================================================= */
+
+.wc-footer-small-text {
+
+    max-width: 220px;
+
+    margin: 0 0 15px;
+
+    color: rgba(
+        255,
+        255,
+        255,
+        .62
+    );
+
+    font-size: 9px;
+
+    line-height: 1.7;
+
+}
+
+
+/* =============================================================
+   LOGIN BUTTON
+============================================================= */
+
+.wc-footer-login {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    min-width: 190px;
+
+    padding: 10px 13px;
+
+    border: 1px solid rgba(
+        255,
+        255,
+        255,
+        .15
+    );
+
+    border-radius: 9px;
+
+    background: rgba(
+        255,
+        255,
+        255,
+        .07
+    );
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    transition:
+        background .25s ease,
+        border-color .25s ease,
+        transform .25s ease;
+
+}
+
+
+.wc-footer-login:hover {
+
+    background: #0d9488;
+
+    border-color: #0d9488;
+
+    color: #ffffff;
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+.wc-footer-login i {
+
+    color: #5eead4;
+
+    font-size: 11px;
+
+}
+
+
+.wc-footer-login:hover i {
+
+    color: #ffffff;
+
+}
+
+
+/* =============================================================
+   FOOTER CONTACT
+============================================================= */
+
+.wc-footer-contact {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 15px;
+
+}
+
+
+.wc-footer-contact > i {
+
+    color: #5eead4;
+
+    font-size: 11px;
+
+}
+
+
+.wc-footer-contact a {
+
+    color: rgba(
+        255,
+        255,
+        255,
+        .65
+    );
+
+    font-size: 9px;
+
+    text-decoration: none;
+
+}
+
+
+.wc-footer-contact a:hover {
+
+    color: #ffffff;
+
+}
+
+
+/* =============================================================
+   FOOTER BOTTOM
+============================================================= */
+
+.wc-footer-bottom {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 18px 0 22px;
+
+    border-top:
+        1px solid rgba(
+            255,
+            255,
+            255,
+            .10
+        );
+
+    color: rgba(
+        255,
+        255,
+        255,
+        .48
+    );
+
+    font-size: 8px;
+
+}
+
+
+.wc-footer-bottom > div {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+}
+
+
+.wc-footer-dot {
+
+    color: #2dd4bf;
+
+}
+
+
+.wc-footer-bottom-right {
+
+    gap: 7px !important;
+
+}
+
+
+.wc-footer-bottom-right i {
+
+    color: #5eead4;
+
+    font-size: 10px;
+
+}
+
+
+/* =============================================================
+   TABLET
+============================================================= */
+
+@media (max-width: 991px) {
+
+    .wc-footer-main {
+
+        grid-template-columns:
+            1.5fr 1fr 1fr;
+
+        gap: 35px;
+
+        padding: 55px 0 40px;
+
+    }
+
+
+    .wc-footer-brand {
+
+        grid-column: span 3;
+
+        max-width: 550px;
+
+    }
+
+}
+
+
+/* =============================================================
+   MOBILE
+============================================================= */
+
+@media (max-width: 575px) {
+
+    .wc-footer-main {
+
+        display: grid;
+
+        grid-template-columns:
+            1fr;
+
+        gap: 30px;
+
+        padding: 45px 0 35px;
+
+    }
+
+
+    .wc-footer-brand {
+
+        grid-column: auto;
+
+        max-width: 100%;
+
+    }
+
+
+    .wc-footer-logo-icon {
+
+        width: 165px;
+
+        height: 50px;
+
+    }
+
+
+    .wc-footer-logo-icon img {
+
+        width: 160px;
+
+    }
+
+
+    .wc-footer-brand > p {
+
+        font-size: 10px;
+
+    }
+
+
+    .wc-footer-column h5 {
+
+        font-size: 12px;
+
+    }
+
+
+    .wc-footer-bottom {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 10px;
+
+        padding-bottom: 20px;
+
+        line-height: 1.6;
+
+    }
+
+
+    .wc-footer-bottom > div {
+
+        flex-wrap: wrap;
+
+    }
+
+}
+
+
+/* =============================================================
+   EXTRA SMALL
+============================================================= */
+
+@media (max-width: 390px) {
+
+    .wc-footer-main {
+
+        gap: 27px;
+
+    }
+
+
+    .wc-footer-login {
+
+        width: 100%;
+
+    }
+
+}
+
+</style>

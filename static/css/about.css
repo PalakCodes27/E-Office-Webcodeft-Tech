@@ -1,0 +1,151 @@
+.about-section{
+
+    padding:100px 0;
+    background:#071F23;
+}
+
+.section-title{
+
+    text-align:center;
+    margin-bottom:70px;
+}
+
+.section-title span{
+
+    color:#2EDB87;
+    font-weight:600;
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+
+.section-title h2{
+
+    color:#fff;
+    font-size:42px;
+    font-weight:700;
+    margin:15px 0;
+}
+
+.section-title p{
+
+    color:#B8D4D8;
+    max-width:700px;
+    margin:auto;
+    font-size:17px;
+}
+
+.about-wrapper{
+
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:70px;
+    align-items:center;
+}
+
+.about-card{
+
+    background:#0E3135;
+    border-radius:20px;
+    border:1px solid rgba(127,239,245,.12);
+    padding:30px;
+    box-shadow:0 20px 45px rgba(0,0,0,.25);
+}
+
+.image-placeholder{
+
+    height:500px;
+    border-radius:16px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#63F2B3;
+    font-size:24px;
+    font-weight:600;
+    border:2px dashed rgba(127,239,245,.25);
+}
+
+.about-content{
+
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+}
+
+.about-item{
+
+    display:flex;
+    gap:18px;
+    padding:20px;
+    background:#0E3135;
+    border-radius:16px;
+    border:1px solid rgba(127,239,245,.10);
+    transition:.35s;
+}
+
+.about-item:hover{
+
+    transform:translateY(-6px);
+    box-shadow:0 15px 30px rgba(46,219,135,.15);
+}
+
+.about-item i{
+
+    font-size:30px;
+    color:#2EDB87;
+}
+
+.about-item h5{
+
+    color:#fff;
+    margin-bottom:6px;
+    font-weight:600;
+}
+
+.about-item p{
+
+    color:#B8D4D8;
+    margin:0;
+}
+
+.about-btn{
+
+    margin-top:20px;
+    width:220px;
+    text-align:center;
+    text-decoration:none;
+    padding:14px;
+    background:#2EDB87;
+    color:#071F23;
+    border-radius:10px;
+    font-weight:700;
+    transition:.3s;
+}
+
+.about-btn:hover{
+
+    background:#63F2B3;
+}
+
+@media(max-width:992px){
+
+.about-wrapper{
+
+grid-template-columns:1fr;
+}
+
+.about-btn{
+
+width:100%;
+}
+
+.image-placeholder{
+
+height:350px;
+}
+
+.section-title h2{
+
+font-size:34px;
+}
+
+}

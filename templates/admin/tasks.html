@@ -1,0 +1,1504 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tasks | Smart Office</title>
+
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+>
+
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f4f7f8;
+    font-family: Arial, sans-serif;
+    color: #173f45;
+}
+
+.main-container {
+    padding: 40px;
+    max-width: 1900px;
+    margin: auto;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.page-title {
+    margin: 0;
+    font-size: 38px;
+    font-weight: 700;
+    color: #164f57;
+}
+
+.page-subtitle {
+    margin-top: 8px;
+    margin-bottom: 0;
+    font-size: 17px;
+    color: #72869b;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.dashboard-btn,
+.add-task-btn {
+    height: 54px;
+    padding: 0 22px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: .25s ease;
+}
+
+.dashboard-btn {
+    background: #fff;
+    color: #087c83;
+    border: 1.5px solid #0b9694;
+    min-width: 160px;
+}
+
+.dashboard-btn:hover {
+    background: #eaf8f7;
+    color: #086c72;
+    transform: translateY(-2px);
+}
+
+.add-task-btn {
+    background: #0b9089;
+    color: #fff;
+    border: 1.5px solid #0b9089;
+    min-width: 170px;
+    box-shadow: 0 8px 18px rgba(11,144,137,.18);
+}
+
+.add-task-btn:hover {
+    background: #087b76;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.stat-card {
+    background: #fff;
+    border: 1px solid #e2e9eb;
+    border-radius: 19px;
+    min-height: 128px;
+    padding: 26px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 4px 16px rgba(25,65,70,.04);
+}
+
+.stat-icon {
+    width: 65px;
+    height: 65px;
+    min-width: 65px;
+    border-radius: 17px;
+    background: #e7f6f4;
+    color: #07847f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+}
+
+.stat-label {
+    color: #71839a;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.stat-number {
+    color: #164b53;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+.filter-card {
+    background: #fff;
+    border: 1px solid #e2e9eb;
+    border-radius: 19px;
+    padding: 25px 27px;
+    margin-bottom: 32px;
+    box-shadow: 0 4px 16px rgba(25,65,70,.04);
+}
+
+.filter-title {
+    font-size: 21px;
+    font-weight: 700;
+    color: #164b53;
+    margin-bottom: 20px;
+}
+
+.filter-label {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    color: #213e56;
+    margin-bottom: 8px;
+}
+
+.form-control,
+.form-select {
+    height: 57px;
+    border: 1px solid #d9e2e5;
+    border-radius: 11px;
+    font-size: 16px;
+    color: #31465b;
+    padding-left: 17px;
+    box-shadow: none !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #0b9089;
+}
+
+.search-btn {
+    height: 57px;
+    border: none;
+    border-radius: 11px;
+    padding: 0 27px;
+    background: #124d54;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.clear-btn {
+    height: 57px;
+    border: 1px solid #d8e0e3;
+    border-radius: 11px;
+    background: #fff;
+    color: #5f7080;
+    padding: 0 23px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* =========================================================
+   TABLE CARD
+========================================================= */
+
+.table-card {
+    background: #fff;
+    border: 1px solid #e2e9eb;
+    border-radius: 19px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(25,65,70,.04);
+}
+
+.table-header {
+    padding: 28px 27px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e5ebed;
+}
+
+.table-title {
+    margin: 0;
+    color: #164b53;
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.task-count {
+    color: #75879a;
+    font-size: 15px;
+}
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.task-table {
+    width: 100%;
+    min-width: 2100px;
+    margin: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.task-table thead th {
+    background: #fbfcfc;
+    color: #657991;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .3px;
+    padding: 18px;
+    border-bottom: 1px solid #e3e9eb;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.task-table tbody td {
+    padding: 18px;
+    color: #42566b;
+    font-size: 14px;
+    border-bottom: 1px solid #edf1f2;
+    vertical-align: top;
+}
+
+.task-table tbody tr:hover {
+    background: #fbfdfd;
+}
+
+/* =========================================================
+   COLUMN WIDTHS
+========================================================= */
+
+.col-number {
+    width: 55px;
+}
+
+.col-task {
+    width: 220px;
+    min-width: 220px;
+}
+
+.col-project {
+    width: 190px;
+    min-width: 190px;
+}
+
+.col-employee {
+    width: 170px;
+    min-width: 170px;
+}
+
+.col-date {
+    width: 125px;
+    min-width: 125px;
+}
+
+.col-priority {
+    width: 110px;
+    min-width: 110px;
+}
+
+.col-status {
+    width: 130px;
+    min-width: 130px;
+}
+
+.col-employee-comment {
+    width: 290px;
+    min-width: 290px;
+}
+
+.col-admin-comment {
+    width: 360px;
+    min-width: 360px;
+}
+
+.col-remaining {
+    width: 145px;
+    min-width: 145px;
+}
+
+/* NEW TASKS COLUMN */
+
+.col-tasks {
+    width: 140px;
+    min-width: 140px;
+}
+
+.col-action {
+    width: 145px;
+    min-width: 145px;
+}
+
+/* =========================================================
+   TASK
+========================================================= */
+
+.task-title {
+    color: #234653;
+    font-size: 15px;
+    font-weight: 700;
+    white-space: normal;
+    line-height: 1.4;
+}
+
+.task-description {
+    color: #8795a4;
+    font-size: 12px;
+    margin-top: 4px;
+    white-space: normal;
+    line-height: 1.4;
+}
+
+/* =========================================================
+   PROJECT
+========================================================= */
+
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: #087c83;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.project-link:hover {
+    color: #075f65;
+    text-decoration: underline;
+}
+
+.no-project {
+    color: #9aa7b2;
+}
+
+/* =========================================================
+   EMPLOYEE
+========================================================= */
+
+.employee-name {
+    color: #3e566a;
+    font-weight: 600;
+}
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status {
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 13px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.status.pending {
+    background: #fff2d9;
+    color: #a66b00;
+}
+
+.status.in-progress,
+.status.in_progress {
+    background: #dff5f7;
+    color: #08717a;
+}
+
+.status.completed {
+    background: #ddf5e9;
+    color: #16834b;
+}
+
+/* =========================================================
+   PRIORITY
+========================================================= */
+
+.priority-low {
+    color: #198754;
+    font-weight: 700;
+}
+
+.priority-medium {
+    color: #e78313;
+    font-weight: 700;
+}
+
+.priority-high {
+    color: #dc3545;
+    font-weight: 700;
+}
+
+/* =========================================================
+   COMMENT AREA
+========================================================= */
+
+.comment-cell {
+    white-space: normal !important;
+    vertical-align: top !important;
+}
+
+.comment-box {
+    width: 100%;
+    max-width: 335px;
+    background: #f7fbfb;
+    border: 1px solid #e0eeee;
+    border-radius: 10px;
+    padding: 10px 12px;
+    color: #526878;
+    font-size: 13px;
+    line-height: 1.5;
+    white-space: normal;
+    word-break: break-word;
+    margin-bottom: 8px;
+}
+
+.comment-box i {
+    margin-right: 5px;
+}
+
+.employee-comment-box {
+    background: #f7fbfb;
+    border-color: #dceeee;
+}
+
+.employee-comment-box i {
+    color: #087c83;
+}
+
+.admin-comment-box {
+    background: #fffaf0;
+    border-color: #f0dfb9;
+}
+
+.admin-comment-box i {
+    color: #c78300;
+}
+
+.admin-comment-author {
+    color: #a66b00;
+    font-weight: 700;
+}
+
+.comment-time {
+    display: block;
+    margin-top: 6px;
+    color: #9aa7b2;
+    font-size: 11px;
+}
+
+.no-comment {
+    color: #a0adb7;
+    font-size: 13px;
+    font-style: italic;
+}
+
+/* =========================================================
+   ADMIN COMMENT FORM
+========================================================= */
+
+.admin-comment-form {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    width: 100%;
+    max-width: 335px;
+    margin-top: 10px;
+}
+
+.admin-comment-input {
+    flex: 1;
+    min-width: 0;
+    height: 42px;
+    border: 1px solid #d9e2e5;
+    border-radius: 9px;
+    padding: 0 11px;
+    font-size: 13px;
+    outline: none;
+    background: #fff;
+}
+
+.admin-comment-input:focus {
+    border-color: #0b9089;
+    box-shadow: 0 0 0 2px rgba(11,144,137,.08);
+}
+
+.admin-comment-btn {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border: none;
+    border-radius: 9px;
+    background: #0b9089;
+    color: #fff;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.admin-comment-btn:hover {
+    background: #087b76;
+    transform: translateY(-1px);
+}
+
+/* =========================================================
+   REMAINING DAYS
+========================================================= */
+
+.remaining-days {
+    width: 100%;
+    white-space: nowrap;
+}
+
+.days-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 12px;
+    border-radius: 20px;
+    background: #eef8f8;
+    color: #087c83;
+    border: 1px solid #cfe9e8;
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.no-days {
+    color: #a0adb7;
+    font-size: 13px;
+    font-style: italic;
+}
+
+/* =========================================================
+   VIEW TASK BUTTON
+========================================================= */
+
+.view-task-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-width: 115px;
+    height: 40px;
+    padding: 0 14px;
+    border-radius: 10px;
+    background: #eef8f8;
+    border: 1px solid #cce9e8;
+    color: #087c83;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    transition: .2s ease;
+    white-space: nowrap;
+}
+
+.view-task-btn:hover {
+    background: #087c83;
+    border-color: #087c83;
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.action-btn {
+    width: 39px;
+    height: 39px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: .2s ease;
+    font-size: 14px;
+}
+
+.view-btn {
+    background: #eef8f8;
+    border: 1px solid #cce9e8;
+    color: #087c83;
+}
+
+.view-btn:hover {
+    background: #087c83;
+    color: #fff;
+}
+
+.edit-btn {
+    background: #fff8e8;
+    border: 1px solid #f2dfad;
+    color: #c78300;
+}
+
+.edit-btn:hover {
+    background: #c78300;
+    color: #fff;
+}
+
+.delete-btn {
+    background: #fff7f7;
+    border: 1px solid #f0caca;
+    color: #dc3545;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background: #dc3545;
+    color: #fff;
+}
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.empty-state {
+    text-align: center;
+    padding: 70px 20px !important;
+    color: #82909d !important;
+}
+
+.empty-state i {
+    color: #8bb8b8;
+    margin-bottom: 15px;
+}
+
+.empty-state-title {
+    color: #506474;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+/* =========================================================
+   ALERT
+========================================================= */
+
+.alert {
+    border-radius: 12px;
+    border: none;
+    margin-bottom: 25px;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    .stats-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .page-header {
+        align-items: flex-start;
+        gap: 25px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .main-container {
+        padding: 22px 16px;
+    }
+
+    .page-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .page-title {
+        font-size: 30px;
+    }
+
+    .header-buttons {
+        width: 100%;
+    }
+
+    .dashboard-btn,
+    .add-task-btn {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .stats-row {
+        grid-template-columns: 1fr;
+    }
+
+    .search-btn,
+    .clear-btn {
+        width: 100%;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="main-container">
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<div class="page-header">
+
+    <div>
+
+        <h1 class="page-title">
+            Tasks
+        </h1>
+
+        <p class="page-subtitle">
+            Manage and assign daily employee tasks.
+        </p>
+
+    </div>
+
+    <div class="header-buttons">
+
+        <a
+            href="{% url 'admin_dashboard' %}"
+            class="dashboard-btn"
+        >
+            <i class="fa-solid fa-table-cells"></i>
+            Dashboard
+        </a>
+
+        <a
+            href="{% url 'add_task' %}"
+            class="add-task-btn"
+        >
+            <i class="fa-solid fa-plus"></i>
+            Add Task
+        </a>
+
+    </div>
+
+</div>
+
+<!-- =========================================================
+     MESSAGES
+========================================================= -->
+
+{% if messages %}
+
+    {% for message in messages %}
+
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+
+    {% endfor %}
+
+{% endif %}
+
+<!-- =========================================================
+     STATISTICS
+========================================================= -->
+
+<div class="stats-row">
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            <i class="fa-solid fa-list-check"></i>
+        </div>
+
+        <div>
+
+            <div class="stat-label">
+                Total Tasks
+            </div>
+
+            <div class="stat-number">
+                {{ total_tasks }}
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            <i class="fa-regular fa-clock"></i>
+        </div>
+
+        <div>
+
+            <div class="stat-label">
+                Pending Tasks
+            </div>
+
+            <div class="stat-number">
+                {{ pending_tasks }}
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            <i class="fa-solid fa-spinner"></i>
+        </div>
+
+        <div>
+
+            <div class="stat-label">
+                In Progress
+            </div>
+
+            <div class="stat-number">
+                {{ in_progress_tasks }}
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            <i class="fa-solid fa-circle-check"></i>
+        </div>
+
+        <div>
+
+            <div class="stat-label">
+                Completed
+            </div>
+
+            <div class="stat-number">
+                {{ completed_tasks }}
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =========================================================
+     FILTER
+========================================================= -->
+
+<div class="filter-card">
+
+    <div class="filter-title">
+        Search & Filter Tasks
+    </div>
+
+    <form method="GET">
+
+        <div class="row g-3 align-items-end">
+
+            <div class="col-lg-5">
+
+                <label class="filter-label">
+                    Search Task
+                </label>
+
+                <input
+                    type="text"
+                    name="search"
+                    class="form-control"
+                    placeholder="Task title, employee, project..."
+                    value="{{ search }}"
+                >
+
+            </div>
+
+
+            <div class="col-lg-3">
+
+                <label class="filter-label">
+                    Status
+                </label>
+
+                <select
+                    name="status"
+                    class="form-select"
+                >
+
+                    <option value="">
+                        All Status
+                    </option>
+
+                    <option
+                        value="pending"
+                        {% if selected_status == "pending" %}
+                            selected
+                        {% endif %}
+                    >
+                        Pending
+                    </option>
+
+                    <option
+                        value="in_progress"
+                        {% if selected_status == "in_progress" %}
+                            selected
+                        {% endif %}
+                    >
+                        In Progress
+                    </option>
+
+                    <option
+                        value="completed"
+                        {% if selected_status == "completed" %}
+                            selected
+                        {% endif %}
+                    >
+                        Completed
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="col-lg-auto">
+
+                <button
+                    type="submit"
+                    class="search-btn"
+                >
+                    <i class="fa-solid fa-search me-1"></i>
+                    Search
+                </button>
+
+            </div>
+
+
+            <div class="col-lg-auto">
+
+                <a
+                    href="{% url 'tasks' %}"
+                    class="clear-btn d-flex align-items-center justify-content-center text-decoration-none"
+                >
+                    Clear
+                </a>
+
+            </div>
+
+        </div>
+
+    </form>
+
+</div>
+
+<!-- =========================================================
+     TASK TABLE
+========================================================= -->
+
+<div class="table-card">
+
+    <div class="table-header">
+
+        <h2 class="table-title">
+            Task List
+        </h2>
+
+        <span class="task-count">
+
+            {{ filtered_task_count }}
+
+            task{{ filtered_task_count|pluralize }}
+
+        </span>
+
+    </div>
+
+
+    <div class="table-responsive">
+
+        <table class="table task-table align-middle">
+
+            <thead>
+
+                <tr>
+
+                    <th class="col-number">
+                        #
+                    </th>
+
+                    <th class="col-task">
+                        Task
+                    </th>
+
+                    <th class="col-project">
+                        Project
+                    </th>
+
+                    <th class="col-employee">
+                        Employee
+                    </th>
+
+                    <th class="col-date">
+                        Date
+                    </th>
+
+                    <th class="col-priority">
+                        Priority
+                    </th>
+
+                    <th class="col-status">
+                        Status
+                    </th>
+
+                    <th class="col-employee-comment">
+                        Employee Comment
+                    </th>
+
+                    <th class="col-admin-comment">
+                        Admin Comment
+                    </th>
+
+                    <th class="col-remaining">
+                        Remaining Days
+                    </th>
+
+                    <!-- NEW COLUMN -->
+
+                    
+                    <th class="col-action">
+                        Action
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+            {% for task in tasks %}
+
+                <tr>
+
+                    <!-- =================================================
+                         NUMBER
+                    ================================================== -->
+
+                    <td>
+                        {{ forloop.counter }}
+                    </td>
+
+
+                    <!-- =================================================
+                         TASK
+                    ================================================== -->
+
+                    <td>
+
+                        <div class="task-title">
+                            {{ task.title }}
+                        </div>
+
+                        {% if task.description %}
+
+                            <div class="task-description">
+                                {{ task.description|truncatechars:80 }}
+                            </div>
+
+                        {% endif %}
+
+                    </td>
+
+
+                    <!-- =================================================
+                         PROJECT
+                    ================================================== -->
+
+                    <td>
+
+                        {% if task.project %}
+
+                            <a
+                                href="{% url 'project_detail' task.project.id %}"
+                                class="project-link"
+                                title="View Project Details"
+                            >
+
+                                <i class="fa-solid fa-folder"></i>
+
+                                {{ task.project.project_name }}
+
+                            </a>
+
+                        {% else %}
+
+                            <span class="no-project">
+                                No Project
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+
+                    <!-- =================================================
+                         EMPLOYEE
+                    ================================================== -->
+
+                    <td>
+
+                        <span class="employee-name">
+
+                            {{ task.assigned_to.get_full_name|default:task.assigned_to.username }}
+
+                        </span>
+
+                    </td>
+
+
+                    <!-- =================================================
+                         DATE
+                    ================================================== -->
+
+                    <td>
+
+                        {{ task.task_date|date:"d M Y" }}
+
+                    </td>
+
+
+                    <!-- =================================================
+                         PRIORITY
+                    ================================================== -->
+
+                    <td>
+
+                        <span class="priority-{{ task.priority }}">
+
+                            {{ task.get_priority_display }}
+
+                        </span>
+
+                    </td>
+
+
+                    <!-- =================================================
+                         STATUS
+                    ================================================== -->
+
+                    <td>
+
+                        <span class="status {{ task.status }}">
+
+                            {{ task.get_status_display }}
+
+                        </span>
+
+                    </td>
+
+
+                    <!-- =================================================
+                         EMPLOYEE COMMENT
+                    ================================================== -->
+
+                    <td class="comment-cell">
+
+                        {% if task.employee_comment %}
+
+                            <div
+                                class="comment-box employee-comment-box"
+                                title="{{ task.employee_comment }}"
+                            >
+
+                                <i class="fa-regular fa-user"></i>
+
+                                <strong>Employee:</strong>
+
+                                {{ task.employee_comment|truncatechars:180 }}
+
+                            </div>
+
+                        {% else %}
+
+                            <span class="no-comment">
+                                No employee comment
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+
+                    <!-- =================================================
+                         ADMIN COMMENTS
+                    ================================================== -->
+
+                    <td class="comment-cell">
+
+                        {% for comment in task.comments.all %}
+
+                            {% if comment.user.role == "admin" %}
+
+                                <div
+                                    class="comment-box admin-comment-box"
+                                    title="{{ comment.comment }}"
+                                >
+
+                                    <div>
+
+                                        <i class="fa-solid fa-user-tie"></i>
+
+                                        <span class="admin-comment-author">
+                                            Admin:
+                                        </span>
+
+                                        {{ comment.comment }}
+
+                                    </div>
+
+                                    <span class="comment-time">
+
+                                        <i class="fa-regular fa-clock"></i>
+
+                                        {{ comment.created_at|date:"d M Y, h:i A" }}
+
+                                    </span>
+
+                                </div>
+
+                            {% endif %}
+
+                        {% empty %}
+
+                            <span class="no-comment">
+                                No admin comment
+                            </span>
+
+                        {% endfor %}
+
+
+                        <!-- ADD ADMIN COMMENT -->
+
+                        <form
+                            method="POST"
+                            action="{% url 'admin_task_comment' task.id %}"
+                            class="admin-comment-form"
+                        >
+
+                            {% csrf_token %}
+
+                            <input
+                                type="text"
+                                name="comment"
+                                class="admin-comment-input"
+                                placeholder="Write admin comment..."
+                                autocomplete="off"
+                                required
+                            >
+
+                            <button
+                                type="submit"
+                                class="admin-comment-btn"
+                                title="Add Admin Comment"
+                            >
+
+                                <i class="fa-solid fa-paper-plane"></i>
+
+                            </button>
+
+                        </form>
+
+                    </td>
+
+
+                    <!-- =================================================
+                         REMAINING DAYS
+                    ================================================== -->
+
+                    <td>
+
+                        <div class="remaining-days">
+
+                            {% if task.remaining_days != None %}
+
+                                <span class="days-badge">
+
+                                    <i class="fa-regular fa-clock"></i>
+
+                                    {{ task.remaining_days }}
+
+                                    day{{ task.remaining_days|pluralize }}
+
+                                </span>
+
+                            {% else %}
+
+                                <span class="no-days">
+                                    Not updated
+                                </span>
+
+                            {% endif %}
+
+                        </div>
+
+                    </td>
+
+
+                   
+
+                    <!-- =================================================
+                         ACTION
+                    ================================================== -->
+
+                    <td>
+
+                        <div class="action-buttons">
+
+                            <!-- VIEW -->
+
+                            <a
+                                href="{% url 'task_detail' task.id %}"
+                                class="action-btn view-btn"
+                                title="View Task Details"
+                            >
+
+                                <i class="fa-solid fa-eye"></i>
+
+                            </a>
+
+
+                            <!-- EDIT -->
+
+                            <a
+                                href="{% url 'edit_task' task.id %}"
+                                class="action-btn edit-btn"
+                                title="Edit Task"
+                            >
+
+                                <i class="fa-solid fa-pen"></i>
+
+                            </a>
+
+
+                            <!-- DELETE -->
+
+                            <form
+                                method="POST"
+                                action="{% url 'delete_task' task.id %}"
+                                onsubmit="return confirm('Delete this task?');"
+                                style="display:inline;"
+                            >
+
+                                {% csrf_token %}
+
+                                <button
+                                    type="submit"
+                                    class="action-btn delete-btn"
+                                    title="Delete Task"
+                                >
+
+                                    <i class="fa-solid fa-trash"></i>
+
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            {% empty %}
+
+                <tr>
+
+                    <td
+                        colspan="12"
+                        class="empty-state"
+                    >
+
+                        <i class="fa-solid fa-clipboard-list fa-3x"></i>
+
+                        <div class="empty-state-title">
+                            No tasks have been created yet.
+                        </div>
+
+                        <div class="mt-2">
+
+                            Click <strong>Add Task</strong>
+                            to create your first task.
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+{% include "chat/chat_widget.html" %}
+</body>
+</html>

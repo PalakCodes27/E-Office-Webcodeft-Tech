@@ -1,0 +1,3697 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>My To-Do | Smart Office</title>
+
+
+    <!-- =====================================================
+         BOOTSTRAP
+    ====================================================== -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         FONT AWESOME
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    >
+
+
+    <!-- =====================================================
+         FONT
+    ====================================================== -->
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <style>
+
+        :root {
+
+            --teal: #0d9488;
+            --teal-dark: #0f766e;
+            --teal-soft: #e7f7f5;
+
+            --white: #ffffff;
+
+            --bg: #f7faf9;
+
+            --text: #203b39;
+            --muted: #7b8b8c;
+
+            --border: #e6eeee;
+
+            --danger: #dc3545;
+            --warning: #e59b19;
+
+        }
+
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family: "Inter", sans-serif;
+
+            background: var(--bg);
+
+            color: var(--text);
+        }
+
+
+        /* =====================================================
+           PAGE
+        ====================================================== */
+
+        .todo-page {
+
+            min-height: 100vh;
+
+            padding: 28px 32px 45px;
+
+            max-width: 1500px;
+
+            margin: auto;
+        }
+
+
+        /* =====================================================
+           TOP BAR
+        ====================================================== */
+
+        .topbar {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 22px;
+
+            gap: 20px;
+        }
+
+
+        .brand-area {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+        }
+
+
+        /* =====================================================
+           BACK BUTTON
+        ====================================================== */
+
+        .back-btn {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            height: 38px;
+
+            padding: 0 13px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 9px;
+
+            background: white;
+
+            color: #687b7b;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: all .2s ease;
+
+            flex-shrink: 0;
+        }
+
+
+        .back-btn i {
+
+            font-size: 12px;
+
+            transition: transform .2s ease;
+        }
+
+
+        .back-btn:hover {
+
+            background: var(--teal-soft);
+
+            border-color: var(--teal);
+
+            color: var(--teal-dark);
+
+            transform: translateX(-2px);
+        }
+
+
+        .back-btn:hover i {
+
+            transform: translateX(-3px);
+        }
+
+
+        .brand-icon {
+
+            width: 46px;
+
+            height: 46px;
+
+            border-radius: 13px;
+
+            background: var(--teal);
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 19px;
+        }
+
+
+        .brand-area h1 {
+
+            margin: 0;
+
+            font-size: 22px;
+
+            font-weight: 800;
+
+            letter-spacing: -.3px;
+        }
+
+
+        .brand-area p {
+
+            margin: 3px 0 0;
+
+            font-size: 11px;
+
+            color: var(--muted);
+        }
+
+
+        .top-actions {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+        }
+
+
+        .today-label {
+
+            font-size: 12px;
+
+            color: var(--muted);
+
+            padding-right: 8px;
+        }
+
+
+        .new-todo-btn {
+
+            border: none;
+
+            background: var(--teal);
+
+            color: white;
+
+            border-radius: 9px;
+
+            padding: 10px 17px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            transition: .2s;
+        }
+
+
+        .new-todo-btn:hover {
+
+            background: var(--teal-dark);
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =====================================================
+           MAIN LAYOUT
+        ====================================================== */
+
+        .workspace {
+
+            display: grid;
+
+            grid-template-columns: 220px minmax(0, 1fr);
+
+            gap: 22px;
+
+            align-items: start;
+        }
+
+
+        /* =====================================================
+           LEFT NAVIGATION
+        ====================================================== */
+
+        .side-panel {
+
+            background: white;
+
+            border: 1px solid var(--border);
+
+            border-radius: 14px;
+
+            padding: 14px;
+
+            position: sticky;
+
+            top: 20px;
+        }
+
+
+        .side-heading {
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: .8px;
+
+            color: #9aa7a8;
+
+            padding: 8px 10px;
+
+            margin-bottom: 4px;
+        }
+
+
+        .side-item {
+
+            width: 100%;
+
+            border: none;
+
+            background: transparent;
+
+            border-radius: 9px;
+
+            padding: 10px 11px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            color: #687b7b;
+
+            cursor: pointer;
+
+            text-align: left;
+
+            margin-bottom: 2px;
+
+            transition: .2s;
+        }
+
+
+        .side-item i {
+
+            width: 18px;
+
+            text-align: center;
+
+            color: #91a1a1;
+
+        }
+
+
+        .side-item:hover {
+
+            background: #f3f8f7;
+
+            color: var(--teal);
+        }
+
+
+        .side-item:hover i {
+
+            color: var(--teal);
+        }
+
+
+        .side-item.active {
+
+            background: var(--teal-soft);
+
+            color: var(--teal-dark);
+        }
+
+
+        .side-item.active i {
+
+            color: var(--teal);
+        }
+
+
+        .side-divider {
+
+            height: 1px;
+
+            background: var(--border);
+
+            margin: 13px 5px;
+        }
+
+
+        .mini-info {
+
+            padding: 12px 10px;
+
+            font-size: 10px;
+
+            color: var(--muted);
+
+            line-height: 1.6;
+        }
+
+
+        .mini-info strong {
+
+            color: var(--text);
+
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           CONTENT
+        ====================================================== */
+
+        .todo-content-area {
+
+            min-width: 0;
+        }
+
+
+        /* =====================================================
+           QUICK ADD
+        ====================================================== */
+
+        .quick-add {
+
+            background: white;
+
+            border: 1px solid var(--border);
+
+            border-radius: 13px;
+
+            padding: 10px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-bottom: 14px;
+        }
+
+
+        .quick-check {
+
+            width: 22px;
+
+            height: 22px;
+
+            border: 2px solid #cbd8d7;
+
+            border-radius: 7px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: transparent;
+
+            flex-shrink: 0;
+        }
+
+
+        .quick-add input {
+
+            border: none;
+
+            outline: none;
+
+            flex: 1;
+
+            font-size: 12px;
+
+            color: var(--text);
+
+            background: transparent;
+
+            min-width: 0;
+        }
+
+
+        .quick-add input::placeholder {
+
+            color: #a5b0b1;
+        }
+
+
+        .quick-add-submit {
+
+            border: none;
+
+            background: var(--teal-soft);
+
+            color: var(--teal-dark);
+
+            width: 34px;
+
+            height: 34px;
+
+            border-radius: 8px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            cursor: pointer;
+        }
+
+
+        .quick-add-submit:hover {
+
+            background: var(--teal);
+
+            color: white;
+        }
+
+
+        /* =====================================================
+           TOOL HEADER
+        ====================================================== */
+
+        .list-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin: 18px 2px 10px;
+        }
+
+
+        .list-title {
+
+            font-size: 15px;
+
+            font-weight: 800;
+
+            margin: 0;
+        }
+
+
+        .list-count {
+
+            color: var(--muted);
+
+            font-size: 11px;
+
+            margin-left: 5px;
+
+            font-weight: 500;
+        }
+
+
+        .search {
+
+            width: 230px;
+
+            height: 36px;
+
+            background: white;
+
+            border: 1px solid var(--border);
+
+            border-radius: 8px;
+
+            position: relative;
+        }
+
+
+        .search i {
+
+            position: absolute;
+
+            left: 12px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            font-size: 11px;
+
+            color: #a2afaf;
+        }
+
+
+        .search input {
+
+            width: 100%;
+
+            height: 100%;
+
+            border: none;
+
+            outline: none;
+
+            background: transparent;
+
+            padding-left: 32px;
+
+            padding-right: 10px;
+
+            font-size: 11px;
+        }
+
+
+        /* =====================================================
+           FILTER BAR
+        ====================================================== */
+
+        .filter-bar {
+
+            display: flex;
+
+            gap: 6px;
+
+            margin-bottom: 14px;
+
+            overflow-x: auto;
+
+            scrollbar-width: none;
+        }
+
+
+        .filter-bar::-webkit-scrollbar {
+
+            display: none;
+        }
+
+
+        .filter {
+
+            white-space: nowrap;
+
+            border: 1px solid var(--border);
+
+            background: white;
+
+            color: #748484;
+
+            border-radius: 7px;
+
+            padding: 7px 11px;
+
+            font-size: 10px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: .2s;
+        }
+
+
+        .filter:hover {
+
+            border-color: var(--teal);
+
+            color: var(--teal);
+        }
+
+
+        .filter.active {
+
+            background: var(--teal);
+
+            border-color: var(--teal);
+
+            color: white;
+        }
+
+
+        /* =====================================================
+           GROUP
+        ====================================================== */
+
+        .todo-group {
+
+            margin-bottom: 22px;
+        }
+
+
+        .group-title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin-bottom: 6px;
+
+            padding-left: 4px;
+        }
+
+
+        .group-title span {
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: .6px;
+
+            color: #7b8b8c;
+        }
+
+
+        .group-line {
+
+            height: 1px;
+
+            flex: 1;
+
+            background: #e9efee;
+        }
+
+
+        /* =====================================================
+           TODO ITEM
+        ====================================================== */
+
+        .todo-list {
+
+            background: white;
+
+            border: 1px solid var(--border);
+
+            border-radius: 12px;
+
+            overflow: hidden;
+        }
+
+
+        .todo-item {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 13px 15px;
+
+            border-bottom: 1px solid #edf2f1;
+
+            transition: .18s;
+
+            position: relative;
+        }
+
+
+        .todo-item:last-child {
+
+            border-bottom: none;
+        }
+
+
+        .todo-item:hover {
+
+            background: #fcfefe;
+        }
+
+
+        /* =====================================================
+           TODO CHECK
+        ====================================================== */
+
+        .todo-check-form {
+
+            flex-shrink: 0;
+        }
+
+
+        .todo-checkbox {
+
+            appearance: none;
+
+            width: 19px;
+
+            height: 19px;
+
+            border: 2px solid #c2d0cf;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+
+            position: relative;
+
+            margin: 0;
+
+            transition: .18s;
+        }
+
+
+        .todo-checkbox:hover {
+
+            border-color: var(--teal);
+        }
+
+
+        .todo-checkbox:checked {
+
+            background: var(--teal);
+
+            border-color: var(--teal);
+        }
+
+
+        .todo-checkbox:checked::after {
+
+            content: "✓";
+
+            position: absolute;
+
+            left: 3px;
+
+            top: -2px;
+
+            color: white;
+
+            font-size: 12px;
+
+            font-weight: 800;
+        }
+
+
+        /* =====================================================
+           TODO DETAILS
+        ====================================================== */
+
+        .todo-main {
+
+            flex: 1;
+
+            min-width: 0;
+        }
+
+
+        .todo-top {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            flex-wrap: wrap;
+
+            margin-bottom: 3px;
+        }
+
+
+        .todo-title {
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            margin: 0;
+
+            color: #304b49;
+
+            word-break: break-word;
+        }
+
+
+        .todo-item.completed .todo-title {
+
+            text-decoration: line-through;
+
+            color: #9ca9a8;
+        }
+
+
+        .todo-description {
+
+            color: #8a9999;
+
+            font-size: 10px;
+
+            margin-bottom: 6px;
+
+            overflow: hidden;
+
+            white-space: nowrap;
+
+            text-overflow: ellipsis;
+
+            max-width: 680px;
+        }
+
+
+        .todo-bottom {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            flex-wrap: wrap;
+        }
+
+
+        /* =====================================================
+           TAGS
+        ====================================================== */
+
+        .tag {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 4px;
+
+            border-radius: 5px;
+
+            padding: 3px 6px;
+
+            background: #f4f7f7;
+
+            color: #7c8b8b;
+
+            font-size: 9px;
+
+            font-weight: 600;
+        }
+
+
+        .tag i {
+
+            font-size: 8px;
+        }
+
+
+        /* =====================================================
+           PRIORITY
+        ====================================================== */
+
+        .priority {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 4px;
+
+            font-size: 9px;
+
+            font-weight: 700;
+
+            padding: 3px 6px;
+
+            border-radius: 5px;
+        }
+
+
+        .priority-high {
+
+            color: #c33b48;
+
+            background: #fff0f2;
+        }
+
+
+        .priority-medium {
+
+            color: #b47713;
+
+            background: #fff7e5;
+        }
+
+
+        .priority-low {
+
+            color: #27804b;
+
+            background: #edf8f1;
+        }
+
+
+        /* =====================================================
+           DUE
+        ====================================================== */
+
+        .todo-due {
+
+            min-width: 82px;
+
+            text-align: right;
+
+            font-size: 9px;
+
+            font-weight: 600;
+
+            color: #879494;
+        }
+
+
+        .todo-due.today {
+
+            color: var(--teal);
+        }
+
+
+        .todo-due.overdue {
+
+            color: var(--danger);
+        }
+
+
+        .todo-due.completed {
+
+            color: #43a267;
+        }
+
+
+        /* =====================================================
+           ACTIONS
+        ====================================================== */
+
+        .todo-actions {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 2px;
+
+            opacity: 0;
+
+            transition: .18s;
+        }
+
+
+        .todo-item:hover .todo-actions {
+
+            opacity: 1;
+        }
+
+
+        .item-action {
+
+            width: 29px;
+
+            height: 29px;
+
+            border: none;
+
+            background: transparent;
+
+            border-radius: 7px;
+
+            color: #8b9999;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            cursor: pointer;
+        }
+
+
+        .item-action:hover {
+
+            background: var(--teal-soft);
+
+            color: var(--teal);
+        }
+
+
+        .item-action.delete:hover {
+
+            background: #fff0f1;
+
+            color: var(--danger);
+        }
+
+
+        /* =====================================================
+           EMPTY
+        ====================================================== */
+
+        .empty {
+
+            background: white;
+
+            border: 1px solid var(--border);
+
+            border-radius: 12px;
+
+            padding: 65px 20px;
+
+            text-align: center;
+        }
+
+
+        .empty-icon {
+
+            width: 58px;
+
+            height: 58px;
+
+            border-radius: 16px;
+
+            background: var(--teal-soft);
+
+            color: var(--teal);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin: auto auto 14px;
+
+            font-size: 22px;
+        }
+
+
+        .empty h3 {
+
+            font-size: 15px;
+
+            font-weight: 800;
+
+            margin-bottom: 5px;
+        }
+
+
+        .empty p {
+
+            color: var(--muted);
+
+            font-size: 11px;
+
+            margin-bottom: 16px;
+        }
+
+
+        /* =====================================================
+           MODAL
+        ====================================================== */
+
+        .modal-content {
+
+            border: none;
+
+            border-radius: 15px;
+
+            overflow: hidden;
+        }
+
+
+        .modal-header {
+
+            padding: 20px 22px 10px;
+
+            border: none;
+        }
+
+
+        .modal-title {
+
+            font-size: 17px;
+
+            font-weight: 800;
+        }
+
+
+        .modal-subtitle {
+
+            font-size: 10px;
+
+            color: var(--muted);
+
+            margin-top: 3px;
+        }
+
+
+        .modal-body {
+
+            padding: 12px 22px 20px;
+        }
+
+
+        .modal-footer {
+
+            border-top: 1px solid var(--border);
+
+            padding: 13px 22px;
+        }
+
+
+        .form-label {
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            color: #536866;
+
+            margin-bottom: 6px;
+        }
+
+
+        .form-control,
+        .form-select {
+
+            min-height: 40px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 8px;
+
+            font-size: 11px;
+
+            box-shadow: none;
+        }
+
+
+        textarea.form-control {
+
+            min-height: 85px;
+
+            resize: vertical;
+        }
+
+
+        .form-control:focus,
+        .form-select:focus {
+
+            border-color: var(--teal);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(13,148,136,.08);
+        }
+
+
+        .cancel-btn {
+
+            border: 1px solid var(--border);
+
+            background: white;
+
+            color: #708080;
+
+            border-radius: 7px;
+
+            padding: 8px 14px;
+
+            font-size: 11px;
+
+            font-weight: 600;
+        }
+
+
+        .save-btn {
+
+            border: none;
+
+            background: var(--teal);
+
+            color: white;
+
+            border-radius: 7px;
+
+            padding: 8px 16px;
+
+            font-size: 11px;
+
+            font-weight: 700;
+        }
+
+
+        .save-btn:hover {
+
+            background: var(--teal-dark);
+
+            color: white;
+        }
+
+
+        /* =====================================================
+           DELETE
+        ====================================================== */
+
+        .delete-box {
+
+            text-align: center;
+
+            padding: 25px 22px;
+        }
+
+
+        .delete-icon {
+
+            width: 52px;
+
+            height: 52px;
+
+            border-radius: 14px;
+
+            background: #fff0f1;
+
+            color: var(--danger);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin: auto auto 13px;
+
+            font-size: 20px;
+        }
+
+
+        .delete-box h3 {
+
+            font-size: 16px;
+
+            font-weight: 800;
+        }
+
+
+        .delete-box p {
+
+            font-size: 11px;
+
+            color: var(--muted);
+
+            line-height: 1.6;
+        }
+
+
+        .confirm-delete {
+
+            border: none;
+
+            background: var(--danger);
+
+            color: white;
+
+            border-radius: 7px;
+
+            padding: 8px 15px;
+
+            font-size: 11px;
+
+            font-weight: 700;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 900px) {
+
+            .workspace {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .side-panel {
+
+                position: static;
+
+                display: flex;
+
+                align-items: center;
+
+                gap: 5px;
+
+                overflow-x: auto;
+
+                padding: 8px;
+            }
+
+
+            .side-heading,
+            .side-divider,
+            .mini-info {
+
+                display: none;
+            }
+
+
+            .side-item {
+
+                width: auto;
+
+                white-space: nowrap;
+
+                margin: 0;
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .todo-page {
+
+                padding: 18px 12px 30px;
+            }
+
+
+            .topbar {
+
+                align-items: flex-start;
+            }
+
+
+            .today-label {
+
+                display: none;
+            }
+
+
+            .brand-area {
+
+                gap: 8px;
+
+                flex-wrap: wrap;
+            }
+
+
+            .brand-area h1 {
+
+                font-size: 19px;
+            }
+
+
+            .brand-area p {
+
+                font-size: 10px;
+            }
+
+
+            .back-btn {
+
+                height: 34px;
+
+                padding: 0 10px;
+
+                font-size: 10px;
+            }
+
+
+            .back-btn span {
+
+                display: none;
+            }
+
+
+            .new-todo-btn {
+
+                padding: 9px 12px;
+            }
+
+
+            .list-header {
+
+                align-items: stretch;
+
+                flex-direction: column;
+            }
+
+
+            .search {
+
+                width: 100%;
+            }
+
+
+            .todo-item {
+
+                align-items: flex-start;
+
+                padding: 13px 11px;
+            }
+
+
+            .todo-due {
+
+                display: none;
+            }
+
+
+            .todo-actions {
+
+                opacity: 1;
+            }
+
+
+            .todo-description {
+
+                white-space: normal;
+
+                display: -webkit-box;
+
+                -webkit-line-clamp: 2;
+
+                -webkit-box-orient: vertical;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="todo-page">
+
+
+    <!-- =====================================================
+         TOP BAR
+    ====================================================== -->
+
+    <div class="topbar">
+
+
+        <div class="brand-area">
+
+
+            <!-- =================================================
+                 BACK BUTTON
+            ================================================== -->
+
+            <button
+                type="button"
+                class="back-btn"
+                onclick="goBack()"
+                title="Go Back"
+            >
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                <span>
+                    Back
+                </span>
+
+            </button>
+
+
+            <div class="brand-icon">
+
+                <i class="fa-solid fa-check-double"></i>
+
+            </div>
+
+
+            <div>
+
+                <h1>
+                    My To-Do
+                </h1>
+
+                <p>
+                    Keep your priorities clear and your day organized.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="top-actions">
+
+            <span class="today-label">
+
+                {% now "l, d M Y" %}
+
+            </span>
+
+
+            <button
+                type="button"
+                class="new-todo-btn"
+                data-bs-toggle="modal"
+                data-bs-target="#addTodoModal"
+            >
+
+                <i class="fa-solid fa-plus"></i>
+
+                New To-Do
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         MAIN WORKSPACE
+    ====================================================== -->
+
+    <div class="workspace">
+
+
+        <!-- =================================================
+             SIDE PANEL
+        ================================================== -->
+
+        <aside class="side-panel">
+
+
+            <div class="side-heading">
+
+                View
+
+            </div>
+
+
+            <button
+                class="side-item active"
+                data-filter="all"
+                type="button"
+            >
+
+                <i class="fa-solid fa-inbox"></i>
+
+                All To-Dos
+
+            </button>
+
+
+            <button
+                class="side-item"
+                data-filter="today"
+                type="button"
+            >
+
+                <i class="fa-regular fa-calendar"></i>
+
+                Today
+
+            </button>
+
+
+            <button
+                class="side-item"
+                data-filter="pending"
+                type="button"
+            >
+
+                <i class="fa-regular fa-circle"></i>
+
+                Pending
+
+            </button>
+
+
+            <button
+                class="side-item"
+                data-filter="completed"
+                type="button"
+            >
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                Completed
+
+            </button>
+
+
+            <button
+                class="side-item"
+                data-filter="overdue"
+                type="button"
+            >
+
+                <i class="fa-solid fa-clock-rotate-left"></i>
+
+                Overdue
+
+            </button>
+
+
+            <div class="side-divider"></div>
+
+
+            <div class="mini-info">
+
+                <strong>
+                    Small steps.
+                </strong>
+
+                <br>
+
+                Finish one thing at a time and keep your workspace clear.
+
+            </div>
+
+        </aside>
+
+
+
+        <!-- =================================================
+             TODO CONTENT
+        ================================================== -->
+
+        <main class="todo-content-area">
+
+
+            <!-- =================================================
+                 QUICK ADD
+            ================================================== -->
+
+            <form
+                method="POST"
+                action="{% url 'todo_list' %}"
+                class="quick-add"
+            >
+
+                {% csrf_token %}
+
+                <input
+                    type="hidden"
+                    name="action"
+                    value="add"
+                >
+
+
+                <div class="quick-check">
+
+                    <i class="fa-solid fa-check"></i>
+
+                </div>
+
+
+                <input
+                    type="text"
+                    name="title"
+                    placeholder="Quickly add a To-Do..."
+                    maxlength="255"
+                    required
+                >
+
+
+                <button
+                    type="submit"
+                    class="quick-add-submit"
+                    title="Add To-Do"
+                >
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </form>
+
+
+
+            <!-- =================================================
+                 LIST HEADER
+            ================================================== -->
+
+            <div class="list-header">
+
+
+                <h2 class="list-title">
+
+                    My Tasks
+
+                    <span
+                        class="list-count"
+                        id="visibleCount"
+                    >
+
+                        {{ total_todos }}
+
+                    </span>
+
+                </h2>
+
+
+                <div class="search">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search To-Dos..."
+                    >
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 FILTER BAR
+            ================================================== -->
+
+            <div class="filter-bar">
+
+
+                <button
+                    type="button"
+                    class="filter active"
+                    data-filter="all"
+                >
+
+                    All
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="filter"
+                    data-filter="today"
+                >
+
+                    Today
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="filter"
+                    data-filter="pending"
+                >
+
+                    Pending
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="filter"
+                    data-filter="completed"
+                >
+
+                    Completed
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="filter"
+                    data-filter="overdue"
+                >
+
+                    Overdue
+
+                </button>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 TODO CONTAINER
+            ================================================== -->
+
+            <div id="todoContainer">
+
+
+                {% if todos %}
+
+
+                    <!-- =========================================
+                         TODAY
+                    ========================================== -->
+
+                    <div
+                        class="todo-group"
+                        data-group="today"
+                    >
+
+
+                        <div class="group-title">
+
+                            <span>
+                                Today
+                            </span>
+
+                            <div class="group-line"></div>
+
+                        </div>
+
+
+                        <div class="todo-list">
+
+
+                            {% for todo in todos %}
+
+
+                                {% if todo.due_date %}
+
+
+                                    <div
+                                        class="todo-item {% if todo.is_completed %}completed{% endif %}"
+
+                                        data-title="{{ todo.title|lower }}"
+
+                                        data-description="{{ todo.description|default:''|lower }}"
+
+                                        data-category="{{ todo.category|default:''|lower }}"
+
+                                        data-completed="{% if todo.is_completed %}true{% else %}false{% endif %}"
+
+                                        data-due="{{ todo.due_date|date:'Y-m-d' }}"
+                                    >
+
+
+                                        <!-- CHECK -->
+
+                                        <form
+                                            method="POST"
+                                            action="{% url 'todo_list' %}"
+                                            class="todo-check-form"
+                                        >
+
+                                            {% csrf_token %}
+
+                                            <input
+                                                type="hidden"
+                                                name="action"
+                                                value="toggle"
+                                            >
+
+                                            <input
+                                                type="hidden"
+                                                name="todo_id"
+                                                value="{{ todo.id }}"
+                                            >
+
+                                            <input
+                                                type="checkbox"
+                                                class="todo-checkbox"
+
+                                                {% if todo.is_completed %}
+                                                    checked
+                                                {% endif %}
+
+                                                onchange="this.form.submit()"
+                                            >
+
+                                        </form>
+
+
+
+                                        <!-- DETAILS -->
+
+                                        <div class="todo-main">
+
+
+                                            <div class="todo-top">
+
+
+                                                <h3 class="todo-title">
+
+                                                    {{ todo.title }}
+
+                                                </h3>
+
+
+                                                {% if todo.priority == "high" %}
+
+
+                                                    <span class="priority priority-high">
+
+                                                        <i class="fa-solid fa-arrow-up"></i>
+
+                                                        High
+
+                                                    </span>
+
+
+                                                {% elif todo.priority == "low" %}
+
+
+                                                    <span class="priority priority-low">
+
+                                                        <i class="fa-solid fa-arrow-down"></i>
+
+                                                        Low
+
+                                                    </span>
+
+
+                                                {% else %}
+
+
+                                                    <span class="priority priority-medium">
+
+                                                        <i class="fa-solid fa-minus"></i>
+
+                                                        Medium
+
+                                                    </span>
+
+
+                                                {% endif %}
+
+
+                                            </div>
+
+
+                                            {% if todo.description %}
+
+
+                                                <div class="todo-description">
+
+                                                    {{ todo.description }}
+
+                                                </div>
+
+
+                                            {% endif %}
+
+
+                                            <div class="todo-bottom">
+
+
+                                                {% if todo.category %}
+
+
+                                                    <span class="tag">
+
+                                                        <i class="fa-solid fa-tag"></i>
+
+                                                        {{ todo.category }}
+
+                                                    </span>
+
+
+                                                {% endif %}
+
+
+                                                <span class="tag">
+
+                                                    <i class="fa-regular fa-calendar"></i>
+
+                                                    {{ todo.due_date|date:"d M Y" }}
+
+                                                </span>
+
+
+                                            </div>
+
+
+                                        </div>
+
+
+
+                                        <!-- DUE -->
+
+                                        <div class="todo-due today">
+
+
+                                            {% if todo.is_completed %}
+
+
+                                                <i class="fa-solid fa-check"></i>
+
+                                                Done
+
+
+                                            {% else %}
+
+
+                                                Today
+
+
+                                            {% endif %}
+
+
+                                        </div>
+
+
+
+                                        <!-- ACTIONS -->
+
+                                        <div class="todo-actions">
+
+
+                                            <button
+                                                type="button"
+                                                class="item-action"
+
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#editTodoModal"
+
+                                                data-id="{{ todo.id }}"
+
+                                                data-title="{{ todo.title|escape }}"
+
+                                                data-description="{{ todo.description|default:''|escape }}"
+
+                                                data-date="{{ todo.due_date|date:'Y-m-d' }}"
+
+                                                data-priority="{{ todo.priority }}"
+
+                                                data-category="{{ todo.category|default:''|escape }}"
+                                            >
+
+                                                <i class="fa-solid fa-pen"></i>
+
+                                            </button>
+
+
+                                            <button
+                                                type="button"
+                                                class="item-action delete"
+
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#deleteTodoModal"
+
+                                                data-id="{{ todo.id }}"
+
+                                                data-title="{{ todo.title|escape }}"
+                                            >
+
+                                                <i class="fa-regular fa-trash-can"></i>
+
+                                            </button>
+
+
+                                        </div>
+
+                                    </div>
+
+
+                                {% endif %}
+
+
+                            {% endfor %}
+
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =========================================
+                         OTHER TODOS
+                    ========================================== -->
+
+                    <div
+                        class="todo-group"
+                        data-group="other"
+                    >
+
+
+                        <div class="group-title">
+
+                            <span>
+
+                                Upcoming & Other
+
+                            </span>
+
+                            <div class="group-line"></div>
+
+                        </div>
+
+
+                        <div class="todo-list">
+
+
+                            {% for todo in todos %}
+
+
+                                {% if not todo.due_date %}
+
+
+                                    <div
+                                        class="todo-item {% if todo.is_completed %}completed{% endif %}"
+
+                                        data-title="{{ todo.title|lower }}"
+
+                                        data-description="{{ todo.description|default:''|lower }}"
+
+                                        data-category="{{ todo.category|default:''|lower }}"
+
+                                        data-completed="{% if todo.is_completed %}true{% else %}false{% endif %}"
+
+                                        data-due=""
+                                    >
+
+
+                                        <form
+                                            method="POST"
+                                            action="{% url 'todo_list' %}"
+                                            class="todo-check-form"
+                                        >
+
+                                            {% csrf_token %}
+
+
+                                            <input
+                                                type="hidden"
+                                                name="action"
+                                                value="toggle"
+                                            >
+
+
+                                            <input
+                                                type="hidden"
+                                                name="todo_id"
+                                                value="{{ todo.id }}"
+                                            >
+
+
+                                            <input
+                                                type="checkbox"
+                                                class="todo-checkbox"
+
+                                                {% if todo.is_completed %}
+                                                    checked
+                                                {% endif %}
+
+                                                onchange="this.form.submit()"
+                                            >
+
+                                        </form>
+
+
+                                        <div class="todo-main">
+
+
+                                            <div class="todo-top">
+
+
+                                                <h3 class="todo-title">
+
+                                                    {{ todo.title }}
+
+                                                </h3>
+
+
+                                                {% if todo.priority == "high" %}
+
+
+                                                    <span class="priority priority-high">
+
+                                                        <i class="fa-solid fa-arrow-up"></i>
+
+                                                        High
+
+                                                    </span>
+
+
+                                                {% elif todo.priority == "low" %}
+
+
+                                                    <span class="priority priority-low">
+
+                                                        <i class="fa-solid fa-arrow-down"></i>
+
+                                                        Low
+
+                                                    </span>
+
+
+                                                {% else %}
+
+
+                                                    <span class="priority priority-medium">
+
+                                                        <i class="fa-solid fa-minus"></i>
+
+                                                        Medium
+
+                                                    </span>
+
+
+                                                {% endif %}
+
+
+                                            </div>
+
+
+                                            {% if todo.description %}
+
+
+                                                <div class="todo-description">
+
+                                                    {{ todo.description }}
+
+                                                </div>
+
+
+                                            {% endif %}
+
+
+                                            <div class="todo-bottom">
+
+
+                                                {% if todo.category %}
+
+
+                                                    <span class="tag">
+
+                                                        <i class="fa-solid fa-tag"></i>
+
+                                                        {{ todo.category }}
+
+                                                    </span>
+
+
+                                                {% endif %}
+
+
+                                                <span class="tag">
+
+                                                    <i class="fa-regular fa-calendar"></i>
+
+                                                    No deadline
+
+                                                </span>
+
+
+                                            </div>
+
+
+                                        </div>
+
+
+                                        <div class="todo-due">
+
+                                            No deadline
+
+                                        </div>
+
+
+                                        <div class="todo-actions">
+
+
+                                            <button
+                                                type="button"
+                                                class="item-action"
+
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#editTodoModal"
+
+                                                data-id="{{ todo.id }}"
+
+                                                data-title="{{ todo.title|escape }}"
+
+                                                data-description="{{ todo.description|default:''|escape }}"
+
+                                                data-date=""
+
+                                                data-priority="{{ todo.priority }}"
+
+                                                data-category="{{ todo.category|default:''|escape }}"
+                                            >
+
+                                                <i class="fa-solid fa-pen"></i>
+
+                                            </button>
+
+
+                                            <button
+                                                type="button"
+                                                class="item-action delete"
+
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#deleteTodoModal"
+
+                                                data-id="{{ todo.id }}"
+
+                                                data-title="{{ todo.title|escape }}"
+                                            >
+
+                                                <i class="fa-regular fa-trash-can"></i>
+
+                                            </button>
+
+
+                                        </div>
+
+                                    </div>
+
+
+                                {% endif %}
+
+
+                            {% endfor %}
+
+
+                        </div>
+
+                    </div>
+
+
+                {% else %}
+
+
+                    <div class="empty">
+
+
+                        <div class="empty-icon">
+
+                            <i class="fa-solid fa-check"></i>
+
+                        </div>
+
+
+                        <h3>
+
+                            Your To-Do list is clear
+
+                        </h3>
+
+
+                        <p>
+
+                            Add something you want to accomplish today.
+
+                        </p>
+
+
+                        <button
+                            type="button"
+                            class="new-todo-btn mx-auto"
+
+                            data-bs-toggle="modal"
+                            data-bs-target="#addTodoModal"
+                        >
+
+                            <i class="fa-solid fa-plus"></i>
+
+                            Add Your First To-Do
+
+                        </button>
+
+
+                    </div>
+
+
+                {% endif %}
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 SEARCH EMPTY
+            ================================================== -->
+
+            <div
+                id="searchEmpty"
+                class="empty"
+                style="display:none;"
+            >
+
+
+                <div class="empty-icon">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                </div>
+
+
+                <h3>
+
+                    Nothing found
+
+                </h3>
+
+
+                <p>
+
+                    Try a different search or filter.
+
+                </p>
+
+
+            </div>
+
+
+        </main>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     ADD MODAL
+========================================================== -->
+
+<div
+    class="modal fade"
+    id="addTodoModal"
+    tabindex="-1"
+>
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+
+            <div class="modal-header">
+
+
+                <div>
+
+
+                    <div class="modal-title">
+
+                        New To-Do
+
+                    </div>
+
+
+                    <div class="modal-subtitle">
+
+                        Add a task, reminder or something you don't want to forget.
+
+                    </div>
+
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                ></button>
+
+
+            </div>
+
+
+            <form
+                method="POST"
+                action="{% url 'todo_list' %}"
+            >
+
+                {% csrf_token %}
+
+
+                <input
+                    type="hidden"
+                    name="action"
+                    value="add"
+                >
+
+
+                <div class="modal-body">
+
+
+                    <div class="mb-3">
+
+
+                        <label class="form-label">
+
+                            What needs to be done?
+
+                        </label>
+
+
+                        <input
+                            type="text"
+                            name="title"
+
+                            class="form-control"
+
+                            placeholder="e.g. Send project proposal"
+
+                            maxlength="255"
+
+                            required
+                        >
+
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+
+                        <label class="form-label">
+
+                            Notes
+
+                        </label>
+
+
+                        <textarea
+                            name="description"
+
+                            class="form-control"
+
+                            placeholder="Add extra details if needed..."
+                        ></textarea>
+
+
+                    </div>
+
+
+                    <div class="row g-3">
+
+
+                        <div class="col-md-6">
+
+
+                            <label class="form-label">
+
+                                Due Date
+
+                            </label>
+
+
+                            <input
+                                type="date"
+                                name="due_date"
+
+                                class="form-control"
+                            >
+
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+
+                            <label class="form-label">
+
+                                Priority
+
+                            </label>
+
+
+                            <select
+                                name="priority"
+                                class="form-select"
+                            >
+
+
+                                <option value="low">
+
+                                    Low
+
+                                </option>
+
+
+                                <option
+                                    value="medium"
+                                    selected
+                                >
+
+                                    Medium
+
+                                </option>
+
+
+                                <option value="high">
+
+                                    High
+
+                                </option>
+
+
+                            </select>
+
+
+                        </div>
+
+
+                        <div class="col-12">
+
+
+                            <label class="form-label">
+
+                                Category
+
+                            </label>
+
+
+                            <input
+                                type="text"
+                                name="category"
+
+                                class="form-control"
+
+                                placeholder="Work, Personal, Meeting..."
+
+                                maxlength="100"
+                            >
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="modal-footer">
+
+
+                    <button
+                        type="button"
+                        class="cancel-btn"
+
+                        data-bs-dismiss="modal"
+                    >
+
+                        Cancel
+
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="save-btn"
+                    >
+
+                        <i class="fa-solid fa-plus me-1"></i>
+
+                        Create To-Do
+
+                    </button>
+
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     EDIT MODAL
+========================================================== -->
+
+<div
+    class="modal fade"
+    id="editTodoModal"
+    tabindex="-1"
+>
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+
+            <div class="modal-header">
+
+
+                <div>
+
+
+                    <div class="modal-title">
+
+                        Edit To-Do
+
+                    </div>
+
+
+                    <div class="modal-subtitle">
+
+                        Update the details of your To-Do.
+
+                    </div>
+
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                ></button>
+
+
+            </div>
+
+
+            <form
+                method="POST"
+                action="{% url 'todo_list' %}"
+            >
+
+                {% csrf_token %}
+
+
+                <input
+                    type="hidden"
+                    name="action"
+                    value="edit"
+                >
+
+
+                <input
+                    type="hidden"
+                    name="todo_id"
+                    id="editTodoId"
+                >
+
+
+                <div class="modal-body">
+
+
+                    <div class="mb-3">
+
+
+                        <label class="form-label">
+
+                            To-Do
+
+                        </label>
+
+
+                        <input
+                            type="text"
+
+                            name="title"
+
+                            id="editTodoTitle"
+
+                            class="form-control"
+
+                            maxlength="255"
+
+                            required
+                        >
+
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+
+                        <label class="form-label">
+
+                            Notes
+
+                        </label>
+
+
+                        <textarea
+                            name="description"
+
+                            id="editTodoDescription"
+
+                            class="form-control"
+                        ></textarea>
+
+
+                    </div>
+
+
+                    <div class="row g-3">
+
+
+                        <div class="col-md-6">
+
+
+                            <label class="form-label">
+
+                                Due Date
+
+                            </label>
+
+
+                            <input
+                                type="date"
+
+                                name="due_date"
+
+                                id="editTodoDate"
+
+                                class="form-control"
+                            >
+
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+
+                            <label class="form-label">
+
+                                Priority
+
+                            </label>
+
+
+                            <select
+                                name="priority"
+
+                                id="editTodoPriority"
+
+                                class="form-select"
+                            >
+
+
+                                <option value="low">
+
+                                    Low
+
+                                </option>
+
+
+                                <option value="medium">
+
+                                    Medium
+
+                                </option>
+
+
+                                <option value="high">
+
+                                    High
+
+                                </option>
+
+
+                            </select>
+
+
+                        </div>
+
+
+                        <div class="col-12">
+
+
+                            <label class="form-label">
+
+                                Category
+
+                            </label>
+
+
+                            <input
+                                type="text"
+
+                                name="category"
+
+                                id="editTodoCategory"
+
+                                class="form-control"
+
+                                maxlength="100"
+                            >
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="modal-footer">
+
+
+                    <button
+                        type="button"
+
+                        class="cancel-btn"
+
+                        data-bs-dismiss="modal"
+                    >
+
+                        Cancel
+
+                    </button>
+
+
+                    <button
+                        type="submit"
+
+                        class="save-btn"
+                    >
+
+                        <i class="fa-solid fa-check me-1"></i>
+
+                        Save Changes
+
+                    </button>
+
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     DELETE MODAL
+========================================================== -->
+
+<div
+    class="modal fade"
+    id="deleteTodoModal"
+    tabindex="-1"
+>
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+
+            <div class="delete-box">
+
+
+                <div class="delete-icon">
+
+                    <i class="fa-regular fa-trash-can"></i>
+
+                </div>
+
+
+                <h3>
+
+                    Delete To-Do?
+
+                </h3>
+
+
+                <p>
+
+                    Are you sure you want to remove
+
+                    <strong id="deleteTodoName">
+
+                        this To-Do
+
+                    </strong>?
+
+                    <br>
+
+                    This action cannot be undone.
+
+                </p>
+
+
+                <form
+                    method="POST"
+                    action="{% url 'todo_list' %}"
+                >
+
+                    {% csrf_token %}
+
+
+                    <input
+                        type="hidden"
+
+                        name="action"
+
+                        value="delete"
+                    >
+
+
+                    <input
+                        type="hidden"
+
+                        name="todo_id"
+
+                        id="deleteTodoId"
+                    >
+
+
+                    <div class="d-flex justify-content-center gap-2">
+
+
+                        <button
+                            type="button"
+
+                            class="cancel-btn"
+
+                            data-bs-dismiss="modal"
+                        >
+
+                            Cancel
+
+                        </button>
+
+
+                        <button
+                            type="submit"
+
+                            class="confirm-delete"
+                        >
+
+                            Delete
+
+                        </button>
+
+
+                    </div>
+
+
+                </form>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     BOOTSTRAP JS
+========================================================== -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+></script>
+
+
+
+<!-- =========================================================
+     TODO JAVASCRIPT
+========================================================== -->
+
+<script>
+
+    /* =====================================================
+       BACK BUTTON
+    ====================================================== */
+
+    function goBack() {
+
+        /*
+         * First preference:
+         * Browser history se previous page par jao.
+         */
+
+        if (window.history.length > 1) {
+
+            window.history.back();
+
+            return;
+
+        }
+
+
+        /*
+         * Agar browser history available nahi hai,
+         * to jis page se user aaya tha us page par jao.
+         */
+
+        if (document.referrer) {
+
+            window.location.href = document.referrer;
+
+            return;
+
+        }
+
+
+        /*
+         * Agar history aur referrer dono available nahi hain,
+         * to home page par jao.
+         */
+
+        window.location.href = "/";
+
+    }
+
+
+
+    /* =====================================================
+       ELEMENTS
+    ====================================================== */
+
+    const searchInput =
+        document.getElementById("searchInput");
+
+
+    const filters =
+        document.querySelectorAll(".filter");
+
+
+    const sideItems =
+        document.querySelectorAll(".side-item");
+
+
+    const todoItems =
+        document.querySelectorAll(".todo-item");
+
+
+    const searchEmpty =
+        document.getElementById("searchEmpty");
+
+
+    const visibleCount =
+        document.getElementById("visibleCount");
+
+
+
+    let currentFilter = "all";
+
+
+
+    /* =====================================================
+       TODAY
+    ====================================================== */
+
+    function getToday() {
+
+        const date =
+            new Date();
+
+
+        const year =
+            date.getFullYear();
+
+
+        const month =
+            String(
+                date.getMonth() + 1
+            ).padStart(2, "0");
+
+
+        const day =
+            String(
+                date.getDate()
+            ).padStart(2, "0");
+
+
+        return (
+            year +
+            "-" +
+            month +
+            "-" +
+            day
+        );
+
+    }
+
+
+
+    /* =====================================================
+       FILTER TODOS
+    ====================================================== */
+
+    function applyFilter() {
+
+        const search =
+            searchInput.value
+                .toLowerCase()
+                .trim();
+
+
+        const today =
+            getToday();
+
+
+        let count = 0;
+
+
+        todoItems.forEach(function(item) {
+
+
+            const title =
+                item.dataset.title || "";
+
+
+            const description =
+                item.dataset.description || "";
+
+
+            const category =
+                item.dataset.category || "";
+
+
+            const completed =
+                item.dataset.completed === "true";
+
+
+            const due =
+                item.dataset.due || "";
+
+
+            const matchesSearch =
+
+                title.includes(search) ||
+
+                description.includes(search) ||
+
+                category.includes(search);
+
+
+            let matchesFilter = true;
+
+
+            if (
+                currentFilter === "today"
+            ) {
+
+                matchesFilter =
+                    due === today;
+
+            }
+
+
+            else if (
+                currentFilter === "pending"
+            ) {
+
+                matchesFilter =
+                    !completed;
+
+            }
+
+
+            else if (
+                currentFilter === "completed"
+            ) {
+
+                matchesFilter =
+                    completed;
+
+            }
+
+
+            else if (
+                currentFilter === "overdue"
+            ) {
+
+                matchesFilter =
+
+                    !completed &&
+
+                    due !== "" &&
+
+                    due < today;
+
+            }
+
+
+            const visible =
+
+                matchesSearch &&
+                matchesFilter;
+
+
+            item.style.display =
+
+                visible
+                    ? "flex"
+                    : "none";
+
+
+            if (visible) {
+
+                count++;
+
+            }
+
+        });
+
+
+        visibleCount.textContent =
+            count;
+
+
+        searchEmpty.style.display =
+
+            count === 0
+                ? "block"
+                : "none";
+
+    }
+
+
+
+    /* =====================================================
+       FILTER BUTTONS
+    ====================================================== */
+
+    function activateFilter(filter) {
+
+        currentFilter =
+            filter;
+
+
+        filters.forEach(
+            function(button) {
+
+                button.classList.toggle(
+
+                    "active",
+
+                    button.dataset.filter === filter
+
+                );
+
+            }
+        );
+
+
+        sideItems.forEach(
+            function(button) {
+
+                button.classList.toggle(
+
+                    "active",
+
+                    button.dataset.filter === filter
+
+                );
+
+            }
+        );
+
+
+        applyFilter();
+
+    }
+
+
+
+    filters.forEach(
+        function(button) {
+
+            button.addEventListener(
+
+                "click",
+
+                function() {
+
+                    activateFilter(
+                        button.dataset.filter
+                    );
+
+                }
+
+            );
+
+        }
+    );
+
+
+
+    sideItems.forEach(
+        function(button) {
+
+            button.addEventListener(
+
+                "click",
+
+                function() {
+
+                    activateFilter(
+                        button.dataset.filter
+                    );
+
+                }
+
+            );
+
+        }
+    );
+
+
+
+    searchInput.addEventListener(
+        "input",
+        applyFilter
+    );
+
+
+
+    /* =====================================================
+       EDIT MODAL
+    ====================================================== */
+
+    const editModal =
+        document.getElementById(
+            "editTodoModal"
+        );
+
+
+    if (editModal) {
+
+        editModal.addEventListener(
+
+            "show.bs.modal",
+
+            function(event) {
+
+
+                const button =
+                    event.relatedTarget;
+
+
+                document.getElementById(
+                    "editTodoId"
+                ).value =
+                    button.dataset.id || "";
+
+
+                document.getElementById(
+                    "editTodoTitle"
+                ).value =
+                    button.dataset.title || "";
+
+
+                document.getElementById(
+                    "editTodoDescription"
+                ).value =
+                    button.dataset.description || "";
+
+
+                document.getElementById(
+                    "editTodoDate"
+                ).value =
+                    button.dataset.date || "";
+
+
+                document.getElementById(
+                    "editTodoPriority"
+                ).value =
+                    button.dataset.priority || "medium";
+
+
+                document.getElementById(
+                    "editTodoCategory"
+                ).value =
+                    button.dataset.category || "";
+
+            }
+
+        );
+
+    }
+
+
+
+    /* =====================================================
+       DELETE MODAL
+    ====================================================== */
+
+    const deleteModal =
+        document.getElementById(
+            "deleteTodoModal"
+        );
+
+
+    if (deleteModal) {
+
+        deleteModal.addEventListener(
+
+            "show.bs.modal",
+
+            function(event) {
+
+
+                const button =
+                    event.relatedTarget;
+
+
+                document.getElementById(
+                    "deleteTodoId"
+                ).value =
+                    button.dataset.id || "";
+
+
+                document.getElementById(
+                    "deleteTodoName"
+                ).textContent =
+
+                    '"' +
+
+                    (
+                        button.dataset.title ||
+                        "this To-Do"
+                    ) +
+
+                    '"';
+
+            }
+
+        );
+
+    }
+
+</script>
+
+
+
+<!-- =========================================================
+     CHAT WIDGET
+========================================================== -->
+
+{% include "chat/chat_widget.html" %}
+
+
+</body>
+
+</html>

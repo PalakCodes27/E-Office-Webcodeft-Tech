@@ -1,0 +1,1588 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Edit Project | Smart Office</title>
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f8f8;
+            color: #1f2937;
+        }
+
+        .page-wrapper {
+            padding: 30px;
+            max-width: 1250px;
+            margin: auto;
+        }
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            gap: 20px;
+        }
+
+        .page-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .page-title .icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+
+            background: #0f766e;
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 19px;
+
+            box-shadow:
+                0 4px 10px rgba(15, 118, 110, 0.18);
+        }
+
+        .page-title h1 {
+            font-size: 25px;
+            margin-bottom: 4px;
+            color: #173b3a;
+        }
+
+        .page-title p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        /* =====================================================
+           BACK BUTTON
+        ===================================================== */
+
+        .back-btn {
+            text-decoration: none;
+            color: #374151;
+
+            border: 1px solid #cbd5d5;
+
+            background: white;
+
+            padding: 11px 17px;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+
+            transition: 0.2s;
+        }
+
+        .back-btn:hover {
+            background: #ecf7f6;
+            color: #0f766e;
+            border-color: #99d5d0;
+        }
+
+        /* =====================================================
+           MESSAGES
+        ===================================================== */
+
+        .message-area {
+            margin-bottom: 20px;
+        }
+
+        .message {
+            padding: 13px 16px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .message.success {
+            background: #dff7f3;
+            color: #0f625b;
+            border: 1px solid #b7e6df;
+        }
+
+        .message.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        .message.warning {
+            background: #fff8e6;
+            color: #956400;
+            border: 1px solid #f0dfaa;
+        }
+
+        /* =====================================================
+           FORM CARD
+        ===================================================== */
+
+        .form-card {
+            background: white;
+
+            border-radius: 14px;
+
+            border: 1px solid #dce9e8;
+
+            box-shadow:
+                0 5px 20px rgba(15, 118, 110, 0.07);
+
+            overflow: hidden;
+        }
+
+        /* =====================================================
+           SECTIONS
+        ===================================================== */
+
+        .section {
+            padding: 25px 28px;
+
+            border-bottom: 1px solid #e2eeee;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        /* =====================================================
+           SECTION TITLE
+        ===================================================== */
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            font-size: 17px;
+            font-weight: 700;
+
+            margin-bottom: 20px;
+
+            color: #173b3a;
+        }
+
+        .section-title i {
+            color: #0f766e;
+
+            width: 28px;
+            height: 28px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #e6f5f3;
+
+            border-radius: 7px;
+
+            font-size: 14px;
+        }
+
+        /* =====================================================
+           FORM GRID
+        ===================================================== */
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 18px 22px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        /* =====================================================
+           LABEL
+        ===================================================== */
+
+        label {
+            font-size: 13px;
+            font-weight: 600;
+
+            margin-bottom: 7px;
+
+            color: #374151;
+        }
+
+        .required {
+            color: #dc2626;
+        }
+
+        /* =====================================================
+           INPUTS
+        ===================================================== */
+
+        input,
+        select,
+        textarea {
+
+            width: 100%;
+
+            padding: 12px 13px;
+
+            border: 1px solid #cfdcdc;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+
+            outline: none;
+
+            background: white;
+
+            color: #111827;
+
+            transition: 0.2s;
+        }
+
+        input:hover,
+        select:hover,
+        textarea:hover {
+            border-color: #9ac8c4;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+
+            border-color: #0d9488;
+
+            box-shadow:
+                0 0 0 3px rgba(13, 148, 136, 0.10);
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #9ca3af;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 105px;
+        }
+
+        /* =====================================================
+           COST BOX
+        ===================================================== */
+
+        .cost-box {
+
+            background: #f7fbfb;
+
+            border: 1px solid #dcebea;
+
+            padding: 18px;
+
+            border-radius: 10px;
+
+            transition: 0.2s;
+        }
+
+        .cost-box:hover {
+
+            border-color: #9bd0cc;
+
+            background: #f4faf9;
+        }
+
+        .cost-box input {
+
+            background: white;
+        }
+
+        .help-text {
+
+            font-size: 11px;
+
+            color: #8b9696;
+
+            margin-top: 5px;
+        }
+
+        /* =====================================================
+           COST GRID
+        ===================================================== */
+
+        .cost-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 18px 22px;
+        }
+
+        /* =====================================================
+           PAYMENT BOX
+        ===================================================== */
+
+        .payment-box {
+
+            background: #f7fbfb;
+
+            border: 1px solid #dcebea;
+
+            padding: 18px;
+
+            border-radius: 10px;
+
+            transition: 0.2s;
+        }
+
+        .payment-box:hover {
+
+            border-color: #9bd0cc;
+
+            background: #f4faf9;
+        }
+
+        .payment-box input {
+
+            background: white;
+        }
+
+        /* =====================================================
+           ACTIONS
+        ===================================================== */
+
+        .form-actions {
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            gap: 12px;
+
+            padding: 22px 28px;
+
+            background: #f7faf9;
+
+            border-top: 1px solid #dfeceb;
+        }
+
+        .btn {
+
+            border: none;
+
+            border-radius: 8px;
+
+            padding: 12px 20px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            text-decoration: none;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            transition: 0.2s;
+        }
+
+        /* =====================================================
+           CANCEL
+        ===================================================== */
+
+        .btn-cancel {
+
+            background: white;
+
+            color: #374151;
+
+            border: 1px solid #cbd5d5;
+        }
+
+        .btn-cancel:hover {
+
+            background: #ecf7f6;
+
+            color: #0f766e;
+
+            border-color: #99d5d0;
+        }
+
+        /* =====================================================
+           SAVE
+        ===================================================== */
+
+        .btn-save {
+
+            background: #0f766e;
+
+            color: white;
+
+            box-shadow:
+                0 4px 10px rgba(15, 118, 110, 0.15);
+        }
+
+        .btn-save:hover {
+
+            background: #115e59;
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 6px 14px rgba(15, 118, 110, 0.22);
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 768px) {
+
+            .page-wrapper {
+                padding: 18px;
+            }
+
+            .page-header {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+            .back-btn {
+
+                width: 100%;
+
+                text-align: center;
+            }
+
+            .form-grid,
+            .cost-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+
+                grid-column: auto;
+            }
+
+            .section {
+
+                padding: 20px;
+            }
+
+            .form-actions {
+
+                padding: 18px 20px;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .form-actions {
+
+                flex-direction: column;
+            }
+
+            .btn {
+
+                width: 100%;
+
+                justify-content: center;
+            }
+
+            .page-title h1 {
+
+                font-size: 22px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="page-wrapper">
+
+
+    <!-- =====================================================
+         PAGE HEADER
+    ===================================================== -->
+
+    <div class="page-header">
+
+        <div class="page-title">
+
+            <div class="icon">
+
+                <i class="fa-solid fa-pen-to-square"></i>
+
+            </div>
+
+            <div>
+
+                <h1>Edit Project</h1>
+
+                <p>
+                    Update project information, team, cost and timeline.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <a
+            href="{% url 'projects' %}"
+            class="back-btn"
+        >
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Back to Projects
+
+        </a>
+
+    </div>
+
+
+    <!-- =====================================================
+         MESSAGES
+    ===================================================== -->
+
+    {% if messages %}
+
+        <div class="message-area">
+
+            {% for message in messages %}
+
+                <div class="message
+                    {% if message.tags == 'success' %}
+                        success
+                    {% elif message.tags == 'warning' %}
+                        warning
+                    {% else %}
+                        error
+                    {% endif %}
+                ">
+
+                    {{ message }}
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+
+    <!-- =====================================================
+         FORM CARD
+    ===================================================== -->
+
+    <div class="form-card">
+
+        <form
+            method="POST"
+            action="{% url 'edit_project' project.id %}"
+        >
+
+            {% csrf_token %}
+
+
+            <!-- =================================================
+                 PROJECT INFORMATION
+            ================================================== -->
+
+            <div class="section">
+
+                <div class="section-title">
+
+                    <i class="fa-solid fa-circle-info"></i>
+
+                    Project Information
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <!-- PROJECT NAME -->
+
+                    <div class="form-group">
+
+                        <label>
+
+                            Project Name
+
+                            <span class="required">*</span>
+
+                        </label>
+
+                        <input
+                            type="text"
+                            name="project_name"
+                            value="{{ project.project_name|default:'' }}"
+                            placeholder="Enter project name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- CLIENT -->
+
+                    <div class="form-group">
+
+                        <label>
+
+                            Client
+
+                            <span class="required">*</span>
+
+                        </label>
+
+                        <select
+                            name="client"
+                            required
+                        >
+
+                            <option value="">
+                                Select Client
+                            </option>
+
+                            {% for client in clients %}
+
+                                <option
+                                    value="{{ client.id }}"
+                                    {% if project.client_id == client.id %}
+                                        selected
+                                    {% endif %}
+                                >
+
+                                    {{ client.name }}
+
+                                </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- PROJECT TYPE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Project Type
+                        </label>
+
+                        <select name="project_type">
+
+                            <option value="">
+                                Select Project Type
+                            </option>
+
+                            <option
+                                value="website"
+                                {% if project.project_type == "website" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Website
+                            </option>
+
+                            <option
+                                value="web_application"
+                                {% if project.project_type == "web_application" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Web Application
+                            </option>
+
+                            <option
+                                value="mobile_application"
+                                {% if project.project_type == "mobile_application" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Mobile Application
+                            </option>
+
+                            <option
+                                value="software"
+                                {% if project.project_type == "software" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Software
+                            </option>
+
+                            <option
+                                value="ecommerce"
+                                {% if project.project_type == "ecommerce" %}
+                                    selected
+                                {% endif %}
+                            >
+                                E-Commerce
+                            </option>
+
+                            <option
+                                value="api"
+                                {% if project.project_type == "api" %}
+                                    selected
+                                {% endif %}
+                            >
+                                API / Integration
+                            </option>
+
+                            <option
+                                value="maintenance"
+                                {% if project.project_type == "maintenance" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Maintenance
+                            </option>
+
+                            <option
+                                value="other"
+                                {% if project.project_type == "other" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- PROJECT CODE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Project Code
+                        </label>
+
+                        <input
+                            type="text"
+                            name="project_code"
+                            value="{{ project.project_code|default:'' }}"
+                            placeholder="Enter project code"
+                        >
+
+                    </div>
+
+
+                    <!-- TECHNOLOGY STACK -->
+
+                    <div class="form-group full">
+
+                        <label>
+                            Technology / Tech Stack
+                        </label>
+
+                        <input
+                            type="text"
+                            name="technology_stack"
+                            value="{{ project.technology_stack|default:'' }}"
+                            placeholder="e.g. Django, Python, HTML, CSS, MySQL"
+                        >
+
+                    </div>
+
+
+                    <!-- DESCRIPTION -->
+
+                    <div class="form-group full">
+
+                        <label>
+                            Project Description
+                        </label>
+
+                        <textarea
+                            name="description"
+                            placeholder="Enter project description..."
+                        >{{ project.description|default:'' }}</textarea>
+
+                    </div>
+
+
+                    <!-- REQUIREMENTS -->
+
+                    <div class="form-group full">
+
+                        <label>
+                            Requirements
+                        </label>
+
+                        <textarea
+                            name="requirements"
+                            placeholder="Enter project requirements..."
+                        >{{ project.requirements|default:'' }}</textarea>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 PROJECT TEAM
+            ================================================== -->
+
+            <div class="section">
+
+                <div class="section-title">
+
+                    <i class="fa-solid fa-users"></i>
+
+                    Project Team
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <!-- PROJECT MANAGER -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Project Manager
+                        </label>
+
+                        <select name="project_manager">
+
+                            <option value="">
+                                Select Project Manager
+                            </option>
+
+                            {% for employee in employees %}
+
+                                <option
+                                    value="{{ employee.id }}"
+                                    {% if project.project_manager_id == employee.id %}
+                                        selected
+                                    {% endif %}
+                                >
+
+                                    {% if employee.get_full_name %}
+                                        {{ employee.get_full_name }}
+                                    {% else %}
+                                        {{ employee.username }}
+                                    {% endif %}
+
+                                </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- DESIGNER -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Designer
+                        </label>
+
+                        <select name="designer">
+
+                            <option value="">
+                                Select Designer
+                            </option>
+
+                            {% for employee in employees %}
+
+                                <option
+                                    value="{{ employee.id }}"
+                                    {% if project.designer_id == employee.id %}
+                                        selected
+                                    {% endif %}
+                                >
+
+                                    {% if employee.get_full_name %}
+                                        {{ employee.get_full_name }}
+                                    {% else %}
+                                        {{ employee.username }}
+                                    {% endif %}
+
+                                </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- DEVELOPER -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Developer
+                        </label>
+
+                        <select name="developer">
+
+                            <option value="">
+                                Select Developer
+                            </option>
+
+                            {% for employee in employees %}
+
+                                <option
+                                    value="{{ employee.id }}"
+                                    {% if project.developer_id == employee.id %}
+                                        selected
+                                    {% endif %}
+                                >
+
+                                    {% if employee.get_full_name %}
+                                        {{ employee.get_full_name }}
+                                    {% else %}
+                                        {{ employee.username }}
+                                    {% endif %}
+
+                                </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- TESTER -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Tester
+                        </label>
+
+                        <select name="tester">
+
+                            <option value="">
+                                Select Tester
+                            </option>
+
+                            {% for employee in employees %}
+
+                                <option
+                                    value="{{ employee.id }}"
+                                    {% if project.tester_id == employee.id %}
+                                        selected
+                                    {% endif %}
+                                >
+
+                                    {% if employee.get_full_name %}
+                                        {{ employee.get_full_name }}
+                                    {% else %}
+                                        {{ employee.username }}
+                                    {% endif %}
+
+                                </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 PROJECT COST
+            ================================================== -->
+
+            <div class="section">
+
+                <div class="section-title">
+
+                    <i class="fa-solid fa-indian-rupee-sign"></i>
+
+                    Project Cost
+
+                </div>
+
+
+                <div class="cost-grid">
+
+
+                    <!-- TOTAL PROJECT COST -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Total Project Cost
+                        </label>
+
+                        <div class="cost-box">
+
+                            <input
+                                type="number"
+                                name="total_cost"
+                                min="0"
+                                step="0.01"
+                                value="{{ project.total_cost|default:'0.00' }}"
+                                placeholder="0.00"
+                            >
+
+                            <div class="help-text">
+                                Total budget for the project.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- DESIGNER COST -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Designer Cost
+                        </label>
+
+                        <div class="cost-box">
+
+                            <input
+                                type="number"
+                                name="designer_cost"
+                                min="0"
+                                step="0.01"
+                                value="{{ project.designer_cost|default:'0.00' }}"
+                                placeholder="0.00"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- DEVELOPMENT COST -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Development Cost
+                        </label>
+
+                        <div class="cost-box">
+
+                            <input
+                                type="number"
+                                name="development_cost"
+                                min="0"
+                                step="0.01"
+                                value="{{ project.development_cost|default:'0.00' }}"
+                                placeholder="0.00"
+                            >
+
+                            <div class="help-text">
+                                Total development cost for the project.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PAID DEVELOPMENT COST -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Paid Development Cost
+                        </label>
+
+                        <div class="cost-box">
+
+                            <input
+                                type="number"
+                                name="paid_development_cost"
+                                min="0"
+                                step="0.01"
+                                value="{{ project.paid_development_cost|default:'0.00' }}"
+                                placeholder="0.00"
+                            >
+
+                            <div class="help-text">
+                                Amount already paid towards development.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- DEVELOPMENT PAYMENT DATE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Development Payment Date
+                        </label>
+
+                        <div class="payment-box">
+
+                            <input
+                                type="date"
+                                name="development_payment_date"
+                                value="{% if project.development_payment_date %}{{ project.development_payment_date|date:'Y-m-d' }}{% endif %}"
+                            >
+
+                            <div class="help-text">
+                                Date on which the development payment was made.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- TESTER COST -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Tester Cost
+                        </label>
+
+                        <div class="cost-box">
+
+                            <input
+                                type="number"
+                                name="tester_cost"
+                                min="0"
+                                step="0.01"
+                                value="{{ project.tester_cost|default:'0.00' }}"
+                                placeholder="0.00"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 PROJECT TIMELINE
+            ================================================== -->
+
+            <div class="section">
+
+                <div class="section-title">
+
+                    <i class="fa-solid fa-calendar-days"></i>
+
+                    Project Timeline
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <!-- START DATE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Start Date
+                        </label>
+
+                        <input
+                            type="date"
+                            name="start_date"
+                            value="{% if project.start_date %}{{ project.start_date|date:'Y-m-d' }}{% endif %}"
+                        >
+
+                    </div>
+
+
+                    <!-- EXPECTED END DATE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Expected End Date
+                        </label>
+
+                        <input
+                            type="date"
+                            name="expected_end_date"
+                            value="{% if project.expected_end_date %}{{ project.expected_end_date|date:'Y-m-d' }}{% endif %}"
+                        >
+
+                    </div>
+
+
+                    <!-- ESTIMATED DAYS -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Estimated Days
+                        </label>
+
+                        <input
+                            type="number"
+                            name="estimated_days"
+                            min="0"
+                            value="{{ project.estimated_days|default:'' }}"
+                            placeholder="e.g. 30"
+                        >
+
+                        <div class="help-text">
+                            Estimated project duration in days.
+                        </div>
+
+                    </div>
+
+
+                    <!-- ACTUAL END DATE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Actual End Date
+                        </label>
+
+                        <input
+                            type="date"
+                            name="actual_end_date"
+                            value="{% if project.actual_end_date %}{{ project.actual_end_date|date:'Y-m-d' }}{% endif %}"
+                        >
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 STATUS & PRIORITY
+            ================================================== -->
+
+            <div class="section">
+
+                <div class="section-title">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    Status & Priority
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <!-- STATUS -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Project Status
+                        </label>
+
+                        <select name="status">
+
+                            {% for value, label in project.STATUS_CHOICES %}
+
+                                <option
+                                    value="{{ value }}"
+                                    {% if project.status == value %}
+                                        selected
+                                    {% endif %}
+                                >
+                                    {{ label }}
+                                </option>
+
+                            {% empty %}
+
+                                <option
+                                    value="planning"
+                                    {% if project.status == "planning" %}
+                                        selected
+                                    {% endif %}
+                                >
+                                    Planning
+                                </option>
+
+                                <option
+                                    value="in_progress"
+                                    {% if project.status == "in_progress" %}
+                                        selected
+                                    {% endif %}
+                                >
+                                    In Progress
+                                </option>
+
+                                <option
+                                    value="testing"
+                                    {% if project.status == "testing" %}
+                                        selected
+                                    {% endif %}
+                                >
+                                    Testing
+                                </option>
+
+                                <option
+                                    value="on_hold"
+                                    {% if project.status == "on_hold" %}
+                                        selected
+                                    {% endif %}
+                                >
+                                    On Hold
+                                </option>
+
+                                <option
+                                    value="completed"
+                                    {% if project.status == "completed" %}
+                                        selected
+                                    {% endif %}
+                                >
+                                    Completed
+                                </option>
+
+                                <option
+                                    value="cancelled"
+                                    {% if project.status == "cancelled" %}
+                                        selected
+                                    {% endif %}
+                                >
+                                    Cancelled
+                                </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- PRIORITY -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Priority
+                        </label>
+
+                        <select name="priority">
+
+                            {% for value, label in project.PRIORITY_CHOICES %}
+
+                                <option
+                                    value="{{ value }}"
+                                    {% if project.priority == value %}
+                                        selected
+                                    {% endif %}
+                                >
+                                    {{ label }}
+                                </option>
+
+                            {% empty %}
+
+                                <option
+                                    value="low"
+                                    {% if project.priority == "low" %}
+                                        selected
+                                    {% endif %}
+                                >
+                                    Low
+                                </option>
+
+                                <option
+                                    value="medium"
+                                    {% if project.priority == "medium" %}
+                                        selected
+                                    {% endif %}
+                                >
+                                    Medium
+                                </option>
+
+                                <option
+                                    value="high"
+                                    {% if project.priority == "high" %}
+                                        selected
+                                    {% endif %}
+                                >
+                                    High
+                                </option>
+
+                                <option
+                                    value="urgent"
+                                    {% if project.priority == "urgent" %}
+                                        selected
+                                    {% endif %}
+                                >
+                                    Urgent
+                                </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- PROGRESS -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Progress (%)
+                        </label>
+
+                        <input
+                            type="number"
+                            name="progress"
+                            min="0"
+                            max="100"
+                            value="{{ project.progress|default:'0' }}"
+                            placeholder="0 - 100"
+                        >
+
+                    </div>
+
+
+                    <!-- NOTES -->
+
+                    <div class="form-group full">
+
+                        <label>
+                            Additional Notes
+                        </label>
+
+                        <textarea
+                            name="notes"
+                            placeholder="Add any additional notes..."
+                        >{{ project.notes|default:'' }}</textarea>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 ACTIONS
+            ================================================== -->
+
+            <div class="form-actions">
+
+                <a
+                    href="{% url 'projects' %}"
+                    class="btn btn-cancel"
+                >
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                    Cancel
+
+                </a>
+
+
+                <button
+                    type="submit"
+                    class="btn btn-save"
+                >
+
+                    <i class="fa-solid fa-floppy-disk"></i>
+
+                    Update Project
+
+                </button>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+{% include "chat/chat_widget.html" %}
+</body>
+
+</html>

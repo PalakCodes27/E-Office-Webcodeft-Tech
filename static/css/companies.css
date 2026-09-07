@@ -1,0 +1,88 @@
+.companies-section{
+
+    padding:100px 0;
+    background:#071F23;
+    overflow:hidden;
+
+}
+
+.company-slider{
+
+    margin-top:60px;
+    overflow:hidden;
+    position:relative;
+
+}
+
+.company-track{
+
+    display:flex;
+    gap:30px;
+    width:max-content;
+    animation:scrollCompanies 30s linear infinite;
+
+}
+
+.company-track:hover{
+
+    animation-play-state:paused;
+
+}
+
+.company-card{
+
+    min-width:240px;
+    height:110px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:#0E3135;
+    border-radius:20px;
+    border:1px solid rgba(127,239,245,.12);
+
+    color:#ffffff;
+    font-size:22px;
+    font-weight:700;
+    letter-spacing:1px;
+
+    transition:.35s;
+
+}
+
+.company-card:hover{
+
+    transform:translateY(-8px);
+
+    background:linear-gradient(135deg,#0A5C63,#2EDB87);
+
+}
+
+@keyframes scrollCompanies{
+
+    from{
+
+        transform:translateX(0);
+
+    }
+
+    to{
+
+        transform:translateX(-50%);
+
+    }
+
+}
+
+@media(max-width:768px){
+
+.company-card{
+
+min-width:180px;
+height:90px;
+font-size:18px;
+
+}
+
+}

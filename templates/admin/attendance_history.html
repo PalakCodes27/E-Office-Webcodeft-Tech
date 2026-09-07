@@ -1,0 +1,1546 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
+>
+
+<title>Attendance History</title>
+
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+>
+
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f5f8f8;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #263238;
+}
+
+.page-wrapper {
+    padding: 30px;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.page-title {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+    color: #173f43;
+}
+
+.page-subtitle {
+    margin-top: 5px;
+    color: #718084;
+    font-size: 14px;
+}
+
+.back-btn {
+    text-decoration: none;
+    background: #0f766e;
+    color: white;
+    padding: 10px 17px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.back-btn:hover {
+    background: #0b5f59;
+    color: white;
+}
+
+
+/* =====================================================
+   FILTER
+===================================================== */
+
+.filter-box {
+    background: white;
+    border: 1px solid #e3eeee;
+    border-radius: 12px;
+    padding: 22px;
+    margin-bottom: 25px;
+    box-shadow: 0 3px 12px rgba(15, 118, 110, 0.04);
+}
+
+.filter-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #173f43;
+    margin-bottom: 18px;
+}
+
+.form-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #566568;
+    margin-bottom: 7px;
+}
+
+.form-control,
+.form-select {
+    height: 43px;
+    border-radius: 7px;
+    border: 1px solid #d5e2e2;
+    font-size: 14px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #0f766e;
+    box-shadow: 0 0 0 2px rgba(15, 118, 110, 0.10);
+}
+
+.view-btn {
+    height: 43px;
+    background: #0f766e;
+    border: none;
+    color: white;
+    border-radius: 7px;
+    padding: 0 22px;
+    font-weight: 600;
+}
+
+.view-btn:hover {
+    background: #0b5f59;
+}
+
+.reset-btn {
+    height: 43px;
+    border: 1px solid #d5e2e2;
+    background: white;
+    color: #536467;
+    border-radius: 7px;
+    padding: 0 18px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+.reset-btn:hover {
+    background: #f5f8f8;
+    color: #173f43;
+}
+
+
+/* =====================================================
+   MONTHLY SUMMARY CARD
+===================================================== */
+
+.monthly-summary-card {
+    background: white;
+    border: 1px solid #e3eeee;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 25px;
+    box-shadow: 0 3px 12px rgba(15, 118, 110, 0.04);
+}
+
+.monthly-summary-header {
+    padding: 20px;
+    border-bottom: 1px solid #edf2f2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.monthly-summary-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #173f43;
+}
+
+.monthly-summary-subtitle {
+    color: #7a888a;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.monthly-total-box {
+    background: #e5f6f2;
+    border: 1px solid #cceae5;
+    border-radius: 9px;
+    padding: 10px 16px;
+    text-align: center;
+    min-width: 150px;
+}
+
+.monthly-total-label {
+    display: block;
+    font-size: 11px;
+    color: #617174;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+    font-weight: 700;
+}
+
+.monthly-total-value {
+    display: block;
+    margin-top: 3px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #0f766e;
+}
+
+
+/* =====================================================
+   SUMMARY TABLE
+===================================================== */
+
+.summary-table-responsive {
+    overflow-x: auto;
+}
+
+.summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 850px;
+}
+
+.summary-table thead {
+    background: #f2f8f7;
+}
+
+.summary-table th {
+    padding: 13px 16px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+    color: #617174;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.summary-table td {
+    padding: 14px 16px;
+    border-top: 1px solid #edf2f2;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.summary-table tbody tr:hover {
+    background: #f9fcfc;
+}
+
+.summary-employee {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.summary-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #dff2ef;
+    color: #0f766e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.summary-name {
+    font-weight: 600;
+    color: #25383a;
+}
+
+.summary-email {
+    color: #879395;
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+.hours-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #e5f6f2;
+    color: #0f766e;
+    border-radius: 7px;
+    padding: 7px 12px;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.count-present {
+    color: #16804d;
+    font-weight: 700;
+}
+
+.count-absent {
+    color: #c0392b;
+    font-weight: 700;
+}
+
+.count-leave {
+    color: #a66a00;
+    font-weight: 700;
+}
+
+.count-half {
+    color: #3867b5;
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   RESULT HEADER
+===================================================== */
+
+.result-card {
+    background: white;
+    border: 1px solid #e3eeee;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.result-header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #edf2f2;
+}
+
+.result-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #173f43;
+}
+
+.result-subtitle {
+    color: #7a888a;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.record-count {
+    font-size: 13px;
+    color: #7a888a;
+}
+
+
+/* =====================================================
+   ATTENDANCE TABLE
+===================================================== */
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.attendance-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 950px;
+}
+
+.attendance-table thead {
+    background: #f2f8f7;
+}
+
+.attendance-table th {
+    padding: 14px 16px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+    color: #617174;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.attendance-table td {
+    padding: 14px 16px;
+    border-top: 1px solid #edf2f2;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.attendance-table tbody tr:hover {
+    background: #f9fcfc;
+}
+
+
+/* =====================================================
+   EMPLOYEE
+===================================================== */
+
+.employee-cell {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.employee-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #dff2ef;
+    color: #0f766e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.employee-name {
+    font-weight: 600;
+    color: #25383a;
+}
+
+.employee-email {
+    color: #879395;
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 11px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.status-present {
+    background: #e5f6ee;
+    color: #16804d;
+}
+
+.status-absent {
+    background: #fdeaea;
+    color: #c0392b;
+}
+
+.status-leave {
+    background: #fff4dd;
+    color: #a66a00;
+}
+
+.status-half {
+    background: #e8f0ff;
+    color: #3867b5;
+}
+
+.status-holiday {
+    background: #fff4dd;
+    color: #a66a00;
+}
+
+.time-value {
+    font-weight: 600;
+    color: #405254;
+}
+
+.muted {
+    color: #a1abad;
+}
+
+
+/* =====================================================
+   HOLIDAY ROW
+===================================================== */
+
+.holiday-row {
+    background: #fffdf5;
+}
+
+.holiday-row:hover {
+    background: #fff9e8 !important;
+}
+
+.holiday-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #fff0c7;
+    color: #a66a00;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.holiday-name {
+    font-weight: 700;
+    color: #a66a00;
+}
+
+.holiday-description {
+    color: #879395;
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+.holiday-detail {
+    margin-top: 6px;
+    font-size: 12px;
+    color: #7a888a;
+    font-weight: 600;
+}
+
+.holiday-subdetail {
+    margin-top: 3px;
+    font-size: 11px;
+    color: #9aa5a7;
+}
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #849092;
+}
+
+.empty-state i {
+    font-size: 45px;
+    color: #b8c9c9;
+    margin-bottom: 12px;
+}
+
+.empty-state h5 {
+    color: #536467;
+    margin-bottom: 6px;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .page-wrapper {
+        padding: 18px;
+    }
+
+    .page-header {
+        align-items: flex-start;
+        gap: 15px;
+        flex-direction: column;
+    }
+
+    .filter-box {
+        padding: 18px;
+    }
+
+    .result-header {
+        align-items: flex-start;
+        gap: 10px;
+        flex-direction: column;
+    }
+
+    .monthly-summary-header {
+        align-items: flex-start;
+        gap: 15px;
+        flex-direction: column;
+    }
+
+    .monthly-total-box {
+        width: 100%;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="page-wrapper">
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<div class="page-header">
+
+
+<div>
+
+    <h1 class="page-title">
+
+        <i class="bi bi-clock-history me-2"></i>
+
+        Attendance History
+
+    </h1>
+
+
+    <div class="page-subtitle">
+
+        View complete monthly attendance of employees
+
+    </div>
+
+</div>
+
+
+<a
+    href="{% url 'attendance_reports' %}"
+    class="back-btn"
+>
+
+    <i class="bi bi-arrow-left me-1"></i>
+
+    Attendance Reports
+
+</a>
+
+
+</div>
+
+<!-- =====================================================
+     FILTER
+===================================================== -->
+
+<div class="filter-box">
+
+
+<div class="filter-title">
+
+    <i class="bi bi-funnel me-2"></i>
+
+    Select Attendance Period
+
+</div>
+
+
+<form method="GET">
+
+    <div class="row g-3 align-items-end">
+
+
+        <!-- MONTH -->
+
+        <div class="col-md-4">
+
+            <label class="form-label">
+
+                Month
+
+            </label>
+
+
+            <input
+                type="month"
+                name="month"
+                class="form-control"
+                value="{{ selected_month }}"
+                required
+            >
+
+        </div>
+
+
+        <!-- EMPLOYEE -->
+
+        <div class="col-md-4">
+
+            <label class="form-label">
+
+                Employee
+
+            </label>
+
+
+            <select
+                name="employee"
+                class="form-select"
+            >
+
+                <option value="">
+
+                    All Employees
+
+                </option>
+
+
+                {% for employee in employees %}
+
+                    <option
+                        value="{{ employee.id }}"
+                        {% if selected_employee == employee.id|stringformat:"s" %}
+                            selected
+                        {% endif %}
+                    >
+
+                        {{ employee.first_name }}
+                        {{ employee.last_name }}
+
+                    </option>
+
+                {% endfor %}
+
+            </select>
+
+        </div>
+
+
+        <!-- BUTTONS -->
+
+        <div class="col-md-4">
+
+            <button
+                type="submit"
+                class="view-btn me-2"
+            >
+
+                <i class="bi bi-search me-1"></i>
+
+                View Attendance
+
+            </button>
+
+
+            <a
+                href="{% url 'attendance_history' %}"
+                class="reset-btn"
+            >
+
+                Reset
+
+            </a>
+
+        </div>
+
+    </div>
+
+</form>
+
+</div>
+
+<!-- =====================================================
+     EMPLOYEE-WISE MONTHLY WORKING HOURS
+===================================================== -->
+
+{% if selected_month %}
+
+<div class="monthly-summary-card">
+
+
+<div class="monthly-summary-header">
+
+    <div>
+
+        <h2 class="monthly-summary-title">
+
+            <i class="bi bi-people me-2"></i>
+
+            Employee-wise Monthly Working Hours
+
+        </h2>
+
+
+        <div class="monthly-summary-subtitle">
+
+            {% if selected_employee %}
+
+                Monthly working hours for selected employee
+
+            {% else %}
+
+                Total working hours of all employees
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    <div class="monthly-total-box">
+
+        <span class="monthly-total-label">
+
+            Overall Hours
+
+        </span>
+
+
+        <span class="monthly-total-value">
+
+            {{ total_working_hours }}
+
+        </span>
+
+    </div>
+
+</div>
+
+
+<div class="summary-table-responsive">
+
+    <table class="summary-table">
+
+        <thead>
+
+            <tr>
+
+                <th>#</th>
+
+                <th>Employee</th>
+
+                <th>Present</th>
+
+                <th>Half Day</th>
+
+                <th>Absent</th>
+
+                <th>Leave</th>
+
+                <th>Monthly Working Hours</th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+
+            {% for item in employee_monthly_hours %}
+
+            <tr>
+
+                <td>
+
+                    {{ forloop.counter }}
+
+                </td>
+
+
+                <td>
+
+                    <div class="summary-employee">
+
+                        <div class="summary-avatar">
+
+                            {% if item.employee.name %}
+
+                                {{ item.employee.name|first|upper }}
+
+                            {% elif item.employee.first_name %}
+
+                                {{ item.employee.first_name|first|upper }}
+
+                            {% else %}
+
+                                E
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <div>
+
+                            <div class="summary-name">
+
+                                {% if item.employee.name %}
+
+                                    {{ item.employee.name }}
+
+                                {% else %}
+
+                                    {{ item.employee.first_name }}
+                                    {{ item.employee.last_name }}
+
+                                {% endif %}
+
+                            </div>
+
+
+                            {% if item.employee.email %}
+
+                                <div class="summary-email">
+
+                                    {{ item.employee.email }}
+
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                </td>
+
+
+                <td>
+
+                    <span class="count-present">
+
+                        {{ item.present_count|default:"0" }}
+
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <span class="count-half">
+
+                        {{ item.half_day_count|default:"0" }}
+
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <span class="count-absent">
+
+                        {{ item.absent_count|default:"0" }}
+
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <span class="count-leave">
+
+                        {{ item.leave_count|default:"0" }}
+
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <span class="hours-badge">
+
+                        <i class="bi bi-clock"></i>
+
+                        {{ item.hours }}h
+                        {{ item.minutes }}m
+
+                    </span>
+
+                </td>
+
+            </tr>
+
+
+            {% empty %}
+
+            <tr>
+
+                <td
+                    colspan="7"
+                    class="text-center"
+                >
+
+                    <div class="empty-state">
+
+                        <i class="bi bi-people"></i>
+
+                        <h5>
+
+                            No Employees Found
+
+                        </h5>
+
+                        <p>
+
+                            No active employees are available.
+
+                        </p>
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+
+</div>
+
+{% endif %}
+
+<!-- =====================================================
+     DETAILED MONTHLY ATTENDANCE
+===================================================== -->
+
+<div class="result-card">
+
+
+<!-- =================================================
+     RESULT HEADER
+================================================== -->
+
+<div class="result-header">
+
+    <div>
+
+        <h2 class="result-title">
+
+            Monthly Attendance
+
+        </h2>
+
+
+        <div class="result-subtitle">
+
+            {% if selected_month %}
+
+                Attendance for {{ selected_month }}
+
+                {% if selected_employee %}
+
+                    • Selected Employee
+
+                {% else %}
+
+                    • All Employees
+
+                {% endif %}
+
+            {% else %}
+
+                Select a month and employee to view attendance
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    {% if monthly_items %}
+
+        <span class="record-count">
+
+            {{ monthly_items|length }} records
+
+        </span>
+
+    {% endif %}
+
+</div>
+
+
+<!-- =================================================
+     TABLE
+================================================== -->
+
+<div class="table-responsive">
+
+    <table class="attendance-table">
+
+        <thead>
+
+            <tr>
+
+                <th>#</th>
+
+                <th>Employee</th>
+
+                <th>Date</th>
+
+                <th>Check In</th>
+
+                <th>Check Out</th>
+
+                <th>Working Hours</th>
+
+                <th>Status</th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+
+
+        {% for item in monthly_items %}
+
+
+            <!-- =================================================
+                 HOLIDAY
+            ================================================== -->
+
+            {% if item.type == "holiday" %}
+
+            <tr class="holiday-row">
+
+
+                <!-- NUMBER -->
+
+                <td>
+
+                    {{ forloop.counter }}
+
+                </td>
+
+
+                <!-- HOLIDAY -->
+
+                <td>
+
+                    <div class="employee-cell">
+
+
+                        <div class="holiday-avatar">
+
+                            <i class="bi bi-calendar-event-fill"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <div class="holiday-name">
+
+                                {{ item.holiday_name }}
+
+                            </div>
+
+
+                            <div class="holiday-description">
+
+                                Company Holiday • All Employees
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </td>
+
+
+                <!-- DATE -->
+
+                <td>
+
+                    <span class="time-value">
+
+                        {{ item.date|date:"d M Y" }}
+
+                    </span>
+
+                </td>
+
+
+                <!-- CHECK IN -->
+
+                <td>
+
+                    <span class="muted">
+
+                        —
+
+                    </span>
+
+                </td>
+
+
+                <!-- CHECK OUT -->
+
+                <td>
+
+                    <span class="muted">
+
+                        —
+
+                    </span>
+
+                </td>
+
+
+                <!-- WORKING HOURS -->
+
+                <td>
+
+                    <span class="muted">
+
+                        —
+
+                    </span>
+
+                </td>
+
+
+                <!-- STATUS -->
+
+                <td>
+
+                    <span class="status status-holiday">
+
+                        <i class="bi bi-calendar-event-fill"></i>
+
+                        Holiday
+
+                    </span>
+
+
+                    {% if item.holiday_description %}
+
+                    <div class="holiday-detail">
+
+                        {{ item.holiday_description }}
+
+                    </div>
+
+                    {% endif %}
+
+                </td>
+
+            </tr>
+
+
+            <!-- =================================================
+                 NORMAL ATTENDANCE
+            ================================================== -->
+
+            {% else %}
+
+            {% with record=item.record %}
+
+            <tr>
+
+
+                <!-- NUMBER -->
+
+                <td>
+
+                    {{ forloop.counter }}
+
+                </td>
+
+
+                <!-- EMPLOYEE -->
+
+                <td>
+
+                    <div class="employee-cell">
+
+
+                        <div class="employee-avatar">
+
+                            {% if record.employee.name %}
+
+                                {{ record.employee.name|first|upper }}
+
+                            {% elif record.employee.first_name %}
+
+                                {{ record.employee.first_name|first|upper }}
+
+                            {% else %}
+
+                                E
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <div>
+
+                            <div class="employee-name">
+
+                                {% if record.employee.name %}
+
+                                    {{ record.employee.name }}
+
+                                {% else %}
+
+                                    {{ record.employee.first_name }}
+                                    {{ record.employee.last_name }}
+
+                                {% endif %}
+
+                            </div>
+
+
+                            {% if record.employee.email %}
+
+                                <div class="employee-email">
+
+                                    {{ record.employee.email }}
+
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                </td>
+
+
+                <!-- DATE -->
+
+                <td>
+
+                    {{ record.date|date:"d M Y" }}
+
+                </td>
+
+
+                <!-- CHECK IN -->
+
+                <td>
+
+                    {% if record.check_in %}
+
+                        <span class="time-value">
+
+                            {{ record.check_in|time:"h:i A" }}
+
+                        </span>
+
+                    {% else %}
+
+                        <span class="muted">
+
+                            —
+
+                        </span>
+
+                    {% endif %}
+
+                </td>
+
+
+                <!-- CHECK OUT -->
+
+                <td>
+
+                    {% if record.check_out %}
+
+                        <span class="time-value">
+
+                            {{ record.check_out|time:"h:i A" }}
+
+                        </span>
+
+                    {% else %}
+
+                        <span class="muted">
+
+                            —
+
+                        </span>
+
+                    {% endif %}
+
+                </td>
+
+
+                <!-- WORKING HOURS -->
+
+                <td>
+
+                    {% if record.working_hours %}
+
+                        <span class="time-value">
+
+                            {{ record.working_hours }}
+
+                        </span>
+
+                    {% else %}
+
+                        <span class="muted">
+
+                            —
+
+                        </span>
+
+                    {% endif %}
+
+                </td>
+
+
+                <!-- STATUS -->
+
+                <td>
+
+
+                    {% if record.status == "present" %}
+
+                        <span class="status status-present">
+
+                            <i class="bi bi-check-circle-fill"></i>
+
+                            Present
+
+                        </span>
+
+
+                    {% elif record.status == "absent" %}
+
+                        <span class="status status-absent">
+
+                            <i class="bi bi-x-circle-fill"></i>
+
+                            Absent
+
+                        </span>
+
+
+                    {% elif record.status == "leave" %}
+
+                        <span class="status status-leave">
+
+                            <i class="bi bi-calendar-minus-fill"></i>
+
+                            Leave
+
+                        </span>
+
+
+                    {% elif record.status == "half_day" %}
+
+                        <span class="status status-half">
+
+                            <i class="bi bi-clock-fill"></i>
+
+                            Half Day
+
+                        </span>
+
+
+                    {% else %}
+
+                        <span class="status status-present">
+
+                            {{ record.status|title }}
+
+                        </span>
+
+                    {% endif %}
+
+                </td>
+
+            </tr>
+
+            {% endwith %}
+
+            {% endif %}
+
+
+        {% empty %}
+
+
+            <!-- =================================================
+                 EMPTY
+            ================================================== -->
+
+            <tr>
+
+                <td colspan="7">
+
+                    <div class="empty-state">
+
+                        <i class="bi bi-calendar-x"></i>
+
+                        <h5>
+
+                            No Attendance Records
+
+                        </h5>
+
+
+                        <p>
+
+                            Select a month and employee
+                            to view attendance records.
+
+                        </p>
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+
+        {% endfor %}
+
+
+        </tbody>
+
+    </table>
+
+</div>
+
+
+</div>
+
+</div>
+{% include "chat/chat_widget.html" %}
+</body>
+
+</html>

@@ -1,0 +1,687 @@
+<!-- =============================================================
+     WHY CHOOSE US
+============================================================= -->
+
+<section class="why-section" id="why-us">
+
+```
+<div class="container">
+
+    <!-- =====================================================
+         SECTION HEADER
+    ====================================================== -->
+
+    <div class="section-title">
+
+        <span>WHY CHOOSE US?</span>
+
+        <h2>
+            What Makes Us
+            <strong>Different</strong>
+        </h2>
+
+        <p>
+            We combine creativity, technology and strategy to deliver
+            solutions that make a real impact.
+        </p>
+
+    </div>
+
+
+    <!-- =====================================================
+         WHY CHOOSE US CARDS
+    ====================================================== -->
+
+    <div class="why-grid">
+
+
+        <!-- =================================================
+             CLIENT-CENTRIC APPROACH
+        ================================================== -->
+
+        <div class="why-card">
+
+            <div class="why-icon">
+
+                <i class="bi bi-person-heart"></i>
+
+            </div>
+
+            <div class="why-content">
+
+                <h4>
+                    Client-Centric Approach
+                </h4>
+
+                <p>
+                    We listen, understand and deliver solutions
+                    that align with your goals.
+                </p>
+
+            </div>
+
+            <div class="why-number">
+                01
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             QUALITY & RELIABILITY
+        ================================================== -->
+
+        <div class="why-card">
+
+            <div class="why-icon">
+
+                <i class="bi bi-patch-check"></i>
+
+            </div>
+
+            <div class="why-content">
+
+                <h4>
+                    Quality & Reliability
+                </h4>
+
+                <p>
+                    We follow best practices to ensure quality,
+                    security and performance.
+                </p>
+
+            </div>
+
+            <div class="why-number">
+                02
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             ON-TIME DELIVERY
+        ================================================== -->
+
+        <div class="why-card">
+
+            <div class="why-icon">
+
+                <i class="bi bi-clock-history"></i>
+
+            </div>
+
+            <div class="why-content">
+
+                <h4>
+                    On-Time Delivery
+                </h4>
+
+                <p>
+                    Our agile process ensures timely delivery
+                    without compromising quality.
+                </p>
+
+            </div>
+
+            <div class="why-number">
+                03
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             LONG-TERM PARTNERSHIP
+        ================================================== -->
+
+        <div class="why-card">
+
+            <div class="why-icon">
+
+                <i class="bi bi-handshake"></i>
+
+            </div>
+
+            <div class="why-content">
+
+                <h4>
+                    Long-Term Partnership
+                </h4>
+
+                <p>
+                    We believe in building lasting relationships
+                    with our clients.
+                </p>
+
+            </div>
+
+            <div class="why-number">
+                04
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+```
+
+</section>
+
+<!-- =============================================================
+     WHY CHOOSE US CSS
+============================================================= -->
+
+<style>
+
+/* =============================================================
+   MAIN SECTION
+============================================================= */
+
+.why-section {
+
+    width: 100%;
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 90px 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f6fcfb 0%,
+            #ffffff 100%
+        );
+
+}
+
+
+/* =============================================================
+   SECTION TITLE
+============================================================= */
+
+.why-section .section-title {
+
+    max-width: 720px;
+
+    margin: 0 auto 55px;
+
+    text-align: center;
+
+}
+
+
+.why-section .section-title span {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 6px 13px;
+
+    border-radius: 30px;
+
+    background: #e5f8f5;
+
+    color: #0d9488;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+}
+
+
+.why-section .section-title h2 {
+
+    margin: 15px 0 14px;
+
+    color: #163d39;
+
+    font-size: clamp(
+        32px,
+        4vw,
+        48px
+    );
+
+    line-height: 1.15;
+
+    font-weight: 800;
+
+    letter-spacing: -1.5px;
+
+}
+
+
+.why-section .section-title h2 strong {
+
+    color: #0d9488;
+
+    font-weight: 800;
+
+}
+
+
+.why-section .section-title p {
+
+    max-width: 620px;
+
+    margin: 0 auto;
+
+    color: #718581;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+
+}
+
+
+/* =============================================================
+   GRID
+============================================================= */
+
+.why-grid {
+
+    max-width: 1000px;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 18px;
+
+}
+
+
+/* =============================================================
+   WHY CARD
+============================================================= */
+
+.why-card {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 17px;
+
+    min-height: 155px;
+
+    padding: 25px 45px 25px 23px;
+
+    background: #ffffff;
+
+    border: 1px solid #deeeeb;
+
+    border-radius: 17px;
+
+    box-shadow:
+        0 8px 28px rgba(
+            15,
+            118,
+            110,
+            .045
+        );
+
+    overflow: hidden;
+
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
+
+}
+
+
+/* Left teal line */
+
+.why-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    top: 0;
+
+    width: 3px;
+
+    height: 0;
+
+    background: #0d9488;
+
+    border-radius:
+        0 0 5px 5px;
+
+    transition:
+        height .3s ease;
+
+}
+
+
+.why-card:hover {
+
+    transform:
+        translateY(-5px);
+
+    border-color: #b8ddd7;
+
+    box-shadow:
+        0 18px 38px rgba(
+            15,
+            118,
+            110,
+            .10
+        );
+
+}
+
+
+.why-card:hover::before {
+
+    height: 100%;
+
+}
+
+
+/* =============================================================
+   ICON
+============================================================= */
+
+.why-icon {
+
+    width: 52px;
+
+    height: 52px;
+
+    min-width: 52px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background: #e6f8f5;
+
+    color: #0d9488;
+
+    font-size: 20px;
+
+    transition:
+        background .25s ease,
+        color .25s ease,
+        transform .25s ease;
+
+}
+
+
+.why-card:hover .why-icon {
+
+    background: #0d9488;
+
+    color: #ffffff;
+
+    transform:
+        scale(1.05);
+
+}
+
+
+/* =============================================================
+   CONTENT
+============================================================= */
+
+.why-content {
+
+    flex: 1;
+
+    min-width: 0;
+
+}
+
+
+.why-content h4 {
+
+    margin: 0 0 8px;
+
+    color: #244742;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    line-height: 1.3;
+
+}
+
+
+.why-content p {
+
+    max-width: 380px;
+
+    margin: 0;
+
+    color: #7b8e8b;
+
+    font-size: 10px;
+
+    line-height: 1.75;
+
+}
+
+
+/* =============================================================
+   NUMBER
+============================================================= */
+
+.why-number {
+
+    position: absolute;
+
+    top: 14px;
+
+    right: 18px;
+
+    color: #d9efeb;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+}
+
+
+/* =============================================================
+   TABLET
+============================================================= */
+
+@media (max-width: 991px) {
+
+    .why-section {
+
+        padding: 75px 0;
+
+    }
+
+
+    .why-grid {
+
+        max-width: 720px;
+
+    }
+
+}
+
+
+/* =============================================================
+   MOBILE
+============================================================= */
+
+@media (max-width: 575px) {
+
+    .why-section {
+
+        padding: 60px 0;
+
+    }
+
+
+    .why-section .section-title {
+
+        margin-bottom: 38px;
+
+    }
+
+
+    .why-section .section-title h2 {
+
+        font-size: 31px;
+
+        letter-spacing: -1px;
+
+    }
+
+
+    .why-section .section-title p {
+
+        font-size: 12px;
+
+    }
+
+
+    .why-grid {
+
+        grid-template-columns:
+            1fr;
+
+        gap: 13px;
+
+    }
+
+
+    .why-card {
+
+        min-height: 130px;
+
+        padding: 20px 40px 20px 17px;
+
+        gap: 13px;
+
+        border-radius: 14px;
+
+    }
+
+
+    .why-icon {
+
+        width: 44px;
+
+        height: 44px;
+
+        min-width: 44px;
+
+        border-radius: 11px;
+
+        font-size: 17px;
+
+    }
+
+
+    .why-content h4 {
+
+        font-size: 12px;
+
+        margin-bottom: 6px;
+
+    }
+
+
+    .why-content p {
+
+        font-size: 9px;
+
+        line-height: 1.65;
+
+    }
+
+
+    .why-number {
+
+        top: 11px;
+
+        right: 14px;
+
+        font-size: 8px;
+
+    }
+
+}
+
+
+/* =============================================================
+   EXTRA SMALL DEVICES
+============================================================= */
+
+@media (max-width: 390px) {
+
+    .why-card {
+
+        padding-left: 14px;
+
+        gap: 10px;
+
+    }
+
+
+    .why-icon {
+
+        width: 40px;
+
+        height: 40px;
+
+        min-width: 40px;
+
+        font-size: 16px;
+
+    }
+
+
+    .why-content h4 {
+
+        font-size: 11px;
+
+    }
+
+
+    .why-content p {
+
+        font-size: 8px;
+
+    }
+
+}
+
+</style>

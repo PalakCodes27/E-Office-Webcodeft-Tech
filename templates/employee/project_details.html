@@ -1,0 +1,852 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Project Details | Smart Office</title>
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f7f8;
+    color: #17212b;
+}
+
+.page-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 30px;
+}
+
+/* ================= HEADER ================= */
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    gap: 15px;
+}
+
+.header-left h1 {
+    font-size: 29px;
+    color: #124e55;
+    margin-bottom: 6px;
+}
+
+.header-left p {
+    color: #718096;
+    font-size: 14px;
+}
+
+.header-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    text-decoration: none;
+    border: none;
+    padding: 11px 18px;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-back {
+    background: white;
+    color: #08757a;
+    border: 1px solid #b9dddd;
+}
+
+.btn-back:hover {
+    background: #edfafa;
+}
+
+/* ================= PROJECT BANNER ================= */
+
+.project-banner {
+    background: linear-gradient(135deg, #124e55, #0b918c);
+    color: white;
+    padding: 30px;
+    border-radius: 17px;
+    margin-bottom: 20px;
+}
+
+.project-name {
+    font-size: 29px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.client-name {
+    font-size: 15px;
+    opacity: .9;
+}
+
+.status {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 7px 13px;
+    border-radius: 20px;
+    background: white;
+    color: #08757a;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* ================= MAIN CARD ================= */
+
+.main-card {
+    background: white;
+    border: 1px solid #e5ebed;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 5px 18px rgba(0,0,0,.035);
+}
+
+.section {
+    padding: 28px;
+    border-bottom: 1px solid #e5ebed;
+}
+
+.section:last-child {
+    border-bottom: none;
+}
+
+.section-title {
+    color: #16474e;
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+/* ================= DETAILS ================= */
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.detail-item {
+    background: #f8fafb;
+    border: 1px solid #e5ebed;
+    border-radius: 11px;
+    padding: 17px;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+.detail-label {
+    display: block;
+    color: #718096;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 7px;
+}
+
+.detail-value {
+    color: #24343d;
+    font-size: 15px;
+    font-weight: 600;
+    word-break: break-word;
+}
+
+.description {
+    color: #465666;
+    line-height: 1.8;
+    font-size: 14px;
+    white-space: pre-line;
+}
+
+/* ================= TEAM ================= */
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.team-member {
+    background: #f8fafb;
+    border: 1px solid #e5ebed;
+    border-radius: 11px;
+    padding: 18px;
+}
+
+.role {
+    color: #087b7d;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 7px;
+}
+
+.member-name {
+    color: #24343d;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+/* ================= NOTES ================= */
+
+.notes {
+    background: #edfafa;
+    border: 1px solid #d4eeee;
+    border-radius: 11px;
+    padding: 18px;
+    color: #465666;
+    line-height: 1.7;
+    white-space: pre-line;
+}
+
+/* ================= FOOTER ================= */
+
+.footer {
+    padding: 20px 28px;
+    display: flex;
+    justify-content: flex-end;
+    border-top: 1px solid #e5ebed;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width: 900px) {
+
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media(max-width: 800px) {
+
+    .page-container {
+        padding: 18px;
+    }
+
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header-actions {
+        width: 100%;
+    }
+
+    .header-actions .btn {
+        flex: 1;
+    }
+
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .full-width {
+        grid-column: auto;
+    }
+
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media(max-width: 500px) {
+
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="page-container">
+
+
+<!-- ================================================= -->
+<!-- HEADER -->
+<!-- ================================================= -->
+
+<div class="page-header">
+
+    <div class="header-left">
+
+        <h1>Project Details</h1>
+
+        <p>
+            Information about your assigned project.
+        </p>
+
+    </div>
+
+
+    <div class="header-actions">
+
+        <a href="{% url 'employee_tasks' %}"
+           class="btn btn-back">
+
+            ← Back to My Tasks
+
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- PROJECT HEADER -->
+<!-- ================================================= -->
+
+<div class="project-banner">
+
+    <div class="project-name">
+
+        {{ project.project_name }}
+
+    </div>
+
+
+    <div class="client-name">
+
+        Client:
+
+        <strong>
+            {{ project.client.name }}
+        </strong>
+
+        {% if project.client.company_name %}
+
+            — {{ project.client.company_name }}
+
+        {% endif %}
+
+    </div>
+
+
+    <span class="status">
+
+        {{ project.get_status_display }}
+
+    </span>
+
+</div>
+
+
+<div class="main-card">
+
+
+<!-- ================================================= -->
+<!-- PROJECT INFORMATION -->
+<!-- ================================================= -->
+
+<div class="section">
+
+    <div class="section-title">
+        Project Information
+    </div>
+
+
+    <div class="details-grid">
+
+
+        <!-- PROJECT NAME -->
+
+        <div class="detail-item">
+
+            <span class="detail-label">
+                Project Name
+            </span>
+
+            <span class="detail-value">
+
+                {{ project.project_name }}
+
+            </span>
+
+        </div>
+
+
+        <!-- CLIENT -->
+
+        <div class="detail-item">
+
+            <span class="detail-label">
+                Client
+            </span>
+
+            <span class="detail-value">
+
+                {{ project.client.name }}
+
+                {% if project.client.company_name %}
+
+                    — {{ project.client.company_name }}
+
+                {% endif %}
+
+            </span>
+
+        </div>
+
+
+        <!-- PROJECT CODE -->
+
+        <div class="detail-item">
+
+            <span class="detail-label">
+                Project Code
+            </span>
+
+            <span class="detail-value">
+
+                {{ project.project_code|default:"Not provided" }}
+
+            </span>
+
+        </div>
+
+
+        <!-- CATEGORY -->
+
+        <div class="detail-item">
+
+            <span class="detail-label">
+                Category
+            </span>
+
+            <span class="detail-value">
+
+                {{ project.get_project_type_display }}
+
+            </span>
+
+        </div>
+
+
+        <!-- TECHNOLOGY -->
+
+        <div class="detail-item full-width">
+
+            <span class="detail-label">
+                Technology / Tech Stack
+            </span>
+
+            <span class="detail-value">
+
+                {% if project.technology_stack %}
+
+                    {{ project.technology_stack }}
+
+                {% else %}
+
+                    Not specified
+
+                {% endif %}
+
+            </span>
+
+        </div>
+
+
+        <!-- DESCRIPTION -->
+
+        <div class="detail-item full-width">
+
+            <span class="detail-label">
+                Description
+            </span>
+
+            <div class="description">
+
+                {% if project.description %}
+
+                    {{ project.description }}
+
+                {% else %}
+
+                    No description provided.
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <!-- REQUIREMENTS -->
+
+        <div class="detail-item full-width">
+
+            <span class="detail-label">
+                Requirements
+            </span>
+
+            <div class="description">
+
+                {% if project.requirements %}
+
+                    {{ project.requirements }}
+
+                {% else %}
+
+                    No requirements provided.
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- PROJECT TEAM -->
+<!-- ================================================= -->
+
+<div class="section">
+
+    <div class="section-title">
+        Project Team
+    </div>
+
+
+    <div class="team-grid">
+
+
+        <!-- PROJECT MANAGER -->
+
+        <div class="team-member">
+
+            <div class="role">
+                Project Manager
+            </div>
+
+            <div class="member-name">
+
+                {% if project.project_manager %}
+
+                    {{ project.project_manager.first_name }}
+                    {{ project.project_manager.last_name }}
+
+                {% else %}
+
+                    Not Assigned
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <!-- DESIGNER -->
+
+        <div class="team-member">
+
+            <div class="role">
+                Designer
+            </div>
+
+            <div class="member-name">
+
+                {% if project.designer %}
+
+                    {{ project.designer.first_name }}
+                    {{ project.designer.last_name }}
+
+                {% else %}
+
+                    Not Assigned
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <!-- DEVELOPER -->
+
+        <div class="team-member">
+
+            <div class="role">
+                Developer
+            </div>
+
+            <div class="member-name">
+
+                {% if project.developer %}
+
+                    {{ project.developer.first_name }}
+                    {{ project.developer.last_name }}
+
+                {% else %}
+
+                    Not Assigned
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <!-- TESTER -->
+
+        <div class="team-member">
+
+            <div class="role">
+                Tester
+            </div>
+
+            <div class="member-name">
+
+                {% if project.tester %}
+
+                    {{ project.tester.first_name }}
+                    {{ project.tester.last_name }}
+
+                {% else %}
+
+                    Not Assigned
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- TIMELINE & PRIORITY -->
+<!-- ================================================= -->
+
+<div class="section">
+
+    <div class="section-title">
+        Timeline & Priority
+    </div>
+
+
+    <div class="details-grid">
+
+
+        <!-- START DATE -->
+
+        <div class="detail-item">
+
+            <span class="detail-label">
+                Start Date
+            </span>
+
+            <span class="detail-value">
+
+                {% if project.start_date %}
+
+                    {{ project.start_date|date:"d M Y" }}
+
+                {% else %}
+
+                    Not specified
+
+                {% endif %}
+
+            </span>
+
+        </div>
+
+
+        <!-- EXPECTED COMPLETION -->
+
+        <div class="detail-item">
+
+            <span class="detail-label">
+                Expected Completion
+            </span>
+
+            <span class="detail-value">
+
+                {% if project.expected_end_date %}
+
+                    {{ project.expected_end_date|date:"d M Y" }}
+
+                {% else %}
+
+                    Not specified
+
+                {% endif %}
+
+            </span>
+
+        </div>
+
+
+        <!-- ESTIMATED DURATION -->
+
+        <div class="detail-item">
+
+            <span class="detail-label">
+                Estimated Duration
+            </span>
+
+            <span class="detail-value">
+
+                {% if project.estimated_days %}
+
+                    {{ project.estimated_days }} days
+
+                {% else %}
+
+                    Not specified
+
+                {% endif %}
+
+            </span>
+
+        </div>
+
+
+        <!-- PRIORITY -->
+
+        <div class="detail-item">
+
+            <span class="detail-label">
+                Priority
+            </span>
+
+            <span class="detail-value">
+
+                {{ project.get_priority_display }}
+
+            </span>
+
+        </div>
+
+
+        <!-- PROGRESS -->
+
+        <div class="detail-item">
+
+            <span class="detail-label">
+                Progress
+            </span>
+
+            <span class="detail-value">
+
+                {{ project.progress }}%
+
+            </span>
+
+        </div>
+
+
+        <!-- STATUS -->
+
+        <div class="detail-item">
+
+            <span class="detail-label">
+                Status
+            </span>
+
+            <span class="detail-value">
+
+                {{ project.get_status_display }}
+
+            </span>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- INTERNAL NOTES -->
+<!-- ================================================= -->
+
+<div class="section">
+
+    <div class="section-title">
+        Internal Notes
+    </div>
+
+
+    <div class="notes">
+
+        {% if project.notes %}
+
+            {{ project.notes }}
+
+        {% else %}
+
+            No internal notes available.
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- FOOTER -->
+<!-- ================================================= -->
+
+<div class="footer">
+
+    <a href="{% url 'employee_tasks' %}"
+       class="btn btn-back">
+
+        ← Back to My Tasks
+
+    </a>
+
+</div>
+
+
+</div>
+
+</div>
+{% include "chat/chat_widget.html" %}
+</body>
+
+</html>

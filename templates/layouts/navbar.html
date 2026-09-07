@@ -1,0 +1,874 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg wc-navbar">
+
+<div class="container">
+
+    <!-- =====================================================
+         LOGO
+    ====================================================== -->
+
+    <a href="/" class="navbar-brand wc-brand">
+
+        <img
+            src="{% static 'images/webcodeft-new-logo.webp' %}"
+            alt="Webcodeft Technologies"
+            class="wc-logo"
+        >
+
+    </a>
+
+
+    <!-- =====================================================
+         MOBILE TOGGLER
+    ====================================================== -->
+
+    <button
+        class="navbar-toggler wc-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarMenu"
+        aria-controls="navbarMenu"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+    >
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </button>
+
+
+    <!-- =====================================================
+         NAVIGATION
+    ====================================================== -->
+
+    <div
+        class="collapse navbar-collapse"
+        id="navbarMenu"
+    >
+
+        <ul class="navbar-nav ms-auto align-items-lg-center wc-nav-list">
+
+            <!-- HOME -->
+
+            <li class="nav-item">
+
+                <a
+                    href="/"
+                    class="nav-link wc-nav-link active"
+                >
+                    Home
+                </a>
+
+            </li>
+
+
+            <!-- ABOUT -->
+
+            <li class="nav-item">
+
+                <a
+                    href="/#about"
+                    class="nav-link wc-nav-link"
+                >
+                    About
+                </a>
+
+            </li>
+
+
+            <!-- FEATURES -->
+
+            
+
+
+            <!-- CONTACT -->
+
+            <li class="nav-item">
+
+                <a
+                    href="/#contact"
+                    class="nav-link wc-nav-link"
+                >
+                    Contact
+                </a>
+
+            </li>
+
+
+            <!-- LOGIN -->
+
+            <li class="nav-item wc-login-item">
+
+                <a
+                    href="{% url 'login' %}"
+                    class="wc-login-btn"
+                >
+
+                    <span class="wc-login-icon">
+                        <i class="bi bi-box-arrow-in-right"></i>
+                    </span>
+
+                    <span>
+                        Login
+                    </span>
+
+                    <i class="bi bi-arrow-up-right wc-login-arrow"></i>
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+</div>
+
+
+</nav>
+
+<style>
+
+/* =============================================================
+   NAVBAR
+   Same visual language as Footer
+============================================================= */
+
+.wc-navbar {
+
+    position: relative;
+
+    z-index: 1000;
+
+    width: 100%;
+
+    min-height: 76px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #103f3b 0%,
+            #0b5049 55%,
+            #0d5f57 100%
+        );
+
+    border-bottom:
+        1px solid rgba(
+            255,
+            255,
+            255,
+            .10
+        );
+
+    box-shadow:
+        0 6px 25px rgba(
+            6,
+            70,
+            65,
+            .16
+        );
+
+    overflow: hidden;
+
+}
+
+
+/* =============================================================
+   DECORATIVE BACKGROUND
+============================================================= */
+
+.wc-navbar::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 300px;
+
+    height: 300px;
+
+    right: -170px;
+
+    top: -220px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid rgba(
+            255,
+            255,
+            255,
+            .07
+        );
+
+    pointer-events: none;
+
+}
+
+
+.wc-navbar::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 210px;
+
+    height: 210px;
+
+    left: -150px;
+
+    bottom: -175px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid rgba(
+            255,
+            255,
+            255,
+            .05
+        );
+
+    pointer-events: none;
+
+}
+
+
+/* =============================================================
+   CONTAINER
+============================================================= */
+
+.wc-navbar > .container {
+
+    position: relative;
+
+    z-index: 2;
+
+    min-height: 76px;
+
+    display: flex;
+
+    align-items: center;
+
+}
+
+
+/* =============================================================
+   LOGO
+============================================================= */
+
+.wc-brand {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 0;
+
+    margin: 0;
+
+    text-decoration: none;
+
+}
+
+
+.wc-logo {
+
+    display: block;
+
+    width: auto;
+
+    height: 51px;
+
+    max-width: 195px;
+
+    object-fit: contain;
+
+    transition:
+        transform .25s ease,
+        opacity .25s ease;
+
+}
+
+
+.wc-brand:hover .wc-logo {
+
+    transform:
+        translateY(-1px);
+
+    opacity: .92;
+
+}
+
+
+/* =============================================================
+   NAVIGATION
+============================================================= */
+
+.wc-nav-list {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 4px;
+
+    margin: 0;
+
+}
+
+
+/* =============================================================
+   NAV LINKS
+============================================================= */
+
+.wc-nav-link {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 76px;
+
+    padding: 0 16px !important;
+
+    color: rgba(
+        255,
+        255,
+        255,
+        .72
+    ) !important;
+
+    font-size: 12px;
+
+    font-weight: 650;
+
+    text-decoration: none;
+
+    transition:
+        color .25s ease,
+        background .25s ease;
+
+}
+
+
+/* Bottom indicator */
+
+.wc-nav-link::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 15px;
+
+    width: 22px;
+
+    height: 2px;
+
+    border-radius: 10px;
+
+    background: #5eead4;
+
+    transform:
+        translateX(-50%)
+        scaleX(0);
+
+    transition:
+        transform .25s ease;
+
+}
+
+
+/* Hover */
+
+.wc-nav-link:hover {
+
+    color: #ffffff !important;
+
+}
+
+
+.wc-nav-link:hover::after {
+
+    transform:
+        translateX(-50%)
+        scaleX(1);
+
+}
+
+
+/* Active */
+
+.wc-nav-link.active {
+
+    color: #ffffff !important;
+
+}
+
+
+.wc-nav-link.active::after {
+
+    transform:
+        translateX(-50%)
+        scaleX(1);
+
+}
+
+
+/* =============================================================
+   LOGIN
+============================================================= */
+
+.wc-login-item {
+
+    margin-left: 17px;
+
+}
+
+
+.wc-login-btn {
+
+    position: relative;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    min-width: 108px;
+
+    height: 41px;
+
+    padding: 0 13px;
+
+    border:
+        1px solid rgba(
+            94,
+            234,
+            212,
+            .45
+        );
+
+    border-radius: 9px;
+
+    background:
+        rgba(
+            45,
+            212,
+            191,
+            .16
+        );
+
+    color: #ffffff !important;
+
+    text-decoration: none;
+
+    font-size: 11px;
+
+    font-weight: 750;
+
+    box-shadow:
+        0 7px 18px rgba(
+            0,
+            0,
+            0,
+            .10
+        );
+
+    transition:
+        transform .25s ease,
+        background .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
+
+}
+
+
+.wc-login-btn:hover {
+
+    background: #0d9488;
+
+    border-color: #2dd4bf;
+
+    color: #ffffff !important;
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 10px 22px rgba(
+            0,
+            0,
+            0,
+            .18
+        );
+
+}
+
+
+/* Login icon */
+
+.wc-login-icon {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 23px;
+
+    height: 23px;
+
+    border-radius: 6px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .10
+        );
+
+}
+
+
+.wc-login-icon i {
+
+    font-size: 12px;
+
+}
+
+
+.wc-login-arrow {
+
+    color: #5eead4;
+
+    font-size: 9px;
+
+    transition:
+        transform .25s ease;
+
+}
+
+
+.wc-login-btn:hover .wc-login-arrow {
+
+    color: #ffffff;
+
+    transform:
+        translate(
+            2px,
+            -2px
+        );
+
+}
+
+
+/* =============================================================
+   MOBILE TOGGLER
+============================================================= */
+
+.wc-toggler {
+
+    width: 42px;
+
+    height: 42px;
+
+    padding: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 4px;
+
+    border:
+        1px solid rgba(
+            94,
+            234,
+            212,
+            .30
+        ) !important;
+
+    border-radius: 9px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            .07
+        );
+
+    box-shadow: none !important;
+
+}
+
+
+.wc-toggler span {
+
+    display: block;
+
+    width: 18px;
+
+    height: 2px;
+
+    border-radius: 5px;
+
+    background: #5eead4;
+
+}
+
+
+/* Focus */
+
+.wc-toggler:focus {
+
+    outline: none;
+
+    box-shadow:
+        0 0 0 3px rgba(
+            94,
+            234,
+            212,
+            .14
+        ) !important;
+
+}
+
+
+/* =============================================================
+   TABLET
+============================================================= */
+
+@media (max-width: 991px) {
+
+    .wc-navbar {
+
+        min-height: 70px;
+
+    }
+
+
+    .wc-navbar > .container {
+
+        min-height: 70px;
+
+    }
+
+
+    .wc-logo {
+
+        height: 46px;
+
+        max-width: 180px;
+
+    }
+
+
+    .wc-navbar .navbar-collapse {
+
+        position: relative;
+
+        z-index: 5;
+
+        margin-top: 10px;
+
+        padding: 10px 13px 14px;
+
+        border:
+            1px solid rgba(
+                255,
+                255,
+                255,
+                .10
+            );
+
+        border-radius: 13px;
+
+        background:
+            rgba(
+                10,
+                69,
+                64,
+                .98
+            );
+
+        box-shadow:
+            0 15px 35px rgba(
+                0,
+                0,
+                0,
+                .20
+            );
+
+    }
+
+
+    .wc-nav-list {
+
+        align-items: stretch !important;
+
+        gap: 2px;
+
+    }
+
+
+    .wc-nav-link {
+
+        justify-content: flex-start;
+
+        min-height: 43px;
+
+        padding: 0 12px !important;
+
+        border-radius: 8px;
+
+    }
+
+
+    .wc-nav-link:hover {
+
+        background:
+            rgba(
+                255,
+                255,
+                255,
+                .06
+            );
+
+    }
+
+
+    .wc-nav-link::after {
+
+        left: 4px;
+
+        bottom: auto;
+
+        top: 50%;
+
+        width: 3px;
+
+        height: 18px;
+
+        transform:
+            translateY(-50%)
+            scaleY(0);
+
+    }
+
+
+    .wc-nav-link:hover::after,
+    .wc-nav-link.active::after {
+
+        transform:
+            translateY(-50%)
+            scaleY(1);
+
+    }
+
+
+    .wc-login-item {
+
+        margin: 9px 0 0;
+
+    }
+
+
+    .wc-login-btn {
+
+        width: 100%;
+
+        height: 43px;
+
+    }
+
+}
+
+
+/* =============================================================
+   MOBILE
+============================================================= */
+
+@media (max-width: 575px) {
+
+    .wc-navbar {
+
+        min-height: 66px;
+
+    }
+
+
+    .wc-navbar > .container {
+
+        min-height: 66px;
+
+    }
+
+
+    .wc-logo {
+
+        height: 42px;
+
+        max-width: 160px;
+
+    }
+
+
+    .wc-toggler {
+
+        width: 40px;
+
+        height: 40px;
+
+    }
+
+
+    .wc-navbar .navbar-collapse {
+
+        margin-top: 8px;
+
+        padding: 8px 10px 12px;
+
+    }
+
+}
+
+
+/* =============================================================
+   EXTRA SMALL
+============================================================= */
+
+@media (max-width: 390px) {
+
+    .wc-logo {
+
+        height: 39px;
+
+        max-width: 148px;
+
+    }
+
+}
+
+</style>

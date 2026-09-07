@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}Webcodeft Technologies{% endblock %}
+    </title>
+
+    <link rel="icon" href="{% static 'images/favicon.png' %}">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Global CSS -->
+   <!-- CSS -->
+<link rel="stylesheet" href="{% static 'css/variables.css' %}">
+<link rel="stylesheet" href="{% static 'css/reset.css' %}">
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+<link rel="stylesheet" href="{% static 'css/hero.css' %}">
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+<link rel="stylesheet" href="{% static 'css/statistics.css' %}">
+<link rel="stylesheet" href="{% static 'css/features.css' %}">
+<link rel="stylesheet" href="{% static 'css/modules.css' %}">
+<link rel="stylesheet" href="{% static 'css/dashboard-preview.css' %}">
+<link rel="stylesheet" href="{% static 'css/why-choose.css' %}">
+<link rel="stylesheet" href="{% static 'css/companies.css' %}">
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+<link rel="stylesheet" href="{% static 'css/footer.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- Page CSS -->
+    {% block extra_css %}
+    {% endblock %}
+
+</head>
+
+<body>
+
+    {% include 'layouts/navbar.html' %}
+
+    <main>
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+    {% include 'layouts/footer.html' %}
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Page JS -->
+    {% block extra_js %}
+    {% endblock %}
+<script src="{% static 'js/statistics.js' %}"></script>
+</body>
+
+</html>

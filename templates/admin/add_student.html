@@ -1,0 +1,2070 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Add Student | Office Management System</title>
+
+<!-- Bootstrap -->
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+>
+
+<!-- Bootstrap Icons -->
+<link
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    rel="stylesheet"
+>
+
+<style>
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family:
+            Inter,
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            sans-serif;
+
+        background: #f5f7fa;
+        color: #1f2937;
+    }
+
+    .page-wrapper {
+        min-height: 100vh;
+        padding: 35px 25px;
+    }
+
+    .form-container {
+        max-width: 1180px;
+        margin: auto;
+    }
+
+    /* =====================================================
+       TOP HEADER
+    ===================================================== */
+
+    .top-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+
+    .title-area h1 {
+        margin: 0;
+        font-size: 28px;
+        font-weight: 700;
+        color: #172033;
+    }
+
+    .title-area p {
+        margin: 6px 0 0;
+        font-size: 14px;
+        color: #7b8494;
+    }
+
+    .back-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 17px;
+        border: 1px solid #dce2e8;
+        border-radius: 9px;
+        background: #ffffff;
+        color: #4b5563;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        transition: 0.2s ease;
+    }
+
+    .back-button:hover {
+        background: #f1f4f7;
+        color: #172033;
+    }
+
+    /* =====================================================
+       MAIN FORM CARD
+    ===================================================== */
+
+    .form-card {
+        background: #ffffff;
+        border: 1px solid #e5e9ef;
+        border-radius: 16px;
+        box-shadow:
+            0 10px 35px rgba(31, 41, 55, 0.07);
+        overflow: hidden;
+    }
+
+    .form-card-header {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        padding: 22px 28px;
+        border-bottom: 1px solid #edf0f4;
+        background: #ffffff;
+    }
+
+    .header-icon {
+        width: 42px;
+        height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 11px;
+        background: #eaf7f7;
+        color: #08777c;
+        font-size: 19px;
+    }
+
+    .form-card-header h2 {
+        margin: 0;
+        font-size: 17px;
+        font-weight: 700;
+        color: #202938;
+    }
+
+    .form-card-header p {
+        margin: 3px 0 0;
+        font-size: 12px;
+        color: #8a93a2;
+    }
+
+    /* =====================================================
+       FORM BODY
+    ===================================================== */
+
+    .form-body {
+        padding: 30px;
+    }
+
+    .form-section {
+        margin-bottom: 32px;
+    }
+
+    .section-heading {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .section-heading-icon {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        background: #f0f7f7;
+        color: #08777c;
+        font-size: 15px;
+    }
+
+    .section-heading h3 {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 700;
+        color: #273044;
+    }
+
+    .section-heading span {
+        display: block;
+        margin-top: 2px;
+        font-size: 11px;
+        color: #929aaa;
+    }
+
+    /* =====================================================
+       LABEL
+    ===================================================== */
+
+    .form-label {
+        margin-bottom: 7px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #374151;
+    }
+
+    .required {
+        color: #dc3545;
+    }
+
+    /* =====================================================
+       INPUT
+    ===================================================== */
+
+    .form-control,
+    .form-select {
+        height: 46px;
+        padding: 10px 13px;
+        border: 1px solid #dfe4ea;
+        border-radius: 9px;
+        font-size: 13px;
+        color: #293244;
+        background: #ffffff;
+        transition: 0.2s ease;
+        box-shadow: none;
+    }
+
+    textarea.form-control {
+        height: auto;
+        min-height: 105px;
+        resize: vertical;
+    }
+
+    .form-control::placeholder {
+        color: #a8afba;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: #0b858a;
+        box-shadow:
+            0 0 0 3px rgba(11, 133, 138, 0.09);
+    }
+
+    /* =====================================================
+       INPUT WITH ICON
+    ===================================================== */
+
+    .input-group-custom {
+        position: relative;
+    }
+
+    .input-group-custom i {
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #9aa2ae;
+        font-size: 14px;
+        z-index: 2;
+    }
+
+    .input-group-custom .form-control {
+        padding-left: 39px;
+    }
+
+    /* =====================================================
+       LEARNING MODE
+    ===================================================== */
+
+    .mode-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .mode-option {
+        position: relative;
+    }
+
+    .mode-option input {
+        position: absolute;
+        opacity: 0;
+    }
+
+    .mode-label {
+        min-height: 46px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border: 1px solid #dfe4ea;
+        border-radius: 9px;
+        background: #ffffff;
+        color: #697386;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.2s ease;
+    }
+
+    .mode-label:hover {
+        border-color: #9cc8ca;
+    }
+
+    .mode-option input:checked + .mode-label {
+        background: #edf8f8;
+        border-color: #0b858a;
+        color: #08777c;
+    }
+
+    /* =====================================================
+       DURATION
+    ===================================================== */
+
+    .duration-card {
+        padding: 20px;
+        background: #f8fafb;
+        border: 1px solid #e5eaee;
+        border-radius: 12px;
+    }
+
+    .duration-unit {
+        height: 46px;
+        display: flex;
+        align-items: center;
+        padding: 0 14px;
+        background: #ffffff;
+        border: 1px solid #dfe4ea;
+        border-radius: 9px;
+        color: #687282;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    /* =====================================================
+       FEE SECTION
+    ===================================================== */
+
+    .fee-card {
+        padding: 22px;
+        background: #f8fafb;
+        border: 1px solid #e5eaee;
+        border-radius: 12px;
+    }
+
+    .fee-input {
+        position: relative;
+    }
+
+    .currency {
+        position: absolute;
+        left: 13px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #7c8593;
+        font-size: 13px;
+        font-weight: 600;
+        z-index: 2;
+    }
+
+    .fee-input .form-control {
+        padding-left: 30px;
+    }
+
+    /* =====================================================
+       FEE SUMMARY
+    ===================================================== */
+
+    .fee-summary {
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+    }
+
+    .fee-box {
+        padding: 15px;
+        background: #ffffff;
+        border: 1px solid #e3e8ed;
+        border-radius: 10px;
+    }
+
+    .fee-box-label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 11px;
+        color: #8b94a2;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+    }
+
+    .fee-box-value {
+        font-size: 18px;
+        font-weight: 700;
+        color: #273044;
+    }
+
+    .fee-box.remaining .fee-box-value {
+        color: #08777c;
+    }
+
+    /* =====================================================
+       MONTHLY PAYMENT
+    ===================================================== */
+
+    .monthly-fee-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 15px;
+    }
+
+    .monthly-fee-title {
+        font-size: 13px;
+        font-weight: 700;
+        color: #374151;
+    }
+
+    .add-month-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 13px;
+        border: 1px solid #b8d9da;
+        border-radius: 8px;
+        background: #edf8f8;
+        color: #08777c;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.2s ease;
+    }
+
+    .add-month-btn:hover {
+        background: #dff1f1;
+    }
+
+    .monthly-payment-box {
+        padding: 18px;
+        background: #ffffff;
+        border: 1px solid #e1e6eb;
+        border-radius: 10px;
+        margin-bottom: 12px;
+    }
+
+    .payment-row-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 15px;
+    }
+
+    .payment-number {
+        font-size: 12px;
+        font-weight: 700;
+        color: #08777c;
+    }
+
+    .remove-month-btn {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #f0d5d5;
+        border-radius: 7px;
+        background: #fff7f7;
+        color: #dc3545;
+        cursor: pointer;
+        transition: 0.2s ease;
+    }
+
+    .remove-month-btn:hover {
+        background: #ffecec;
+    }
+
+    .empty-month-message {
+        padding: 22px;
+        text-align: center;
+        border: 1px dashed #d8dfe6;
+        border-radius: 10px;
+        color: #9aa2ae;
+        font-size: 12px;
+        background: #ffffff;
+    }
+
+    .payment-status {
+        height: 46px;
+        padding: 10px 13px;
+        border: 1px solid #dfe4ea;
+        border-radius: 9px;
+        background: #ffffff;
+        color: #293244;
+        font-size: 13px;
+        width: 100%;
+    }
+
+    /* =====================================================
+       CERTIFICATE
+    ===================================================== */
+
+    .certificate-card {
+        padding: 20px;
+        background: #f8fafb;
+        border: 1px solid #e5eaee;
+        border-radius: 12px;
+    }
+
+    .certificate-options {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .certificate-option {
+        position: relative;
+    }
+
+    .certificate-option input {
+        position: absolute;
+        opacity: 0;
+    }
+
+    .certificate-label {
+        min-height: 46px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border: 1px solid #dfe4ea;
+        border-radius: 9px;
+        background: #ffffff;
+        color: #697386;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.2s ease;
+    }
+
+    .certificate-label:hover {
+        border-color: #9cc8ca;
+    }
+
+    .certificate-option input:checked + .certificate-label {
+        background: #edf8f8;
+        border-color: #0b858a;
+        color: #08777c;
+    }
+
+    /* =====================================================
+       HELPER TEXT
+    ===================================================== */
+
+    .helper-text {
+        margin-top: 6px;
+        font-size: 11px;
+        color: #929aaa;
+    }
+
+    /* =====================================================
+       ALERT
+    ===================================================== */
+
+    .alert {
+        border: none;
+        border-radius: 9px;
+        font-size: 13px;
+    }
+
+    /* =====================================================
+       FORM ACTIONS
+    ===================================================== */
+
+    .form-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        padding-top: 25px;
+        border-top: 1px solid #edf0f4;
+        margin-top: 5px;
+    }
+
+    .cancel-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 0 21px;
+        border: 1px solid #dce2e8;
+        border-radius: 9px;
+        background: #ffffff;
+        color: #5f6877;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .cancel-btn:hover {
+        background: #f5f6f8;
+        color: #273044;
+    }
+
+    .submit-btn {
+        min-height: 44px;
+        padding: 0 23px;
+        border: none;
+        border-radius: 9px;
+        background: #08777c;
+        color: #ffffff;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.2s ease;
+    }
+
+    .submit-btn:hover {
+        background: #066368;
+        transform: translateY(-1px);
+        box-shadow:
+            0 5px 15px rgba(8, 119, 124, 0.18);
+    }
+
+    /* =====================================================
+       RESPONSIVE
+    ===================================================== */
+
+    @media (max-width: 768px) {
+
+        .page-wrapper {
+            padding: 20px 14px;
+        }
+
+        .top-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .title-area h1 {
+            font-size: 23px;
+        }
+
+        .back-button {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .form-body {
+            padding: 20px;
+        }
+
+        .form-card-header {
+            padding: 18px 20px;
+        }
+
+        .fee-summary {
+            grid-template-columns: 1fr;
+        }
+
+        .mode-grid,
+        .certificate-options {
+            grid-template-columns: 1fr;
+        }
+
+        .form-actions {
+            flex-direction: column-reverse;
+        }
+
+        .cancel-btn,
+        .submit-btn {
+            width: 100%;
+        }
+
+    }
+
+</style>
+
+
+</head>
+
+<body>
+
+<div class="page-wrapper">
+
+
+<div class="form-container">
+
+    <!-- PAGE HEADER -->
+
+    <div class="top-header">
+
+        <div class="title-area">
+
+            <h1>
+                Add Student
+            </h1>
+
+            <p>
+                Create and manage a new student profile
+            </p>
+
+        </div>
+
+        <a
+            href="{% url 'students' %}"
+            class="back-button"
+        >
+
+            <i class="bi bi-arrow-left"></i>
+
+            Back to Students
+
+        </a>
+
+    </div>
+
+
+    <!-- FORM CARD -->
+
+    <div class="form-card">
+
+        <!-- CARD HEADER -->
+
+        <div class="form-card-header">
+
+            <div class="header-icon">
+
+                <i class="bi bi-person-plus"></i>
+
+            </div>
+
+            <div>
+
+                <h2>
+                    Student Registration
+                </h2>
+
+                <p>
+                    Enter the student's personal, academic and fee details
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- FORM BODY -->
+
+        <div class="form-body">
+
+            <!-- MESSAGES -->
+
+            {% if messages %}
+
+                {% for message in messages %}
+
+                    <div class="alert alert-{{ message.tags }} mb-4">
+
+                        <i class="bi bi-info-circle me-2"></i>
+
+                        {{ message }}
+
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+
+            <form
+                method="POST"
+                id="studentForm"
+            >
+
+                {% csrf_token %}
+
+
+                <!-- =================================================
+                     PERSONAL INFORMATION
+                ================================================= -->
+
+                <div class="form-section">
+
+                    <div class="section-heading">
+
+                        <div class="section-heading-icon">
+                            <i class="bi bi-person"></i>
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Personal Information
+                            </h3>
+
+                            <span>
+                                Basic details of the student
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="row g-4">
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+                                First Name
+                                <span class="required">*</span>
+                            </label>
+
+                            <div class="input-group-custom">
+
+                                <i class="bi bi-person"></i>
+
+                                <input
+                                    type="text"
+                                    name="first_name"
+                                    class="form-control"
+                                    placeholder="Enter first name"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+                                Last Name
+                            </label>
+
+                            <div class="input-group-custom">
+
+                                <i class="bi bi-person"></i>
+
+                                <input
+                                    type="text"
+                                    name="last_name"
+                                    class="form-control"
+                                    placeholder="Enter last name"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+                                Email Address
+                                <span class="required">*</span>
+                            </label>
+
+                            <div class="input-group-custom">
+
+                                <i class="bi bi-envelope"></i>
+
+                                <input
+                                    type="email"
+                                    name="email"
+                                    class="form-control"
+                                    placeholder="student@example.com"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+                                Phone Number
+                            </label>
+
+                            <div class="input-group-custom">
+
+                                <i class="bi bi-telephone"></i>
+
+                                <input
+                                    type="tel"
+                                    name="phone"
+                                    class="form-control"
+                                    placeholder="Enter phone number"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-12">
+
+                            <label class="form-label">
+                                Address
+                            </label>
+
+                            <textarea
+                                name="address"
+                                class="form-control"
+                                placeholder="Enter complete address"
+                            ></textarea>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     COURSE INFORMATION
+                ================================================= -->
+
+                <div class="form-section">
+
+                    <div class="section-heading">
+
+                        <div class="section-heading-icon">
+                            <i class="bi bi-mortarboard"></i>
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Course Information
+                            </h3>
+
+                            <span>
+                                Academic and training details
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="row g-4">
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+
+                                Course
+                                <span class="required">*</span>
+
+                            </label>
+
+                            <input
+                                type="text"
+                                name="course"
+                                class="form-control"
+                                placeholder="e.g. Python Full Stack Development"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+                                Batch
+                            </label>
+
+                            <input
+                                type="text"
+                                name="batch"
+                                class="form-control"
+                                placeholder="e.g. 2026 Morning Batch"
+                            >
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+                                Learning Mode
+                            </label>
+
+                            <div class="mode-grid">
+
+                                <div class="mode-option">
+
+                                    <input
+                                        type="radio"
+                                        name="learning_mode"
+                                        id="online"
+                                        value="online"
+                                        checked
+                                    >
+
+                                    <label
+                                        for="online"
+                                        class="mode-label"
+                                    >
+
+                                        <i class="bi bi-laptop"></i>
+
+                                        Online
+
+                                    </label>
+
+                                </div>
+
+
+                                <div class="mode-option">
+
+                                    <input
+                                        type="radio"
+                                        name="learning_mode"
+                                        id="offline"
+                                        value="offline"
+                                    >
+
+                                    <label
+                                        for="offline"
+                                        class="mode-label"
+                                    >
+
+                                        <i class="bi bi-building"></i>
+
+                                        Offline
+
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+                                Assigned Employee
+                            </label>
+
+                            <select
+                                name="assigned_employee"
+                                class="form-select"
+                            >
+
+                                <option value="">
+                                    Select employee
+                                </option>
+
+                                {% for employee in employees %}
+
+                                    <option value="{{ employee.id }}">
+
+                                        {{ employee.get_full_name|default:employee.username }}
+
+                                    </option>
+
+                                {% endfor %}
+
+                            </select>
+
+                            <div class="helper-text">
+                                Select the employee responsible for this student.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     COURSE DURATION
+                ================================================= -->
+
+                <div class="form-section">
+
+                    <div class="section-heading">
+
+                        <div class="section-heading-icon">
+
+                            <i class="bi bi-hourglass-split"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Course Duration
+                            </h3>
+
+                            <span>
+                                Specify how long the course will continue
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="duration-card">
+
+                        <div class="row g-4">
+
+                            <!-- Months -->
+
+                            <div class="col-md-6">
+
+                                <label class="form-label">
+                                    Duration in Months
+                                </label>
+
+                                <input
+                                    type="number"
+                                    name="course_duration_months"
+                                    id="course_duration_months"
+                                    class="form-control"
+                                    placeholder="e.g. 6"
+                                    min="0"
+                                >
+
+                            </div>
+
+
+                            <!-- Days -->
+
+                            <div class="col-md-6">
+
+                                <label class="form-label">
+                                    Additional Days
+                                </label>
+
+                                <input
+                                    type="number"
+                                    name="course_duration_days"
+                                    id="course_duration_days"
+                                    class="form-control"
+                                    placeholder="e.g. 15"
+                                    min="0"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="helper-text">
+
+                            Example: A course running for 6 months and 15 days can be entered as
+                            <strong>6 months + 15 days</strong>.
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     ENROLLMENT
+                ================================================= -->
+
+                <div class="form-section">
+
+                    <div class="section-heading">
+
+                        <div class="section-heading-icon">
+
+                            <i class="bi bi-calendar-check"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Enrollment Details
+                            </h3>
+
+                            <span>
+                                Course joining and student status
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="row g-4">
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+                                Joining Date
+                            </label>
+
+                            <div class="input-group-custom">
+
+                                <i class="bi bi-calendar3"></i>
+
+                                <input
+                                    type="date"
+                                    name="joining_date"
+                                    class="form-control"
+                                >
+
+                            </div>
+
+                            <div class="helper-text">
+                                Select the date on which the student joined the course.
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+                                Student Status
+                            </label>
+
+                            <select
+                                name="status"
+                                class="form-select"
+                            >
+
+                                <option value="active">
+                                    Active
+                                </option>
+
+                                <option value="inactive">
+                                    Inactive
+                                </option>
+
+                                <option value="completed">
+                                    Completed
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     FEE DETAILS
+                ================================================= -->
+
+                <div class="form-section">
+
+                    <div class="section-heading">
+
+                        <div class="section-heading-icon">
+
+                            <i class="bi bi-currency-rupee"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Fee Details
+                            </h3>
+
+                            <span>
+                                Monthly course fee and payment information
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="fee-card">
+
+                        <div class="row g-4">
+
+                            <!-- Total Fee -->
+
+                            <div class="col-md-4">
+
+                                <label class="form-label">
+                                    Total Course Fee
+                                </label>
+
+                                <div class="fee-input">
+
+                                    <span class="currency">
+                                        ₹
+                                    </span>
+
+                                    <input
+                                        type="number"
+                                        name="total_fee"
+                                        id="total_fee"
+                                        class="form-control"
+                                        placeholder="0.00"
+                                        min="0"
+                                        step="0.01"
+                                        value="0"
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- Monthly Fee -->
+
+                            <div class="col-md-4">
+
+                                <label class="form-label">
+                                    Monthly Fee
+                                </label>
+
+                                <div class="fee-input">
+
+                                    <span class="currency">
+                                        ₹
+                                    </span>
+
+                                    <input
+                                        type="number"
+                                        name="monthly_fee"
+                                        id="monthly_fee"
+                                        class="form-control"
+                                        placeholder="0.00"
+                                        min="0"
+                                        step="0.01"
+                                        value="0"
+                                    >
+
+                                </div>
+
+                                <div class="helper-text">
+                                    Regular monthly fee for the course.
+                                </div>
+
+                            </div>
+
+
+                            <!-- Paid Fee -->
+
+                            <div class="col-md-4">
+
+                                <label class="form-label">
+                                    Fee Paid
+                                </label>
+
+                                <div class="fee-input">
+
+                                    <span class="currency">
+                                        ₹
+                                    </span>
+
+                                    <input
+                                        type="number"
+                                        name="fee_paid"
+                                        id="fee_paid"
+                                        class="form-control"
+                                        placeholder="0.00"
+                                        min="0"
+                                        step="0.01"
+                                        value="0"
+                                        readonly
+                                    >
+
+                                </div>
+
+                                <div class="helper-text">
+                                    Automatically calculated from monthly payments.
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- =================================================
+                             MONTHLY FEE RECORDS
+                        ================================================= -->
+
+                        <div style="margin-top:25px;">
+
+                            <div class="monthly-fee-header">
+
+                                <div>
+
+                                    <div class="monthly-fee-title">
+                                        Monthly Fee Records
+                                    </div>
+
+                                    <div class="helper-text" style="margin-top:3px;">
+                                        Record which month the fee was received and how much was paid.
+                                    </div>
+
+                                </div>
+
+
+                                <button
+                                    type="button"
+                                    class="add-month-btn"
+                                    id="addMonthBtn"
+                                >
+
+                                    <i class="bi bi-plus-lg"></i>
+
+                                    Add Month
+
+                                </button>
+
+                            </div>
+
+
+                            <div id="monthlyPaymentsContainer">
+
+                                <div class="empty-month-message" id="emptyMonthMessage">
+
+                                    <i
+                                        class="bi bi-calendar2-check"
+                                        style="font-size:20px; display:block; margin-bottom:7px;"
+                                    ></i>
+
+                                    No monthly fee records added yet.
+
+                                    <br>
+
+                                    Click <strong>Add Month</strong> to record a payment.
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- FEE SUMMARY -->
+
+                        <div class="fee-summary">
+
+                            <div class="fee-box">
+
+                                <span class="fee-box-label">
+                                    Total Fee
+                                </span>
+
+                                <span class="fee-box-value">
+
+                                    ₹
+                                    <span id="totalDisplay">
+                                        0.00
+                                    </span>
+
+                                </span>
+
+                            </div>
+
+
+                            <div class="fee-box">
+
+                                <span class="fee-box-label">
+                                    Paid
+                                </span>
+
+                                <span class="fee-box-value">
+
+                                    ₹
+                                    <span id="paidDisplay">
+                                        0.00
+                                    </span>
+
+                                </span>
+
+                            </div>
+
+
+                            <div class="fee-box remaining">
+
+                                <span class="fee-box-label">
+                                    Remaining
+                                </span>
+
+                                <span class="fee-box-value">
+
+                                    ₹
+                                    <span id="remainingDisplay">
+                                        0.00
+                                    </span>
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     CERTIFICATE
+                ================================================= -->
+
+                <div class="form-section">
+
+                    <div class="section-heading">
+
+                        <div class="section-heading-icon">
+
+                            <i class="bi bi-award"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Certificate
+                            </h3>
+
+                            <span>
+                                Track whether the student has received the course certificate
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="certificate-card">
+
+                        <label class="form-label">
+                            Certificate Status
+                        </label>
+
+
+                        <div class="certificate-options">
+
+                            <div class="certificate-option">
+
+                                <input
+                                    type="radio"
+                                    name="certificate_status"
+                                    id="certificate_not_issued"
+                                    value="not_issued"
+                                    checked
+                                >
+
+                                <label
+                                    for="certificate_not_issued"
+                                    class="certificate-label"
+                                >
+
+                                    <i class="bi bi-hourglass"></i>
+
+                                    Not Issued
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="certificate-option">
+
+                                <input
+                                    type="radio"
+                                    name="certificate_status"
+                                    id="certificate_issued"
+                                    value="issued"
+                                >
+
+                                <label
+                                    for="certificate_issued"
+                                    class="certificate-label"
+                                >
+
+                                    <i class="bi bi-patch-check"></i>
+
+                                    Certificate Issued
+
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     NOTES
+                ================================================= -->
+
+                <div class="form-section">
+
+                    <div class="section-heading">
+
+                        <div class="section-heading-icon">
+
+                            <i class="bi bi-sticky"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Additional Information
+                            </h3>
+
+                            <span>
+                                Optional notes about the student
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <label class="form-label">
+                        Notes
+                    </label>
+
+                    <textarea
+                        name="notes"
+                        class="form-control"
+                        placeholder="Add any additional information, remarks or special instructions..."
+                    ></textarea>
+
+                </div>
+
+
+                <!-- ACTIONS -->
+
+                <div class="form-actions">
+
+                    <a
+                        href="{% url 'students' %}"
+                        class="cancel-btn"
+                    >
+                        Cancel
+                    </a>
+
+
+                    <button
+                        type="submit"
+                        class="submit-btn"
+                    >
+
+                        <i class="bi bi-check2-circle me-1"></i>
+
+                        Create Student
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</div>
+
+<!-- =====================================================
+     MONTHLY FEE + FEE CALCULATION
+===================================================== -->
+
+<script>
+
+    const totalFeeInput =
+        document.getElementById("total_fee");
+
+    const monthlyFeeInput =
+        document.getElementById("monthly_fee");
+
+    const paidFeeInput =
+        document.getElementById("fee_paid");
+
+    const totalDisplay =
+        document.getElementById("totalDisplay");
+
+    const paidDisplay =
+        document.getElementById("paidDisplay");
+
+    const remainingDisplay =
+        document.getElementById("remainingDisplay");
+
+    const addMonthBtn =
+        document.getElementById("addMonthBtn");
+
+    const monthlyPaymentsContainer =
+        document.getElementById("monthlyPaymentsContainer");
+
+    const emptyMonthMessage =
+        document.getElementById("emptyMonthMessage");
+
+
+    let monthCounter = 0;
+
+
+    /* =====================================================
+       UPDATE FEE SUMMARY
+    ===================================================== */
+
+    function updateFee() {
+
+        const total =
+            parseFloat(totalFeeInput.value) || 0;
+
+        let paid = 0;
+
+
+        document
+            .querySelectorAll(".monthly-paid-amount")
+            .forEach(function(input) {
+
+                const status =
+                    input
+                        .closest(".monthly-payment-box")
+                        ?.querySelector(".payment-status")
+                        ?.value;
+
+                const amount =
+                    parseFloat(input.value) || 0;
+
+
+                if (status === "paid") {
+
+                    paid += amount;
+
+                }
+
+            });
+
+
+        /*
+         * If there are no monthly records,
+         * keep manually entered fee paid as fallback.
+         */
+
+        const paymentRecords =
+            document.querySelectorAll(".monthly-payment-box");
+
+
+        if (paymentRecords.length === 0) {
+
+            paid =
+                parseFloat(paidFeeInput.value) || 0;
+
+        }
+
+
+        let remaining =
+            total - paid;
+
+
+        if (remaining < 0) {
+            remaining = 0;
+        }
+
+
+        totalDisplay.textContent =
+            total.toFixed(2);
+
+        paidDisplay.textContent =
+            paid.toFixed(2);
+
+        paidFeeInput.value =
+            paid.toFixed(2);
+
+        remainingDisplay.textContent =
+            remaining.toFixed(2);
+
+    }
+
+
+    /* =====================================================
+       ADD MONTH
+    ===================================================== */
+
+    addMonthBtn.addEventListener("click", function() {
+
+        monthCounter++;
+
+
+        if (emptyMonthMessage) {
+
+            emptyMonthMessage.style.display =
+                "none";
+
+        }
+
+
+        const paymentBox =
+            document.createElement("div");
+
+        paymentBox.className =
+            "monthly-payment-box";
+
+
+        paymentBox.innerHTML = `
+
+            <div class="payment-row-header">
+
+                <div class="payment-number">
+
+                    <i class="bi bi-calendar-event me-1"></i>
+
+                    Payment ${monthCounter}
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="remove-month-btn"
+                    title="Remove payment"
+                >
+
+                    <i class="bi bi-trash"></i>
+
+                </button>
+
+            </div>
+
+
+            <div class="row g-3">
+
+                <!-- Month -->
+
+                <div class="col-md-3">
+
+                    <label class="form-label">
+                        Fee Month
+                    </label>
+
+                    <input
+                        type="month"
+                        name="payment_month[]"
+                        class="form-control"
+                    >
+
+                </div>
+
+
+                <!-- Amount -->
+
+                <div class="col-md-3">
+
+                    <label class="form-label">
+                        Amount
+                    </label>
+
+                    <div class="fee-input">
+
+                        <span class="currency">
+                            ₹
+                        </span>
+
+                        <input
+                            type="number"
+                            name="payment_amount[]"
+                            class="form-control monthly-paid-amount"
+                            placeholder="0.00"
+                            min="0"
+                            step="0.01"
+                            value="0"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- Payment Date -->
+
+                <div class="col-md-3">
+
+                    <label class="form-label">
+                        Payment Date
+                    </label>
+
+                    <input
+                        type="date"
+                        name="payment_date[]"
+                        class="form-control"
+                    >
+
+                </div>
+
+
+                <!-- Status -->
+
+                <div class="col-md-3">
+
+                    <label class="form-label">
+                        Payment Status
+                    </label>
+
+                    <select
+                        name="payment_status[]"
+                        class="payment-status"
+                    >
+
+                        <option value="paid">
+                            Paid
+                        </option>
+
+                        <option value="pending">
+                            Pending
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        monthlyPaymentsContainer.appendChild(
+            paymentBox
+        );
+
+
+        /*
+         * Remove payment
+         */
+
+        const removeButton =
+            paymentBox.querySelector(
+                ".remove-month-btn"
+            );
+
+
+        removeButton.addEventListener(
+            "click",
+            function() {
+
+                paymentBox.remove();
+
+                updatePaymentNumbers();
+
+                updateFee();
+
+
+                const remainingPayments =
+                    document.querySelectorAll(
+                        ".monthly-payment-box"
+                    );
+
+
+                if (remainingPayments.length === 0) {
+
+                    emptyMonthMessage.style.display =
+                        "block";
+
+                }
+
+            }
+        );
+
+
+        /*
+         * Amount / Status change
+         */
+
+        const amountInput =
+            paymentBox.querySelector(
+                ".monthly-paid-amount"
+            );
+
+        const statusInput =
+            paymentBox.querySelector(
+                ".payment-status"
+            );
+
+
+        amountInput.addEventListener(
+            "input",
+            updateFee
+        );
+
+
+        statusInput.addEventListener(
+            "change",
+            updateFee
+        );
+
+
+        updateFee();
+
+    });
+
+
+    /* =====================================================
+       UPDATE PAYMENT NUMBERS
+    ===================================================== */
+
+    function updatePaymentNumbers() {
+
+        const payments =
+            document.querySelectorAll(
+                ".monthly-payment-box"
+            );
+
+
+        payments.forEach(function(payment, index) {
+
+            const number =
+                payment.querySelector(
+                    ".payment-number"
+                );
+
+
+            number.innerHTML = `
+
+                <i class="bi bi-calendar-event me-1"></i>
+
+                Payment ${index + 1}
+
+            `;
+
+        });
+
+
+        monthCounter =
+            payments.length;
+
+    }
+
+
+    /* =====================================================
+       TOTAL FEE CHANGE
+    ===================================================== */
+
+    totalFeeInput.addEventListener(
+        "input",
+        updateFee
+    );
+
+
+    /*
+     * Initial calculation
+     */
+
+    updateFee();
+
+</script>
+{% include "chat/chat_widget.html" %}
+</body>
+
+</html>

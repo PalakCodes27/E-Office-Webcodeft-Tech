@@ -1,0 +1,541 @@
+/* ==========================
+   Google Font
+========================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+
+    background:linear-gradient(135deg,#06191d,#0a2f33,#0d4f45);
+    min-height:100vh;
+
+}
+
+/* ==========================
+      Main Section
+========================== */
+
+.register-page{
+
+    width:100%;
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:40px 20px;
+
+}
+
+/* ==========================
+        Card
+========================== */
+
+.register-card{
+
+    width:1100px;
+    max-width:100%;
+
+    display:flex;
+
+    overflow:hidden;
+
+    border-radius:20px;
+
+    background:#12373b;
+
+    box-shadow:0 20px 60px rgba(0,0,0,.45);
+
+}
+
+/* ==========================
+      Left Side
+========================== */
+
+.register-left{
+
+    width:40%;
+
+    padding:60px 45px;
+
+    background:linear-gradient(180deg,#0f4644,#0b282d);
+
+    color:#fff;
+
+}
+
+.brand-icon{
+
+    width:80px;
+    height:80px;
+
+    border-radius:50%;
+
+    background:#38e38b;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:#0d2828;
+
+    font-size:34px;
+
+    margin-bottom:30px;
+
+}
+
+.brand h2{
+
+    font-size:38px;
+
+    font-weight:700;
+
+    margin-bottom:15px;
+
+}
+
+.brand p{
+
+    color:#c9d9d8;
+
+    line-height:30px;
+
+    font-size:16px;
+
+}
+
+/* ==========================
+      Features
+========================== */
+
+.features{
+
+    margin-top:60px;
+
+}
+
+.feature{
+
+    display:flex;
+
+    align-items:center;
+
+    margin-bottom:22px;
+
+}
+
+.feature i{
+
+    width:45px;
+    height:45px;
+
+    border-radius:50%;
+
+    background:#37e18c;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:#08201e;
+
+    margin-right:15px;
+
+    font-size:18px;
+
+}
+
+.feature span{
+
+    color:#fff;
+
+    font-size:16px;
+
+}
+
+/* ==========================
+      Right Side
+========================== */
+
+.register-right{
+
+    width:60%;
+
+    padding:55px 50px;
+
+    background:#113236;
+
+}
+
+.register-right h3{
+
+    color:#fff;
+
+    font-size:34px;
+
+    margin-bottom:10px;
+
+}
+
+.sub-title{
+
+    color:#b7d2cf;
+
+    margin-bottom:35px;
+
+}
+
+/* ==========================
+        Inputs
+========================== */
+
+.input-box{
+
+    width:100%;
+
+    position:relative;
+
+    margin-bottom:22px;
+
+}
+
+.input-box i{
+
+    position:absolute;
+
+    left:18px;
+
+    top:18px;
+
+    color:#37e18c;
+
+}
+
+.input-box input{
+
+    width:100%;
+
+    height:56px;
+
+    padding-left:52px;
+
+    padding-right:45px;
+
+    border-radius:12px;
+
+    border:1px solid rgba(55,225,140,.25);
+
+    background:#0d2629;
+
+    color:#fff;
+
+    outline:none;
+
+    transition:.3s;
+
+}
+
+.input-box input::placeholder{
+
+    color:#9eb9b7;
+
+}
+
+.input-box input:focus{
+
+    border-color:#37e18c;
+
+    box-shadow:0 0 15px rgba(55,225,140,.2);
+
+}
+
+/* Password Eye */
+
+.eye{
+
+    position:absolute;
+
+    right:18px;
+
+    top:18px;
+
+    color:#37e18c;
+
+    cursor:pointer;
+
+}
+/* =====================================
+   Checkbox
+===================================== */
+
+.form-check{
+    margin-top:10px;
+    margin-bottom:25px;
+}
+
+.form-check-input{
+    background:#0d2629;
+    border:1px solid rgba(55,225,140,.35);
+    cursor:pointer;
+}
+
+.form-check-input:checked{
+    background:#37e18c;
+    border-color:#37e18c;
+}
+
+.form-check-label{
+    color:#c7d9d7;
+    font-size:14px;
+    margin-left:8px;
+}
+
+.form-check-label a{
+    color:#37e18c;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.form-check-label a:hover{
+    text-decoration:underline;
+}
+
+/* =====================================
+   Register Button
+===================================== */
+
+.register-btn{
+
+    width:100%;
+    height:56px;
+
+    border:none;
+    outline:none;
+
+    margin-top:15px;
+
+    border-radius:12px;
+
+    background:linear-gradient(135deg,#37e18c,#1dbf73);
+
+    color:#06211f;
+
+    font-size:17px;
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+}
+
+.register-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 15px 30px rgba(55,225,140,.35);
+
+}
+
+/* =====================================
+   Login Link
+===================================== */
+
+.login-link{
+
+    margin-top:28px;
+
+    text-align:center;
+
+    color:#c4d8d4;
+
+    font-size:15px;
+
+}
+
+.login-link a{
+
+    color:#37e18c;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+}
+
+.login-link a:hover{
+
+    text-decoration:underline;
+
+}
+
+/* =====================================
+   Hover Effects
+===================================== */
+
+.input-box:hover input{
+
+    border-color:#37e18c;
+
+}
+
+.feature{
+
+    transition:.3s;
+
+}
+
+.feature:hover{
+
+    transform:translateX(8px);
+
+}
+
+.brand-icon{
+
+    transition:.4s;
+
+}
+
+.brand-icon:hover{
+
+    transform:rotate(10deg) scale(1.08);
+
+}
+
+/* =====================================
+   Responsive
+===================================== */
+
+@media(max-width:992px){
+
+.register-card{
+
+    flex-direction:column;
+
+}
+
+.register-left{
+
+    width:100%;
+    text-align:center;
+
+    padding:50px 35px;
+
+}
+
+.register-right{
+
+    width:100%;
+
+    padding:45px 35px;
+
+}
+
+.feature{
+
+    justify-content:center;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.register-right{
+
+    padding:35px 25px;
+
+}
+
+.brand h2{
+
+    font-size:30px;
+
+}
+
+.register-right h3{
+
+    font-size:28px;
+
+}
+
+.row .col-md-6{
+
+    margin-bottom:18px;
+
+}
+
+}
+
+@media(max-width:576px){
+
+.register-page{
+
+    padding:20px;
+
+}
+
+.register-card{
+
+    border-radius:15px;
+
+}
+
+.register-left{
+
+    padding:35px 20px;
+
+}
+
+.register-right{
+
+    padding:30px 20px;
+
+}
+
+.brand-icon{
+
+    width:70px;
+    height:70px;
+    font-size:28px;
+    margin:auto;
+    margin-bottom:25px;
+
+}
+
+.brand h2{
+
+    font-size:26px;
+
+}
+
+.brand p{
+
+    font-size:14px;
+    line-height:24px;
+
+}
+
+.input-box input{
+
+    height:52px;
+
+}
+
+.register-btn{
+
+    height:52px;
+
+}
+
+}

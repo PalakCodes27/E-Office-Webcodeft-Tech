@@ -1,0 +1,43 @@
+.sidebar{
+    width:260px;
+    height:100vh;
+    position:fixed;
+    left:0;
+    top:0;
+    background:#062F2F;
+    color:#fff;
+    padding:25px;
+}
+
+.logo{
+    margin-bottom:40px;
+}
+
+.logo h3{
+    color:#10B981;
+    font-weight:700;
+}
+
+.menu{
+    list-style:none;
+    padding:0;
+}
+
+.menu li{
+    margin:10px 0;
+}
+
+.menu li a{
+    color:#fff;
+    text-decoration:none;
+    display:flex;
+    gap:12px;
+    padding:14px;
+    border-radius:10px;
+    transition:.3s;
+}
+
+.menu li a:hover,
+.menu li.active a{
+    background:#10B981;
+}
